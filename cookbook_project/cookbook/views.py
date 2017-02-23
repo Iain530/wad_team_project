@@ -29,7 +29,7 @@ def view_user(request):
     return HttpResponse("view someone elses profile")
 
 # Actual recipe view
-def view_userrecipe(request):
+def view_recipe(request):
     return HttpResponse("view a recipe")
 
 
