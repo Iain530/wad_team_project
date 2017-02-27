@@ -7,14 +7,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 # COOKBOOK IMPORTS
 from cookbook.models import Category, Recipe, Comment, Ingredient
-from cookbook.forms import UserForm, CategoryForm, IngredientForm
+from cookbook.forms import UserForm, IngredientForm, RecipeForm
 
 #-HOME-SECTION----------------------------------------------------------
 
 def home(request):
     context_dict = {}
-    best_rated = Recipes.objects.order_by('-rating')[:5]
-    new_recipes = Recipes.objects.order_by('-upload_date')[:5]
+    best_rated = Recipe.objects.order_by('-rating')[:5]
+    new_recipes = Recipe.objects.order_by('-upload_date')[:5]
     context_dict['best_rated'] = best_rated
     context_dict['new_recipes'] = new_recipes
     #when template is made
@@ -95,8 +95,8 @@ def user_logout(request):
 def myprofile(request):
     context_dict = {}
     
-    recent_comments = Comments.objects.filter(user=request.user).order_by(['-upload_date'])[:10]
-    recipes = list(Recipes.objects.filter(user=request.user).order_by(['-upload_date']))
+    recent_comments = Comment.objects.filter(user=request.user).order_by(['-upload_date'])[:10]
+    recipes = Recipe.objects.filter(user=request.user).order_by(['-upload_date'])
 
     context_dict['recent_comments'] = recent_comments
     context_dict['recipes'] = recipes
@@ -156,27 +156,30 @@ def view_user(request, user):
     return HttpResponse("view someone elses profile")
 
 # Actual recipe view
-def view_recipe(request, user, name):
+def view_recipe(request, user, recipe_slug):
     context_dict = {}
 
     if request.method == 'GET':
 
         try:
             # get the recipe
-            recipe = Recipe.objects.get(user=user, name=name)
+            user = User.objects.get(username=user)
+            recipe = Recipe.objects.get(user=user, slug=recipe_slug)
             recipe.views += 1
 
             # get the recipes ingredients
-            ingredients = Ingredients.objects.filter(recipe=recipe)
+            ingredients = Ingredient.objects.filter(recipe=recipe)
 
             # get the recipes comments
-            comments = Comments.objects.filter(recipe=recipe).order_by('-upload_date')
+            comments = Comment.objects.filter(recipe=recipe).order_by('-upload_date')
             
             context_dict['recipe'] = recipe
             context_dict['ingredients'] = ingredients
             context_dict['comments'] = comments
 
-        except Recipe.DoesNotExist:
+            print('comments-{0}, ingredients-{1}, recipe-{2}'.format(comments, ingredients, recipe))
+
+        except Recipe.DoesNotExist or User.DoesNotExist:
             context_dict['recipe'] = None
             context_dict['ingredients'] = None
             context_dict['comments'] = None
@@ -208,7 +211,7 @@ def view_category(request, category):
 
 def bestrated(request):
     context_dict = {}
-    recipes = Recipes.objects.order_by('-rating')
+    recipes = Recipe.objects.order_by('-rating')
     context_dict['recipes'] = recipes
     return HttpResponse("best rated recipes here")
 

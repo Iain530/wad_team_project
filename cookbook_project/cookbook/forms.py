@@ -13,12 +13,12 @@ class UserForm(forms.ModelForm):
 class RecipeForm(forms.ModelForm):
     name = forms.CharField(max_length=Recipe.MAX_NAME_LENGTH,
                            help_text="Recipe Name")
-    instructions = forms.TextField(help_text="Instructions")
+    #instructions = forms.TextField(help_text="Instructions")
     serves = forms.IntegerField(min_value=1, max_value=32767,
                                 help_text="Serves")
     cooking_time = forms.IntegerField(min_value=1,
                                       help_text="Cooking time (minutes)")
-    category = forms.ChoiceField(choices=Category.objects)
+    #category = forms.ChoiceField(choices=Category.objects.all())
     
     is_vegetarian = forms.BooleanField(required=False)
     is_vegan = forms.BooleanField(required=False)
@@ -28,7 +28,7 @@ class RecipeForm(forms.ModelForm):
 
     class Meta:
         model = Recipe
-        fields = ('name', 'picture', 'intructions', 'serves',
+        fields = ('name', 'picture', 'category', 'instructions', 'serves', 'cooking_time',
                    'is_vegetarian', 'is_vegan', 'is_gluten_free',
                    'is_dairy_free',)
 

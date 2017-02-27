@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from django.contrib.auth.models import User
 from django.db import models
+from django.template.defaultfilters import slugify
 
 class Category(models.Model):
     # Primary key
@@ -17,7 +18,7 @@ class Recipe(models.Model):
     category = models.ForeignKey(Category)
 
     # Users that save this recipe
-    saved_by = models.ManyToManyField(User, related_name='saved_recipes', null=True)
+    saved_by = models.ManyToManyField(User, related_name='saved_recipes')
 	
     views = models.PositiveIntegerField(default=0)
     rating = models.PositiveIntegerField(default=0)
@@ -28,6 +29,7 @@ class Recipe(models.Model):
     # Fields input by user
     MAX_NAME_LENGTH = 128
     name = models.CharField(max_length=MAX_NAME_LENGTH)
+    slug = models.SlugField()
     instructions = models.TextField()             # Change field type
     serves = models.PositiveSmallIntegerField()
     cooking_time = models.PositiveIntegerField()
@@ -53,15 +55,19 @@ class Recipe(models.Model):
             self.rating = new_rating
         else:
             print('Invalid rating: {0}'.format(rate))
-            
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Recipe, self).save(*args, **kwargs)
 
     class Meta:
-        unique_together = ('user', 'name')
+        unique_together = ('user', 'slug')
 
-def Ingredient(models.Model):
-    name = models.CharField(max_length=64)
-    quantity = models.IntegerField(default=1)
+class Ingredient(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+
+    name = models.CharField(max_length=64)
+    quantity = models.CharField(max_length=64)
 
     def __str__(self):
         return self.name
