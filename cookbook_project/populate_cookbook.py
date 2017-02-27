@@ -54,16 +54,20 @@ def populate():
     ]
 
     ingredients = [
-        {'recipe': 'Tofu Curry',
+        {'recipe_name': 'Tofu Curry',
+         'recipe_author': 'HummusLover123',
          'name': 'tofu',
          'quantity': '500g'},
-        {'recipe': 'Tofu Curry',
+        {'recipe_name': 'Tofu Curry',
+         'recipe_author': 'HummusLover123',
          'name': 'salt',
          'quantity': 'pinch of'},
-        {'recipe': 'Roast Beef',
+        {'recipe_name': 'Roast Beef',
+         'recipe_author': 'HealthyDad',
          'name': 'beef',
          'quantity': '16oz'},
-        {'recipe': 'Roast Beef',
+        {'recipe_name': 'Roast Beef',
+         'recipe_author': 'HealthyDad',
          'name': 'salt',
          'quantity': 'big pinch'},
     ]
@@ -89,6 +93,10 @@ def populate():
         add_recipe(rec['user'], rec['category'],rec['name'], rec['instructions'],
                    rec['serves'], rec['cooking_time'], rec['is_vegetarian'],
                    rec['is_vegan'], rec['is_gluten_free'], rec['is_dairy_free'])
+
+    for ing in ingredients:
+        add_ingredient(ing['recipe_name'], ing['recipe_author'], ing['name'],
+                       ing['quantity'])
 
     for com in comments:
         add_comment(com['username'], com['recipe_name'], com['recipe_author'],
@@ -123,6 +131,14 @@ def add_recipe(username, category, name, instructions, serves, cooking_time,
                                      is_dairy_free=is_dairy_free)[0]
     r.save()
     return r
+
+def add_ingredient(recipe_name, recipe_author, name, quantity):
+    user = User.objects.get(username=recipe_author)
+    recipe = Recipe.objects.get(user=user, name=recipe_name)
+
+    i = Ingredient.objects.get_or_create(recipe=recipe, name=name, quantity=quantity)[0]
+    i.save()
+    return i
 
 def add_comment(username, recipe_name, recipe_author, text):
     user = User.objects.get(username=username)
