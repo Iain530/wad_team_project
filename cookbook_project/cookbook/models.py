@@ -2,20 +2,9 @@ from __future__ import unicode_literals
 from django.contrib.auth.models import User
 from django.db import models
 
-##class UserProfile(models.Model):
-##    user = models.OneToOneField(User)
-##
-##    saved_recipes = models.?????ToManyField(Recipe)
-##
-##    def __str__(self):
-##        return self.user
-##    def __unicode__(self):
-##        return self.user
-
-
 class Category(models.Model):
     # Primary key
-    name = models.CharField(max_length=128, unique=True)
+    name = models.CharField(max_length=128, primary_key=True)
 
     def __str__(self):
         return self.name
@@ -23,20 +12,22 @@ class Category(models.Model):
         return self.name
 		
 class Recipe(models.Model):
-    # Primary key
-    name = models.CharField(max_length=128, unique=True)
-
     # Foreign keys
     user = models.ForeignKey(User)
     category = models.ForeignKey(Category)
+
+    # Users that save this recipe
+    saved_by = models.ManyToManyField(User, related_name='saved_recipes', null=True)
 	
     views = models.PositiveIntegerField(default=0)
     rating = models.PositiveIntegerField(default=0)
     no_of_ratings = models.PositiveIntegerField(default=0)
     upload_date = models.DateTimeField(auto_now_add=True)
+
 	
     # Fields input by user
-    ingredients = models.TextField()              # Change field type
+    MAX_NAME_LENGTH = 128
+    name = models.CharField(max_length=MAX_NAME_LENGTH)
     instructions = models.TextField()             # Change field type
     serves = models.PositiveSmallIntegerField()
     cooking_time = models.PositiveIntegerField()
@@ -47,6 +38,31 @@ class Recipe(models.Model):
     is_gluten_free = models.BooleanField(default=False)
     is_dairy_free = models.BooleanField(default=False)
 	
+    def __str__(self):
+        return self.name
+    def __unicode__(self):
+        return self.name
+
+    # not sure if this works
+    def rate(rate):
+        if 0 <= rate <= 5:
+            new_rating = rating * no_of_ratings
+            new_rating += rate
+            self.no_of_ratings += 1
+            new_rating = new_rating / no_of_ratings
+            self.rating = new_rating
+        else:
+            print('Invalid rating: {0}'.format(rate))
+            
+
+    class Meta:
+        unique_together = ('user', 'name')
+
+def Ingredient(models.Model):
+    name = models.CharField(max_length=64)
+    quantity = models.IntegerField(default=1)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+
     def __str__(self):
         return self.name
     def __unicode__(self):
