@@ -107,9 +107,9 @@ def myprofile(request):
 def savedrecipes(request):
     context_dict = {}
 
-    saved_recipes = Recipe.objects.filter(saved_by__user=request.user)
+    saved_recipes = Recipe.objects.filter(saved_by=request.user)
     context_dict['saved_recipes'] = saved_recipes
-    # to do
+    
     return HttpResponse("saved recipes")
 
 @login_required
@@ -177,12 +177,12 @@ def view_recipe(request, user, recipe_slug):
             context_dict['ingredients'] = ingredients
             context_dict['comments'] = comments
 
-            print('comments-{0}, ingredients-{1}, recipe-{2}'.format(comments, ingredients, recipe))
 
         except Recipe.DoesNotExist or User.DoesNotExist:
             context_dict['recipe'] = None
             context_dict['ingredients'] = None
             context_dict['comments'] = None
+
              
         return HttpResponse("view a recipe")
 

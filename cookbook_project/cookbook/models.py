@@ -18,10 +18,10 @@ class Recipe(models.Model):
     category = models.ForeignKey(Category)
 
     # Users that save this recipe
-    saved_by = models.ManyToManyField(User, related_name='saved_recipes')
+    saved_by = models.ManyToManyField(User, related_name='saved_recipes', blank=True)
 	
     views = models.PositiveIntegerField(default=0)
-    rating = models.PositiveIntegerField(default=0)
+    rating = models.FloatField(default=0)
     no_of_ratings = models.PositiveIntegerField(default=0)
     upload_date = models.DateTimeField(auto_now_add=True)
 
@@ -46,13 +46,14 @@ class Recipe(models.Model):
         return self.name
 
     # not sure if this works
-    def rate(rate):
+    def rate(self, rate):
         if 0 <= rate <= 5:
-            new_rating = rating * no_of_ratings
+            new_rating = self.rating * self.no_of_ratings
             new_rating += rate
             self.no_of_ratings += 1
-            new_rating = new_rating / no_of_ratings
+            new_rating = new_rating / self.no_of_ratings
             self.rating = new_rating
+            self.save()
         else:
             print('Invalid rating: {0}'.format(rate))
 
