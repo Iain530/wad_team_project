@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+Cookbook
+{% block title_block %}
+{% endblock %}
+</title>
+<style>
+body {margin:0;}
+ul.topnav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+ul.topnav li {float: left;}
+
+ul.topnav li a {
+  display: inline-block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 25px 25px;
+  text-decoration: none;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+ul.topnav li a:hover {background-color: #555;}
+
+ul.topnav li.icon {display: none;}
+
+.box {
+    width: 70%;
+    background-color: #333;
+	padding: 25px 25px;
+    position: absolute;
+	font-size: 17px;
+	color: #f2f2f2;
+    top: 20%;
+    left: 15%;
+}
+
+@media screen and (max-width:680px) {
+  ul.topnav li:not(:first-child) {display: none;}
+  ul.topnav li.icon {
+    float: right;
+    display: inline-block;
+  }
+}
+
+@media screen and (max-width:680px) {
+  ul.topnav.responsive {position: relative;}
+  ul.topnav.responsive li.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  ul.topnav.responsive li {
+    float: none;
+    display: inline;
+  }
+  ul.topnav.responsive li a {
+    display: block;
+    text-align: left;
+  }
+}
+</style>
+</head>
+<body background="{% static "images/background.jpg" %}">
+
+<ul class="topnav" id="myTopnav">
+  <li><a class="active" href="{% url 'home' %}">Home</a></li>
+  <li><a href="{% url 'categories' %}">Categories</a></li>
+  <li><a href="{% url 'search' %}">Search</a></li>
+  {% if user.is_authenticated %}
+  <li><a href="{% url 'myprofile' %}">My profile</a></li>
+  <li><a href="{% url 'user_logout' %}">Log out</a></li>
+  {% else %}
+  <li><a href="{% url 'user_login' %}">Login</a></li>
+  <li><a href="{% url 'signup' %}">Sign Up</a></li>
+  {% endif %}
+  <li><a href="{% url 'help' %}">Help</a></li>
+  
+  <li class="icon">
+    <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">?</a>
+  </li>
+</ul>
+
+<div class ="box">
+  {% block body_block %}
+  {% endblock %}
+</div>
+
+<script>
+function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+}
+</script>
+
+</body>
+</html>
