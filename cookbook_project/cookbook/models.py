@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 from django.contrib.auth.models import User
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.utils import timezone
 
 class Category(models.Model):
     # Primary key
@@ -23,7 +24,9 @@ class Recipe(models.Model):
     views = models.PositiveIntegerField(default=0)
     rating = models.FloatField(default=0)
     no_of_ratings = models.PositiveIntegerField(default=0)
+    
     upload_date = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(default=timezone.now)
 
 	
     # Fields input by user
