@@ -176,6 +176,7 @@ def view_recipe(request, user, recipe_slug):
             user = User.objects.get(username=user)
             recipe = Recipe.objects.get(user=user, slug=recipe_slug)
             recipe.views += 1
+            recipe.save()
 
             # get the recipes ingredients
             ingredients = Ingredient.objects.filter(recipe=recipe)
