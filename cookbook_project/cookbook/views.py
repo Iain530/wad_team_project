@@ -1,6 +1,6 @@
 # DJANGO IMPORTS
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -95,8 +95,13 @@ def user_logout(request):
 def myprofile(request):
     context_dict = {}
     
-    recent_comments = Comment.objects.filter(user=request.user).order_by(['-upload_date'])[:10]
-    recipes = Recipe.objects.filter(user=request.user).order_by(['-upload_date'])
+    recent_comments = Comment.objects.filter(user=request.user)
+    if recent_comments:
+        recent_comments = recent_comments.order_by(['-upload_date'])[:10]
+        
+    recipes = Recipe.objects.filter(user=request.user)
+    if recipes:
+        recipe = recipes.order_by(['-upload_date'])
 
     context_dict['recent_comments'] = recent_comments
     context_dict['recipes'] = recipes
@@ -131,7 +136,7 @@ def uploadrecipe(request):
                 recipe.is_dairy_free = True
 
             recipe.save()
-            return view_recipe(request, request.user, recipe.name)
+            return view_recipe(request, request.user.username, recipe.name)
 
         else:
             print(form.errors)
@@ -146,11 +151,16 @@ def view_user(request, user):
 
     try:
         user = User.objects.get(username=user)
+        if user == request.user:
+            return HttpResponseRedirect(reverse('myprofile'))
+            
         recipes = Recipe.objects.filter(user=user)
 
+        context_dict['author'] = user
         context_dict['recipes'] = recipes
 
     except User.DoesNotExist:
+        context_dict['author'] = None
         context_dict['recipes'] = None
     
     return HttpResponse("view someone elses profile")
@@ -172,13 +182,15 @@ def view_recipe(request, user, recipe_slug):
 
             # get the recipes comments
             comments = Comment.objects.filter(recipe=recipe).order_by('-upload_date')
-            
+
+            context_dict['author'] = user
             context_dict['recipe'] = recipe
             context_dict['ingredients'] = ingredients
             context_dict['comments'] = comments
 
 
-        except Recipe.DoesNotExist or User.DoesNotExist:
+        except (User.DoesNotExist, Recipe.DoesNotExist):
+            context_dict['author'] = None
             context_dict['recipe'] = None
             context_dict['ingredients'] = None
             context_dict['comments'] = None
@@ -195,23 +207,29 @@ def view_recipe(request, user, recipe_slug):
 
 def categories(request):
     context_dict = {}
-    categories = Category.objects
+    categories = Category.objects.all()
     cotext_dict['categories'] = categories
     
     return HttpResponse("view all categories")
 
-# for all categhories
-def view_category(request, category):
+# for all categories
+def view_category(request, category_name):
     context_dict = {}
+    try:
+        category = Category.objects.get(name=category_name)
+        recipes = Recipe.objects.filter(category=category)
+        context_dict['category'] = category
+        context_dict['recipes'] = recipes
 
-    recipes = Recipe.objects.filter(category=category)
-    context_dict['recipes'] = recipes
+    except Category.DoesNotExist:
+        context_dict['category'] = None
+        context_dict['recipes'] = None
     
     return HttpResponse("specific category")
 
 def bestrated(request):
     context_dict = {}
-    recipes = Recipe.objects.order_by('-rating')
+    recipes = Recipe.objects.all().order_by('-rating')
     context_dict['recipes'] = recipes
     return HttpResponse("best rated recipes here")
 

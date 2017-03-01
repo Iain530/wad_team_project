@@ -57,6 +57,14 @@ class Recipe(models.Model):
         else:
             print('Invalid rating: {0}'.format(rate))
 
+    def user_save(self, user):
+        self.saved_by.add(user)
+        self.save()
+
+    def user_unsave(self, user):
+        self.saved_by.remove(user)
+        self.save()
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Recipe, self).save(*args, **kwargs)
