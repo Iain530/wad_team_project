@@ -20,7 +20,8 @@ class Recipe(models.Model):
 
     # Users that save this recipe
     saved_by = models.ManyToManyField(User, related_name='saved_recipes', blank=True)
-	
+    rated_by
+    
     views = models.PositiveIntegerField(default=0)
     rating = models.FloatField(default=0)
     no_of_ratings = models.PositiveIntegerField(default=0)
@@ -31,8 +32,10 @@ class Recipe(models.Model):
 	
     # Fields input by user
     MAX_NAME_LENGTH = 128
+    MAX_DESC_LENGTH = 400
     name = models.CharField(max_length=MAX_NAME_LENGTH)
-    slug = models.SlugField()
+    slug = models.SlugField() # name as slug
+    description = models.CharField(max_length=MAX_DESC_LENGTH)
     instructions = models.TextField()             # Change field type
     serves = models.PositiveSmallIntegerField()
     cooking_time = models.PositiveIntegerField()
@@ -69,7 +72,14 @@ class Recipe(models.Model):
         self.save()
 
     def save(self, *args, **kwargs):
+        # get slug
         self.slug = slugify(self.name)
+
+        # get rating
+        #self.no_of_ratings = len(Rating.objects.filter(recipe=self))
+        #if self.no_of_ratings > 0:
+            
+        
         super(Recipe, self).save(*args, **kwargs)
 
     class Meta:
@@ -98,3 +108,18 @@ class Comment(models.Model):
         return self.text	
     def __unicode__(self):
         return self.text
+
+
+##class Rating(models.Model):
+##    # Foreign Keys
+##    user = models.ForeignKey(User)
+##    recipe = models.ForeignKey(Recipe)
+##
+##    value = models.PositiveSmallIntegerField()
+##
+##    def __str__(self):
+##        return self.value	
+##    def __unicode__(self):
+##        return self.value
+
+    

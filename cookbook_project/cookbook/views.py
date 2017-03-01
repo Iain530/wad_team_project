@@ -17,9 +17,8 @@ def home(request):
     new_recipes = Recipe.objects.order_by('-upload_date')[:5]
     context_dict['best_rated'] = best_rated
     context_dict['new_recipes'] = new_recipes
-    #when template is made
+    
     response = render(request, 'cookbook/home.html', context_dict)
-    #response = HttpResponse("This is the home")
     return response
 
 #-USER-SECTION----------------------------------------------------------
@@ -65,31 +64,30 @@ def user_login(request):
         if user:
             # check account is not disabled
             if user.is_active:
-                # login the user
+                # login the user and redirect to their profile
                 login(request, user)
                 return HttpResponseRedirect(reverse('myprofile'))
+
+            # inactive account
             else:
-                # inactive account
                 context_dict['errors'] = ['Your CookBook account is disabled.']
-                #return render(request, LOGIN HTML, context_dict)
-                return HttpResponse('disabled account')
+                return render(request, 'cookbook/user_login.html', context_dict)
+
+        # invalid login details
         else:
-            # invalid login details
             print('Invalid login details: {0}, {1}'.format(username, password))
             context_dict['errors'] = ['Invalid login details']
-            #return render(request, LOGIN HTML, context_dict)
-            return HttpResponse('Invalid login details')
+            return render(request, 'cookbook/user_login.html', context_dict)
         
     else:
         # Not HTTP POST
-        #return render(request, LOGIN HTML, context_dict)
-        return HttpResponse('login here')
+        return render(request, 'cookbook/user_login.html', context_dict)
 
 @login_required
 def user_logout(request):
     # logout user and redirect to home page
     logout(request)
-    return HttpResponRedirect(reverse('home'))
+    return HttpResponseRedirect(reverse('home'))
 
 @login_required
 def myprofile(request):
@@ -169,8 +167,13 @@ def view_user(request, user):
 def view_recipe(request, user, recipe_slug):
     context_dict = {}
 
-    if request.method == 'GET':
-
+    if request.method == 'POST':
+        # (posting a comment/rating)
+        return HttpResponse("comment/rating posted")
+    
+    else:
+        #HTTP GET so show the recipe
+        
         try:
             # get the recipe
             user = User.objects.get(username=user)
@@ -199,9 +202,6 @@ def view_recipe(request, user, recipe_slug):
              
         return HttpResponse("view a recipe")
 
-    else:
-        # HTTP POST (posting a comment/rating)
-        return HttpResponse("comment/rating posted")
 
 
 #-CATEGORY-SECTION--(finding-recipes)--------------------------------------
