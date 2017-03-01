@@ -18,8 +18,8 @@ def home(request):
     context_dict['best_rated'] = best_rated
     context_dict['new_recipes'] = new_recipes
     #when template is made
-    #response = render(request, 'cookbook/home.html', context_dict)
-    response = HttpResponse("This is the home")
+    response = render(request, 'cookbook/home.html', context_dict)
+    #response = HttpResponse("This is the home")
     return response
 
 #-USER-SECTION----------------------------------------------------------
@@ -50,7 +50,7 @@ def signup(request):
     context_dict['user_form'] = user_form
     context_dict['registered'] = registered
     
-    return HttpResponse("sign up here")
+    return render(request, 'cookbook/signup.html', context_dict)
 
 def user_login(request):
     context_dict = {}
@@ -106,7 +106,7 @@ def myprofile(request):
     context_dict['recent_comments'] = recent_comments
     context_dict['recipes'] = recipes
 
-    return HttpResponse("my profile")
+    return render(request, 'cookbook/myprofile.html', context_dict)
 
 @login_required
 def savedrecipes(request):
@@ -209,9 +209,9 @@ def view_recipe(request, user, recipe_slug):
 def categories(request):
     context_dict = {}
     categories = Category.objects.all()
-    cotext_dict['categories'] = categories
+    context_dict['categories'] = categories
     
-    return HttpResponse("view all categories")
+    return render(request, 'cookbook/categories.html', context_dict)
 
 # for all categories
 def view_category(request, category_name):
@@ -236,12 +236,12 @@ def bestrated(request):
 
 # search and search results
 def search(request):
-    return HttpResponse("search for recipes")
+    return render(request, 'cookbook/search.html')
 
 #-HELP-SECTION------------------------------------------------------------
 
 def about(request):
-    return HttpResponse("help page")
+    return render(request, 'cookbook/help.html')
 
 def faq(request):
     return HttpResponse("FAQ page")
