@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% extends 'cookbook/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	{{ category.name }}
+{% endblock %}
+
+{% block body_block %}
+	{% if category %}
+		<h1>{{ category.name }}</h1>	
+		<!-- Add page content here -->
+	{% else %}
+		This category doesn't exist!
+	{% endif %}
+{% endblock %}

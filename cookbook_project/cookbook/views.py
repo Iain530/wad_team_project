@@ -226,7 +226,7 @@ def view_category(request, category_name):
         context_dict['category'] = None
         context_dict['recipes'] = None
     
-    return HttpResponse("specific category")
+    return render(request, 'cookbook/view_category.html', context_dict)
 
 def bestrated(request):
     context_dict = {}
