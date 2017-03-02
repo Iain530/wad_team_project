@@ -7,6 +7,7 @@ from django.utils import timezone
 class Category(models.Model):
     # Primary key
     name = models.CharField(max_length=128, primary_key=True)
+    picture = models.ImageField(upload_to="category_images", blank=True)
 
     def __str__(self):
         return self.name
