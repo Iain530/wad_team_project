@@ -66,7 +66,7 @@ def user_login(request):
             if user.is_active:
                 # login the user and redirect to their profile
                 login(request, user)
-                return HttpResponseRedirect(reverse('myprofile'))
+                return HttpResponseRedirect(reverse('cookbook:myprofile'))
 
             # inactive account
             else:
@@ -87,7 +87,7 @@ def user_login(request):
 def user_logout(request):
     # logout user and redirect to home page
     logout(request)
-    return HttpResponseRedirect(reverse('home'))
+    return HttpResponseRedirect(reverse('cookbook:home'))
 
 @login_required
 def myprofile(request):
@@ -150,7 +150,7 @@ def view_user(request, user):
     try:
         user = User.objects.get(username=user)
         if user == request.user:
-            return HttpResponseRedirect(reverse('myprofile'))
+            return HttpResponseRedirect(reverse('cookbook:myprofile'))
             
         recipes = Recipe.objects.filter(user=user)
 
