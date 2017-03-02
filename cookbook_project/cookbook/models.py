@@ -37,7 +37,8 @@ class Recipe(models.Model):
     description = models.CharField(max_length=MAX_DESC_LENGTH)
     instructions = models.TextField()             # Change field type
     serves = models.PositiveSmallIntegerField()
-    cooking_time = models.PositiveIntegerField()
+    cooking_time_hours = models.PositiveIntegerField()
+    cooking_time_minutes = models.PositiveIntegerField()
     picture = models.ImageField(upload_to="recipe_images", blank="True")
     
     is_vegetarian = models.BooleanField(default=False)
@@ -52,7 +53,7 @@ class Recipe(models.Model):
 
     # not sure if this works
     def rate(self, user, rate):
-        if 0 <= rate <= 5 and:
+        if 0 <= rate <= 5:
             new_rating = Rating.objects.get_or_create(recipe=self, user=user, value=rate)
             new_rating.save()
 
