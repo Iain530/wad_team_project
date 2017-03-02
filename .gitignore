@@ -1,0 +1,3 @@
+cookbook_project/cookbook/migrations/
+*.pyc
+db.sqlite3
