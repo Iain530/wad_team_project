@@ -22,7 +22,7 @@ class Recipe(models.Model):
     saved_by = models.ManyToManyField(User, related_name='saved_recipes', blank=True)
     
     views = models.PositiveIntegerField(default=0)
-    rating = models.FloatField(default=0)
+    total_rating = models.FloatField(default=0)
     no_of_ratings = models.PositiveIntegerField(default=0)
     
     upload_date = models.DateTimeField(auto_now_add=True)
