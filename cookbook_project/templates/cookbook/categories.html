@@ -12,8 +12,8 @@
 	<ul>
 		{% for category in categories %}
 		<li>
-		<a href="{% url 'cookbook:view_category' category.name %}">{{ category.name }}</a>
-		<img src="{{ MEDIA_URL }} {{ category.picture }}">
+		<a href="{% url 'cookbook:view_category' category.name %}">{{ category.name }}</a></br>
+		<img src="{{ MEDIA_URL }}{{ category.picture }}">
 		</li>
 		{% endfor %}
 	</ul>
