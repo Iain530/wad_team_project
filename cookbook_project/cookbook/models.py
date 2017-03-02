@@ -52,7 +52,7 @@ class Recipe(models.Model):
 
     # not sure if this works
     def rate(self, user, rate):
-        if 0 <= rate <= 5 and:
+        if 0 <= rate <= 5:
             new_rating = Rating.objects.get_or_create(recipe=self, user=user, value=rate)
             new_rating.save()
 
