@@ -37,8 +37,7 @@ class Recipe(models.Model):
     description = models.CharField(max_length=MAX_DESC_LENGTH)
     instructions = models.TextField()             # Change field type
     serves = models.PositiveSmallIntegerField()
-    cooking_time_hours = models.PositiveIntegerField(default=0)
-    cooking_time_minutes = models.PositiveIntegerField(default=0)
+    cooking_time = models.PositiveIntegerField(default=0)
     picture = models.ImageField(upload_to="recipe_images", blank="True")
     
     is_vegetarian = models.BooleanField(default=False)
