@@ -1,6 +1,8 @@
 from django.conf.urls import url
 from cookbook import views
 
+app_name = 'cookbook'
+
 urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^home/$', views.home, name='home'),

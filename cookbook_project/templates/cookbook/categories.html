@@ -4,5 +4,22 @@
 - Categories
 {% endblock %}
 {% block body_block %}
-  This is the categories page.
+
+	<h1>Categories</h1>
+  
+	<div>
+	{% if categories %}
+	<ul>
+		{% for category in categories %}
+		<li>
+		<a href="{% url 'cookbook:view_category' category.name %}">{{ category.name }}</a>
+		<img src="{{ MEDIA_URL }} {{ category.picture }}">
+		</li>
+		{% endfor %}
+	</ul>
+	{% else %}
+		<strong>There are no categories!</strong>
+	{% endif %}
+	</div>
+
 {% endblock %}
