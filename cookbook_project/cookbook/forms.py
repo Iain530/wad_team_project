@@ -23,13 +23,11 @@ class RecipeForm(forms.ModelForm):
     is_gluten_free = forms.BooleanField(required=False)
     is_dairy_free = forms.BooleanField(required=False)
 
-    #upload_date = forms.DateTimeField(widget=forms.HiddenInput())
 
     class Meta:
         model = Recipe
         fields = ('name', 'picture', 'category', 'instructions', 'serves', 'cooking_time',
-                  # 'upload_date',
-                  'is_vegetarian', 'is_vegan', 'is_gluten_free',
+                  'description', 'is_vegetarian', 'is_vegan', 'is_gluten_free',
                    'is_dairy_free',)
 
 

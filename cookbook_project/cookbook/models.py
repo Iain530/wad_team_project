@@ -64,7 +64,11 @@ class Recipe(models.Model):
                 tot = 0.0
                 for r in all_ratings:
                     tot += r.value
-                self.rating = tot / self.no_of_ratings
+                self.total_rating = tot / self.no_of_ratings
+
+                #weighted rating here
+
+                
             
             self.save()
         else:

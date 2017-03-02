@@ -125,7 +125,7 @@ def add_recipe(username, category, name, instructions, serves, cooking_time,
         
     r = Recipe.objects.get_or_create(user=user, category=cat, name=name,
                                      instructions=instructions, serves=serves,
-                                     cooking_time=cooking_time,
+                                     cooking_time_minutes=cooking_time,
                                      is_vegetarian=is_vegetarian,
                                      is_vegan=is_vegan, is_gluten_free=is_gluten_free,
                                      is_dairy_free=is_dairy_free)[0]
