@@ -52,7 +52,7 @@ class Recipe(models.Model):
 
     # not sure if this works
     def rate(self, user, rate):
-        if 0 <= rate <= 5 and:
+        if 0 <= rate <= 5:
             new_rating = Rating.objects.get_or_create(recipe=self, user=user, value=rate)
             new_rating.save()
 
@@ -63,7 +63,11 @@ class Recipe(models.Model):
                 tot = 0.0
                 for r in all_ratings:
                     tot += r.value
-                self.rating = tot / self.no_of_ratings
+                self.total_rating = tot / self.no_of_ratings
+
+                #weighted rating here
+
+                
             
             self.save()
         else:
