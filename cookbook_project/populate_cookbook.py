@@ -34,6 +34,7 @@ def populate():
         {'user': 'HummusLover123',
          'category': 'Mains',
          'name': 'Tofu Curry',
+         'picture': 'recipe_images/tofu-curry.jpg',
          'instructions': 'intruction_intruction_intruction_\nintruction_\nintruction_',
          'serves': 4,
          'cooking_time': 60,
@@ -44,6 +45,7 @@ def populate():
         {'user': 'HealthyDad',
          'category': 'Snacks',
          'name': 'Roast Beef',
+         'picture': 'recipe_images/roast-beef.jpg',
          'instructions': 'intruction_intruction_intruction_\nintruction_\nintruction_',
          'serves': 3,
          'cooking_time': 90,
@@ -90,7 +92,8 @@ def populate():
         add_category(cat['name'])
 
     for rec in recipes:
-        add_recipe(rec['user'], rec['category'],rec['name'], rec['instructions'],
+        add_recipe(rec['user'], rec['category'],rec['name'], rec['picture'],
+                   rec['instructions'],
                    rec['serves'], rec['cooking_time'], rec['is_vegetarian'],
                    rec['is_vegan'], rec['is_gluten_free'], rec['is_dairy_free'])
 
@@ -117,18 +120,20 @@ def add_category(name):
     c.save()
     return c
 
-def add_recipe(username, category, name, instructions, serves, cooking_time,
+def add_recipe(username, category, name, picture, instructions, serves, cooking_time,
                is_vegetarian, is_vegan, is_gluten_free, is_dairy_free):
     
     user = User.objects.get(username=username)
     cat = Category.objects.get(name=category)
         
     r = Recipe.objects.get_or_create(user=user, category=cat, name=name,
+                                     picture=picture,
                                      instructions=instructions, serves=serves,
                                      cooking_time=cooking_time,
                                      is_vegetarian=is_vegetarian,
                                      is_vegan=is_vegan, is_gluten_free=is_gluten_free,
                                      is_dairy_free=is_dairy_free)[0]
+
     r.save()
     return r
 

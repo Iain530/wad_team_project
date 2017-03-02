@@ -4,5 +4,37 @@
 - Home
 {% endblock %}
 {% block body_block %}
-  This is the home page.
+	<div id="best_rated">
+	<h2>Best Rated</h2>
+	{% if best_rated %}
+		{% for recipe in best_rated %}
+			<a href="{% url 'cookbook:view_recipe' recipe.user.username recipe.slug %}">
+			<img src="{{ MEDIA_URL }}{{ recipe.picture }}" height="200" width="200">
+			{{ recipe.name }}</a>
+			by {{ recipe.user.username }}
+			{{ recipe.total_rating }}
+			{{ recipe.description }}
+			
+		{% endfor %}
+	{% else %}
+		The best rated recipes will appear here!
+	{% endif %}
+	</div>
+	
+	<div id="new_recipes">
+	<h2>New Recipes</h2>
+	{% if new_recipes %}
+		{% for recipe in new_recipes %}
+			<img src="{{ MEDIA_URL }}{{ recipe.picture }}" height="200" width="200">
+			<a href="{% url 'cookbook:view_recipe' recipe.user.username recipe.slug %}">{{ recipe.name }}</a>
+			by {{ recipe.user.username }}
+			{{ recipe.total_rating }}
+			{{ recipe.description }}
+			
+		{% endfor %}
+	{% else %}
+		The newest recipes will appear here!
+	{% endif %}
+	</div>
+	
 {% endblock %}
