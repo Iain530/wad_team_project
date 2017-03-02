@@ -51,13 +51,20 @@ class Recipe(models.Model):
         return self.name
 
     # not sure if this works
-    def rate(self, rate):
-        if 0 <= rate <= 5:
-            new_rating = self.rating * self.no_of_ratings
-            new_rating += rate
-            self.no_of_ratings += 1
-            new_rating = new_rating / self.no_of_ratings
-            self.rating = new_rating
+    def rate(self, user, rate):
+        if 0 <= rate <= 5 and:
+            new_rating = Rating.objects.get_or_create(recipe=self, user=user, value=rate)
+            new_rating.save()
+
+            # calculate rating
+            all_ratings = Rating.objects.filter(recipe=self)
+            self.no_of_ratings = len(all_ratings)
+            if self.no_of_ratings > 0:
+                tot = 0.0
+                for r in all_ratings:
+                    tot += r.value
+                self.rating = tot / self.no_of_ratings
+            
             self.save()
         else:
             print('Invalid rating: {0}'.format(rate))
@@ -73,16 +80,6 @@ class Recipe(models.Model):
     def save(self, *args, **kwargs):
         # get slug
         self.slug = slugify(self.name)
-
-        # calculate rating
-        all_ratings = Rating.objects.filter(recipe=self)
-        self.no_of_ratings = len(all_ratings)
-        if self.no_of_ratings > 0:
-            tot = 0.0
-            for r in all_ratings:
-                tot += r.value
-            self.rating = tot / self.no_of_ratings
-            
         
         super(Recipe, self).save(*args, **kwargs)
 
