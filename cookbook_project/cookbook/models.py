@@ -20,7 +20,6 @@ class Recipe(models.Model):
 
     # Users that save this recipe
     saved_by = models.ManyToManyField(User, related_name='saved_recipes', blank=True)
-    rated_by
     
     views = models.PositiveIntegerField(default=0)
     rating = models.FloatField(default=0)
@@ -75,9 +74,14 @@ class Recipe(models.Model):
         # get slug
         self.slug = slugify(self.name)
 
-        # get rating
-        #self.no_of_ratings = len(Rating.objects.filter(recipe=self))
-        #if self.no_of_ratings > 0:
+        # calculate rating
+        all_ratings = Rating.objects.filter(recipe=self)
+        self.no_of_ratings = len(all_ratings)
+        if self.no_of_ratings > 0:
+            tot = 0.0
+            for r in all_ratings:
+                tot += r.value
+            self.rating = tot / self.no_of_ratings
             
         
         super(Recipe, self).save(*args, **kwargs)
@@ -110,16 +114,16 @@ class Comment(models.Model):
         return self.text
 
 
-##class Rating(models.Model):
-##    # Foreign Keys
-##    user = models.ForeignKey(User)
-##    recipe = models.ForeignKey(Recipe)
-##
-##    value = models.PositiveSmallIntegerField()
-##
-##    def __str__(self):
-##        return self.value	
-##    def __unicode__(self):
-##        return self.value
+class Rating(models.Model):
+    # Foreign Keys
+    user = models.ForeignKey(User)
+    recipe = models.ForeignKey(Recipe)
+
+    value = models.PositiveSmallIntegerField()
+
+    def __str__(self):
+        return self.value	
+    def __unicode__(self):
+        return self.value
 
     
