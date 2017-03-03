@@ -5,33 +5,36 @@
 - Home
 {% endblock %}
 {% block body_block %}
-	<div id="best_rated">
+	<div id="recipe_list">
 	<h2>Best Rated</h2>
 	{% if best_rated %}
 		{% for recipe in best_rated %}
+			<div id="recipe_detail">
 			<a href="{% url 'cookbook:view_recipe' recipe.user.username recipe.slug %}">
 			<img src="{{ MEDIA_URL }}{{ recipe.picture }}" height="200" width="200">
 			{{ recipe.name }}</a>
-			by {{ recipe.user.username }}
+			by <a href="{% url 'cookbook:view_user' recipe.user.username %}">{{ recipe.user.username }}</a>
 			{{ recipe.total_rating }}
 			{{ recipe.description }}
-			
+			</div>
 		{% endfor %}
 	{% else %}
 		The best rated recipes will appear here!
 	{% endif %}
 	</div>
 	
-	<div id="new_recipes">
+	<div id="recipe_list">
 	<h2>New Recipes</h2>
 	{% if new_recipes %}
 		{% for recipe in new_recipes %}
+			<div id="recipe_detail">
+			<a href="{% url 'cookbook:view_recipe' recipe.user.username recipe.slug %}">
 			<img src="{{ MEDIA_URL }}{{ recipe.picture }}" height="200" width="200">
-			<a href="{% url 'cookbook:view_recipe' recipe.user.username recipe.slug %}">{{ recipe.name }}</a>
-			by {{ recipe.user.username }}
+			{{ recipe.name }}</a>
+			by <a href="{% url 'cookbook:view_user' recipe.user.username %}">{{ recipe.user.username }}</a>
 			{{ recipe.total_rating }}
 			{{ recipe.description }}
-			
+			</div>
 		{% endfor %}
 	{% else %}
 		The newest recipes will appear here!
