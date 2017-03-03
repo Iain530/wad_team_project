@@ -247,7 +247,7 @@ def faq(request):
     return HttpResponse("FAQ page")
 
 def conversioncharts(request):
-    return HttpResponse("helpful conversion charts")
+    return render(request, "cookbook/conversion-charts.html")
 
 def recipeguide(request):
     return HttpResponse("how to write a recipe")
