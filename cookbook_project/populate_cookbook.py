@@ -85,6 +85,21 @@ def populate():
          'text': 'eww meat'},
     ]
 
+    ratings = [
+        {'username': 'HummusLover123',
+         'recipe_slug': 'roast-beef',
+         'value': 1},
+        {'username': 'MaggiesMeals',
+         'recipe_slug': 'roast-beef',
+         'value': 4},
+        {'username': 'HealthyDad',
+         'recipe_slug': 'tofu-curry',
+         'value': 4},
+        {'username': 'MaggiesMeals',
+         'recipe_slug': 'tofu-curry',
+         'value': 5},
+    ]
+
     for user in users:
         add_user(user['username'], user['email'], user['password'])
 

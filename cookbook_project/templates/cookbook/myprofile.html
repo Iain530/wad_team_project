@@ -29,7 +29,7 @@
 			<img src="{{ MEDIA_URL }}{{ recipe.picture }}" height="200" width="200">
 			{{ recipe.name }}</a>
 			{{ recipe.description }}
-			<span class="stars">{{ recipe.total_rating }}</span>
+			<!-- <span class="stars">{{ recipe.total_rating }}</span> -->
 			</div>
 		{% endfor %}
 	{% else %}
@@ -37,12 +37,5 @@
 	{% endif %}
 	</div>
 
-<script>
-$.fn.stars = function() {
-    return $(this).each(function() {
-        $(this).html($('<span />').width(Math.max(0, (Math.min(5, parseFloat($(this).html())))) * 16));
-    });
-}
-</script>
 
 {% endblock %}

@@ -100,7 +100,7 @@ def myprofile(request):
     recent_comments = Comment.objects.filter(recipe__in=recipes)
     if recent_comments:
         recent_comments = recent_comments.order_by('-upload_date')[:10]
-
+    
     context_dict['recent_comments'] = recent_comments
     context_dict['recipes'] = recipes
 
