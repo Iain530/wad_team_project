@@ -92,14 +92,14 @@ def user_logout(request):
 @login_required
 def myprofile(request):
     context_dict = {}
-    
-    recent_comments = Comment.objects.filter(user=request.user)
-    if recent_comments:
-        recent_comments = recent_comments.order_by('-upload_date')[:10]
         
     recipes = Recipe.objects.filter(user=request.user)
     if recipes:
         recipe = recipes.order_by('-upload_date')
+
+    recent_comments = Comment.objects.filter(recipe__in=recipes)
+    if recent_comments:
+        recent_comments = recent_comments.order_by('-upload_date')[:10]
 
     context_dict['recent_comments'] = recent_comments
     context_dict['recipes'] = recipes

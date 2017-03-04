@@ -5,11 +5,11 @@
 - Home
 {% endblock %}
 {% block body_block %}
-	<div id="recipe_list">
+	<div class="recipe_list">
 	<h2>Best Rated</h2>
 	{% if best_rated %}
 		{% for recipe in best_rated %}
-			<div id="recipe_detail">
+			<div class="recipe_detail">
 			<a href="{% url 'cookbook:view_recipe' recipe.user.username recipe.slug %}">
 			<img src="{{ MEDIA_URL }}{{ recipe.picture }}" height="200" width="200">
 			{{ recipe.name }}</a>
@@ -23,11 +23,11 @@
 	{% endif %}
 	</div>
 	
-	<div id="recipe_list">
+	<div class="recipe_list">
 	<h2>New Recipes</h2>
 	{% if new_recipes %}
 		{% for recipe in new_recipes %}
-			<div id="recipe_detail">
+			<div class="recipe_detail">
 			<a href="{% url 'cookbook:view_recipe' recipe.user.username recipe.slug %}">
 			<img src="{{ MEDIA_URL }}{{ recipe.picture }}" height="200" width="200">
 			{{ recipe.name }}</a>

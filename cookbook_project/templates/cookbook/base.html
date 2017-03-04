@@ -1,83 +1,21 @@
 <!DOCTYPE html>
 {% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'cookbook/style.css' %}" />
 
 <html>
 <head>
-<link rel="shortcut icon" href="{% static "images/favicon.ico" %}" type="image/x-icon">
+<link rel="shortcut icon" href="{% static "cookbook/images/favicon.ico" %}" type="image/x-icon">
 <title>
 Cookbook
 {% block title_block %}
 {% endblock %}
 </title>
-
-<style>
-
-body {margin:0;}
-ul.topnav {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
-}
-
-ul.topnav li {float: left;}
-
-ul.topnav li.icon {display: none;}
-
-ul.topnav li a {
-  display: inline-block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 6vh 8vh;
-  text-decoration: none;
-  transition: 0.3s;
-  font-size: 24px;
-}
-
-ul.topnav li a:hover {background-color: #555;}
-
-.box {
-    width: 70%;
-    background-color: #333;
-	padding: 25px 25px;
-    position: relative;
-	font-size: 17px;
-	color: #f2f2f2;
-    top: 30px;
-    left: 15%;
-}
-
-@media screen and (max-width:1100px) {
-  ul.topnav li:not(:first-child) {display: none;}
-  ul.topnav li.icon {
-    float: right;
-    display: inline-block;
-  }
-}
-
-@media screen and (max-width:1100px) {
-  ul.topnav.responsive {position: relative;}
-  ul.topnav.responsive li.icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  ul.topnav.responsive li {
-    float: none;
-    display: inline;
-  }
-  ul.topnav.responsive li a {
-    display: block;
-    text-align: left;
-  }
-}
-</style>
 </head>
-<body background="{% static "images/background.jpg" %}">
+
+<body background="{% static "cookbook/images/background.jpg" %}">
 
 <ul class="topnav" id="myTopnav">
-  <li><a id="logo" href="{% url 'cookbook:home' %}" style="padding:0"> <img src="{% static "images/logo.png" %}"></a><li>
+  <li><a id="logo" href="{% url 'cookbook:home' %}" style="padding:0"> <img src="{% static "cookbook/images/logo.png" %}"></a><li>
   <li><a class="active" href="{% url 'cookbook:home' %}">Home</a></li>
   <li><a href="{% url 'cookbook:categories' %}">Categories</a></li>
   <li><a href="{% url 'cookbook:search' %}">Search</a></li>
@@ -106,6 +44,12 @@ function myFunction() {
     } else {
         x.className = "topnav";
     }
+}
+
+$.fn.stars = function() {
+    return $(this).each(function() {
+        $(this).html($('<span />').width(Math.max(0, (Math.min(5, parseFloat($(this).html())))) * 16));
+    });
 }
 </script>
 
