@@ -12,7 +12,15 @@
 
 {% block body_block %}
 	{% if author %}
-		View someone else's profile.
+		{% for recipe in recipes %}
+			<div class="recipe_detail">
+			<a href="{% url 'cookbook:view_recipe' recipe.user.username recipe.slug %}">
+			<img class="list_image" src="{{ MEDIA_URL }}{{ recipe.picture }}" height="200" width="200">
+			<p class="recipe_name"> {{ recipe.name }}</p></a>
+			{{ recipe.total_rating }}
+			{{ recipe.description }}
+			</div>
+		{% endfor %}
 	{% else %}
 		This user does not exist!
 	{% endif %}

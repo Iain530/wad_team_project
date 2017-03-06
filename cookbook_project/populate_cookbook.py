@@ -23,12 +23,18 @@ def populate():
     ]
 
     categories = [
-        {'name': 'Starters'},
-        {'name': 'Mains'},
-        {'name': 'Lunches'},
-        {'name': 'Drinks'},
-        {'name': 'Desserts'},
-        {'name': 'Snacks'},
+        {'name': 'Starters',
+         'picture': os.path.join('category_images', 'starters.jpg')},
+        {'name': 'Mains',
+         'picture': os.path.join('category_images', 'mains.jpg') },
+        {'name': 'Lunches',
+         'picture': os.path.join('category_images', 'lunches.jpg')},
+        {'name': 'Drinks',
+         'picture': os.path.join('category_images', 'drinks.jpg')},
+        {'name': 'Desserts',
+         'picture': os.path.join('category_images', 'desserts')},
+        {'name': 'Snacks',
+         'picture': os.path.join('category_images', 'snacks')},
     ]
 
     recipes = [
@@ -95,6 +101,10 @@ def populate():
          'recipe_author': 'HealthyDad',
          'recipe_name': 'Roast Beef',
          'text': 'eww meat'},
+        {'username': 'MaggiesMeals',
+         'recipe_author': 'HealthyDad',
+         'recipe_name': 'Roast Beef',
+         'text': 'Yummy!'}
     ]
 
     ratings = [

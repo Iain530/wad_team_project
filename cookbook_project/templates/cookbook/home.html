@@ -12,10 +12,10 @@
 			<div class="recipe_detail">
 			<a href="{% url 'cookbook:view_recipe' recipe.user.username recipe.slug %}">
 			<img class="list_image" src="{{ MEDIA_URL }}{{ recipe.picture }}" height="200" width="200">
-			<p class="recipe_name"> {{ recipe.name }}</p></a>
-			by <a href="{% url 'cookbook:view_user' recipe.user.username %}">{{ recipe.user.username }}</a>
+			<div class="recipe_name"><big>{{ recipe.name }}</big></a>
+			<small>   <a href="{% url 'cookbook:view_user' recipe.user.username %}">by {{ recipe.user.username }}</a></small></div>
 			{{ recipe.total_rating }}
-			{{ recipe.description }}
+			<i>{{ recipe.description }}</i>
 			</div>
 		{% endfor %}
 	{% else %}
@@ -33,7 +33,7 @@
 			<p class="recipe_name"> {{ recipe.name }}</p></a>
 			by <a href="{% url 'cookbook:view_user' recipe.user.username %}">{{ recipe.user.username }}</a>
 			{{ recipe.total_rating }}
-			{{ recipe.description }}
+			<i>{{ recipe.description }}</i>
 			</div>
 		{% endfor %}
 	{% else %}

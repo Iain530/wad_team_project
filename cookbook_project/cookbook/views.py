@@ -156,7 +156,7 @@ def view_user(request, user):
         context_dict['author'] = None
         context_dict['recipes'] = None
     
-    return HttpResponse("view someone elses profile")
+    return render(request, 'cookbook/view_user.html', context_dict)
 
 # Actual recipe view
 def view_recipe(request, user, recipe_slug):
