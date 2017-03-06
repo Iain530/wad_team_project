@@ -14,7 +14,6 @@ from cookbook.forms import UserForm, IngredientForm, RecipeForm
 def home(request):
     context_dict = {}
     best_rated = Recipe.objects.order_by('-total_rating')[:5]
-    print best_rated
     new_recipes = Recipe.objects.order_by('-upload_date')[:5]
     context_dict['best_rated'] = best_rated
     context_dict['new_recipes'] = new_recipes
@@ -224,7 +223,7 @@ def view_category(request, category_name):
 
 def bestrated(request):
     context_dict = {}
-    recipes = Recipe.objects.all().order_by('-rating')
+    recipes = Recipe.objects.order_by('-total_rating')
     context_dict['recipes'] = recipes
     return HttpResponse("best rated recipes here")
 
