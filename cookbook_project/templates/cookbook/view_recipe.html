@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% extends 'cookbook/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+{% if recipe %}
+- {{ recipe.user }} - {{ recipe.name }}
+{% else %}
+- Oops
+{% endif %}
+{% endblock %}
+
+{% block body_block %}
+	{% if recipe %}
+		<h2>{{ recipe.name }}</h2>
+		<div id="view_recipe_desc">
+		<img src="{{ MEDIA_URL }}{{ recipe.picture }}" id="view_recipe_image" height="200" width="200">
+		<i>"{{ recipe.description }}"</i></br></br>
+		serves: {{ recipe.serves }}</br>
+		cooking time: {{ recipe.cooking_time }} minutes</br>
+		<h3>Ingredients</h3>
+		{% if ingredients %}
+			{% for ingredient in ingredients %}
+				{{ ingredient.quantity }} {{ ingredient.name}}</br>
+			{% endfor %}
+		{% else %}
+			No ingredients!
+		{% endif %}
+		</div>
+		<p>
+		<h3>Instructions</h3>
+		{{ recipe.instructions }}</br>
+		</p>
+		
+		<h3>Comments</h3>
+		{% if comments %}
+			<div class="comment section">
+			{% for comment in comments %}
+				<div class="comment_box">
+				<p class="comment_user">
+				{{ comment.user }} on {{ comment.upload_date }}
+				</p>
+				<p class="comment_text">
+				{{ comment.text }}
+				</p>
+				</div>
+			{% endfor %}
+			</div>
+		{% else %}
+			No comments yet!
+		{% endif %}
+	{% else %}
+		Oh no! The recipe you are looking for doesn't exist.
+	{% endif %}
+{% endblock %}

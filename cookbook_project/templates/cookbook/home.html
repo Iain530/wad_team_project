@@ -11,8 +11,8 @@
 		{% for recipe in best_rated %}
 			<div class="recipe_detail">
 			<a href="{% url 'cookbook:view_recipe' recipe.user.username recipe.slug %}">
-			<img src="{{ MEDIA_URL }}{{ recipe.picture }}" height="200" width="200">
-			{{ recipe.name }}</a>
+			<img class="list_image" src="{{ MEDIA_URL }}{{ recipe.picture }}" height="200" width="200">
+			<p class="recipe_name"> {{ recipe.name }}</p></a>
 			by <a href="{% url 'cookbook:view_user' recipe.user.username %}">{{ recipe.user.username }}</a>
 			{{ recipe.total_rating }}
 			{{ recipe.description }}
@@ -29,8 +29,8 @@
 		{% for recipe in new_recipes %}
 			<div class="recipe_detail">
 			<a href="{% url 'cookbook:view_recipe' recipe.user.username recipe.slug %}">
-			<img src="{{ MEDIA_URL }}{{ recipe.picture }}" height="200" width="200">
-			{{ recipe.name }}</a>
+			<img class="list_image" src="{{ MEDIA_URL }}{{ recipe.picture }}" height="200" width="200">
+			<p class="recipe_name"> {{ recipe.name }}</p></a>
 			by <a href="{% url 'cookbook:view_user' recipe.user.username %}">{{ recipe.user.username }}</a>
 			{{ recipe.total_rating }}
 			{{ recipe.description }}

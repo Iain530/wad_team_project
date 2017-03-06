@@ -1,20 +1,9 @@
 
 
-/* span.stars, span.stars span {
-    display: block;
-    background: url("images/stars.png") 0 -16px repeat-x;
-	text-indent: -9999px;
-    width: 80px;
-    height: 16px;
+body {
+	margin:0;
+	font-family: 'Slabo 27px', serif;
 }
-
-span.stars span {
-    background-position: 0 0;
-} */
-
-
-
-body {margin:0;}
 ul.topnav {
   list-style-type: none;
   margin: 0;
@@ -73,4 +62,48 @@ ul.topnav li a:hover {background-color: #555;}
     display: block;
     text-align: left;
   }
+}
+
+.recipe_list {
+	padding: 5px 10px;
+}
+
+.recipe_detail {
+	padding: 10px 10px;
+	overflow: auto;
+	
+}
+
+.list_image {
+	float: left;
+	margin: 5px;
+}
+
+#view_recipe_desc {
+	overflow: auto;
+}
+
+#view_recipe_image {
+	float: left;
+	margin: 5px 25px 10px 0;
+}
+
+.comment_box {
+	padding: 10px 10px;
+	background: #bdbdbd;
+	color: black;
+	margin: 0 auto;
+	width: 80%;
+}
+
+.comment_user {
+	color: #424242;
+	font-size: 15px;
+	margin: 0;
+}
+
+.comment_text {
+	color: black;
+	margin: 0;
+	
 }

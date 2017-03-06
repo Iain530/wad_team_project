@@ -6,14 +6,15 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 # COOKBOOK IMPORTS
-from cookbook.models import Category, Recipe, Comment, Ingredient
+from cookbook.models import Category, Recipe, Comment, Ingredient, Rating
 from cookbook.forms import UserForm, IngredientForm, RecipeForm
 
 #-HOME-SECTION----------------------------------------------------------
 
 def home(request):
     context_dict = {}
-    best_rated = Recipe.objects.order_by('-rating')[:5]
+    best_rated = Recipe.objects.order_by('-total_rating')[:5]
+    print best_rated
     new_recipes = Recipe.objects.order_by('-upload_date')[:5]
     context_dict['best_rated'] = best_rated
     context_dict['new_recipes'] = new_recipes
@@ -128,11 +129,6 @@ def uploadrecipe(request):
             recipe = recipe_form.save(commit=False)
             recipe.user = request.user
 
-            if recipe.is_vegan or (recipe.is_vegetarian and recipe.is_dairy_free):
-                recipe.is_vegan = True
-                recipe.is_vegetarian = True
-                recipe.is_dairy_free = True
-
             recipe.save()
             return view_recipe(request, request.user.username, recipe.name)
 
@@ -187,20 +183,18 @@ def view_recipe(request, user, recipe_slug):
             # get the recipes comments
             comments = Comment.objects.filter(recipe=recipe).order_by('-upload_date')
 
-            context_dict['author'] = user
             context_dict['recipe'] = recipe
             context_dict['ingredients'] = ingredients
             context_dict['comments'] = comments
 
 
         except (User.DoesNotExist, Recipe.DoesNotExist):
-            context_dict['author'] = None
             context_dict['recipe'] = None
             context_dict['ingredients'] = None
             context_dict['comments'] = None
 
              
-        return HttpResponse("view a recipe")
+        return render(request, 'cookbook/view_recipe.html', context_dict)
 
 
 
