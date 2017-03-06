@@ -65,13 +65,17 @@ ul.topnav li a:hover {background-color: #555;}
 }
 
 .recipe_list {
-	padding: 5px 10px;
+	/* padding: 5px 10px; */
 }
 
 .recipe_detail {
 	padding: 10px 10px;
 	overflow: auto;
 	
+}
+
+.recipe_name {
+	font-size: 20px;
 }
 
 .list_image {

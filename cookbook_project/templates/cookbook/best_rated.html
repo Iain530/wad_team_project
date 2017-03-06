@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{% extends 'cookbook/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+- Best Rated
+{% endblock %}
+
+{% block body_block %}
+	{% if recipes %}
+		Best rated recipes here.
+	{% else %}
+		No top recipes yet!
+	{% endif %}
+{% endblock %}

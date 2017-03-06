@@ -114,7 +114,7 @@ def savedrecipes(request):
     saved_recipes = Recipe.objects.filter(saved_by=request.user)
     context_dict['saved_recipes'] = saved_recipes
     
-    return HttpResponse("saved recipes")
+    return render(request, 'cookbook/saved_recipes.html', context_dict)
 
 @login_required
 def uploadrecipe(request):
@@ -226,7 +226,7 @@ def bestrated(request):
     context_dict = {}
     recipes = Recipe.objects.all().order_by('-rating')
     context_dict['recipes'] = recipes
-    return HttpResponse("best rated recipes here")
+    return render(request, 'cookbook/best_rated.html', context_dict)
 
 # search and search results
 def search(request):

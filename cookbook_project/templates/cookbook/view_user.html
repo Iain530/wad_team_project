@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% extends 'cookbook/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+{% if author %}
+- {{ author }}
+{% else %}
+- Oops
+{% endif %}
+{% endblock %}
+
+{% block body_block %}
+	{% if author %}
+		View someone else's profile.
+	{% else %}
+		This user does not exist!
+	{% endif %}
+{% endblock %}
