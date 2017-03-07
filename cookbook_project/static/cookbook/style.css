@@ -81,6 +81,7 @@ ul.topnav li a:hover {background-color: #555;}
 	background-color: #4a4a4a;
 	border-style: solid;
 	border-width: 1px;
+	border-color: #f2f2f2;
 	
 }
 
@@ -95,11 +96,15 @@ ul.topnav li a:hover {background-color: #555;}
 	border: 1px solid;
 }
 
-.rating {
+.recipe_rating {
 	
 }
 
 .recipe_desc {
+	
+}
+
+.recipe_info {
 	
 }
 
@@ -118,29 +123,46 @@ ul.topnav li a:hover {background-color: #555;}
 
 #view_recipe_desc {
 	overflow: auto;
+	/* border-style: solid none none none; */
+	/* border-color: #4a4a4a; */
+	/* border-width: 1px; */
 }
 
 #view_recipe_image {
 	float: left;
 	margin: 5px 25px 10px 0;
+	border: 1px solid #f2f2f2;
+}
+
+#instructions_section {
+	border-style: solid none none none;
+	border-color: #4a4a4a;
+	border-width: 1px;
+}
+
+#comment_section {
+	border-style: solid none none none;
+	border-color: #4a4a4a;
+	border-width: 1px;
 }
 
 .comment_box {
 	padding: 10px 10px;
-	background: #bdbdbd;
-	color: black;
-	margin: 0 auto;
+	background: #4a4a4a;  /*bdbdbd*/
+	/* color: black; */
+	border: 1px solid #f2f2f2;
+	margin: 2px auto;
 	width: 80%;
 }
 
 .comment_user {
-	color: #424242;
+	/* color: #424242; */
 	font-size: 15px;
 	margin: 0;
 }
 
 .comment_text {
-	color: black;
+	/* color: black; */
 	margin: 0;
 	
 }
