@@ -12,12 +12,37 @@
 
 {% block body_block %}
 	{% if recipe %}
-		<h2>{{ recipe.name }}</h2>
+		<h2>
+		{{ recipe.name }} - 
+		{% if user == recipe.user %}
+		(edit)
+		{% else %}
+		<a href="{% url 'cookbook:view_user' recipe.user.username %}"><small>by {{ recipe.user.username }}</small></a>
+		{% endif %}
+		
+		</h2>
 		<div id="view_recipe_desc">
 		<img src="{{ MEDIA_URL }}{{ recipe.picture }}" id="view_recipe_image" height="200" width="200">
 		<i>"{{ recipe.description }}"</i></br></br>
 		serves: {{ recipe.serves }}</br>
 		cooking time: {{ recipe.cooking_time }} minutes</br>
+		
+		<div class="dietary_info">
+		{% if recipe.is_gluten_free %}
+		<img class="dietary_image" src="{% static 'cookbook/images/gluten-free.png' %}" height="60" width="55">
+		{% endif %}
+		{% if recipe.is_vegan %}
+		<img class="dietary_image" src="{% static 'cookbook/images/vegan.png' %}" height="48" width="60">
+		{% else %}
+			{% if recipe.is_vegetarian %}
+			<img class="dietary_image" src="{% static 'cookbook/images/vegetarian.png' %}" height="55" width="55">
+			{% endif %}
+			{% if recipe.is_dairy_free %}
+			<img class="dietary_image" src="{% static 'cookbook/images/dairy-free.png' %}" height="50" width="56">
+			{% endif %}
+		{% endif %}
+		</div>
+		
 		<h3>Ingredients</h3>
 		{% if ingredients %}
 			{% for ingredient in ingredients %}

@@ -1,4 +1,6 @@
-
+a {
+	color: #f2f2f2;
+}
 
 body {
 	margin:0;
@@ -65,28 +67,54 @@ ul.topnav li a:hover {background-color: #555;}
   }
 }
 
+/* VIEWING RECIPE LISTS--------------------------- */
+
 .recipe_list {
-	/* padding: 5px 10px; */
+	
 }
 
 .recipe_detail {
 	padding: 10px 10px;
+	margin: 5px;
 	overflow: auto;
+	position: relative;
+	background-color: #4a4a4a;
 	border-style: solid;
 	border-width: 1px;
 	
 }
 
-
 .recipe_name {
 	font-size: 20px;
-	margin: 0;
+	margin: 0 5px 5px 0;
 }
 
 .list_image {
 	float: left;
 	margin: 5px 15px 5px 5px;
+	border: 1px solid;
 }
+
+.rating {
+	
+}
+
+.recipe_desc {
+	
+}
+
+.dietary_info {
+	
+}
+
+.dietary_image {
+	float: right;
+	margin: 5px;
+	position: relative;
+	right: 5px;
+}
+
+/* VIEW RECIPE ------------------------ */
 
 #view_recipe_desc {
 	overflow: auto;
