@@ -12,7 +12,7 @@
 
 {% block body_block %}
 	{% if recipe %}
-		<h2>
+		<h1>
 		{{ recipe.name }} - 
 		{% if user == recipe.user %}
 		(edit)
@@ -20,7 +20,7 @@
 		<small>by <a href="{% url 'cookbook:view_user' recipe.user.username %}">{{ recipe.user.username }}</a></small>
 		{% endif %}
 		
-		</h2>
+		</h1>
 		<div id="view_recipe_desc">
 		<img src="{{ MEDIA_URL }}{{ recipe.picture }}" id="view_recipe_image" height="200" width="200">
 		<i>"{{ recipe.description }}"</i></br></br>
