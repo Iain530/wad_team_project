@@ -12,12 +12,44 @@
 		
 		{% if recipes %}
 			{% for recipe in recipes %}
+			<div class="recipe_detail">
+				
+				<div class="recipe_name">
 				<a href="{% url 'cookbook:view_recipe' recipe.user.username recipe.slug %}">
-				<img src="{{ MEDIA_URL }}{{ recipe.picture }}" height="200" width="200">
-				{{ recipe.name }}</a>
-				by {{ recipe.user.username }}
+				<img class="list_image" src="{{ MEDIA_URL }}{{ recipe.picture }}" height="200" width="200">
+				<big>{{ recipe.name }}</big></a>
+				by <a href="{% url 'cookbook:view_user' recipe.user.username %}"><small>{{ recipe.user.username }}</small></a>
+				</div>
+				
+				<div class="recipe_rating">
 				{{ recipe.total_rating }}
-				{{ recipe.description }}
+				</div>
+				
+				<div class="recipe_desc">
+				<i>"{{ recipe.description }}"</i>
+				</div>
+				
+				<div class="recipe_info">
+				Serves: {{ recipe.serves }} - Cooking time: {{ recipe.cooking_time }} minutes
+				</div>
+				
+				<div class="dietary_info">
+				{% if recipe.is_gluten_free %}
+				<img class="dietary_image" src="{% static 'cookbook/images/gluten-free.png' %}" height="60" width="55">
+				{% endif %}
+				{% if recipe.is_vegan %}
+				<img class="dietary_image" src="{% static 'cookbook/images/vegan.png' %}" height="48" width="60">
+				{% else %}
+					{% if recipe.is_vegetarian %}
+					<img class="dietary_image" src="{% static 'cookbook/images/vegetarian.png' %}" height="55" width="55">
+					{% endif %}
+					{% if recipe.is_dairy_free %}
+					<img class="dietary_image" src="{% static 'cookbook/images/dairy-free.png' %}" height="50" width="56">
+					{% endif %}
+				{% endif %}
+				</div>
+			
+			</div>
 			{% endfor %}
 		{% else %}
 			<strong>There are currently no {{ category.name }} on Cookbook!</strong><br>

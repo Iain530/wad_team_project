@@ -10,10 +10,13 @@
 		{% for category in categories %}
 		<div class="category_detail" >
 			<a href="{% url 'cookbook:view_category' category.name %}">
+			
 			<div class="category_name">
 			<big>{{ category.name }}</big></br>
 			</div>
+			
 			<img class="category_list_image" src="{{ MEDIA_URL }}{{ category.picture }}" height="250" width="250">
+			
 			</a>
 		</div>
 		{% endfor %}
