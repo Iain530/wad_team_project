@@ -4,21 +4,21 @@
 - Categories
 {% endblock %}
 {% block body_block %}
-
 	<h1>Categories</h1>
-  
-	<div>
+	<div class="category_list">
 	{% if categories %}
-	<ul>
 		{% for category in categories %}
-		<li>
-		<a href="{% url 'cookbook:view_category' category.name %}">{{ category.name }}</a></br>
-		<img src="{{ MEDIA_URL }}{{ category.picture }}">
-		</li>
+		<div class="category_detail" >
+			<a href="{% url 'cookbook:view_category' category.name %}">
+			<div class="category_name">
+			<big>{{ category.name }}</big></br>
+			</div>
+			<img class="category_list_image" src="{{ MEDIA_URL }}{{ category.picture }}" height="200" width="200">
+			</a>
+		</div>
 		{% endfor %}
-	</ul>
 	{% else %}
-		<strong>There are no categories!</strong>
+		There are no categories!
 	{% endif %}
 	</div>
 

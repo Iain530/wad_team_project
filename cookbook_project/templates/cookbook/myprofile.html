@@ -1,8 +1,41 @@
 {% extends 'cookbook/base.html' %}
 {% load staticfiles %}
 {% block title_block %}
-- My Profile
+- {{ user.username }}
 {% endblock %}
 {% block body_block %}
-  This is your profile page.
+	<h2>My Profile - {{ user.username }}</h2>
+	
+	<div id="recent_comments">
+	<h3>Recent comments</h3>
+	{% if recent_comments %}
+		{% for comment in recent_comments %}
+			<div class="comment">
+			{{ comment.user.username }}</br>
+			{{ comment.text }}
+			</div>
+		{% endfor %}
+	{% else %}
+		No comments yet!
+	{% endif %}
+	</div>
+	
+	<div class="recipe_list" id="my_recipe_list">
+	<h3>My Recipes</h3>
+	{% if recipes %}
+		{% for recipe in recipes %}
+			<div class="my_recipe_detail">
+			<a href="{% url 'cookbook:view_recipe' recipe.user.username recipe.slug %}">
+			<img src="{{ MEDIA_URL }}{{ recipe.picture }}" height="200" width="200">
+			{{ recipe.name }}</a>
+			{{ recipe.description }}
+			<!-- <span class="stars">{{ recipe.total_rating }}</span> -->
+			</div>
+		{% endfor %}
+	{% else %}
+	
+	{% endif %}
+	</div>
+
+
 {% endblock %}

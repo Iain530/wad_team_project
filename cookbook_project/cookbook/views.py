@@ -6,14 +6,14 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 # COOKBOOK IMPORTS
-from cookbook.models import Category, Recipe, Comment, Ingredient
+from cookbook.models import Category, Recipe, Comment, Ingredient, Rating
 from cookbook.forms import UserForm, IngredientForm, RecipeForm
 
 #-HOME-SECTION----------------------------------------------------------
 
 def home(request):
     context_dict = {}
-    best_rated = Recipe.objects.order_by('-rating')[:5]
+    best_rated = Recipe.objects.order_by('-total_rating')[:5]
     new_recipes = Recipe.objects.order_by('-upload_date')[:5]
     context_dict['best_rated'] = best_rated
     context_dict['new_recipes'] = new_recipes
@@ -92,15 +92,15 @@ def user_logout(request):
 @login_required
 def myprofile(request):
     context_dict = {}
-    
-    recent_comments = Comment.objects.filter(user=request.user)
-    if recent_comments:
-        recent_comments = recent_comments.order_by('-upload_date')[:10]
         
     recipes = Recipe.objects.filter(user=request.user)
     if recipes:
         recipe = recipes.order_by('-upload_date')
 
+    recent_comments = Comment.objects.filter(recipe__in=recipes)
+    if recent_comments:
+        recent_comments = recent_comments.order_by('-upload_date')[:10]
+    
     context_dict['recent_comments'] = recent_comments
     context_dict['recipes'] = recipes
 
@@ -113,7 +113,7 @@ def savedrecipes(request):
     saved_recipes = Recipe.objects.filter(saved_by=request.user)
     context_dict['saved_recipes'] = saved_recipes
     
-    return HttpResponse("saved recipes")
+    return render(request, 'cookbook/saved_recipes.html', context_dict)
 
 @login_required
 def uploadrecipe(request):
@@ -127,11 +127,6 @@ def uploadrecipe(request):
             # create
             recipe = recipe_form.save(commit=False)
             recipe.user = request.user
-
-            if recipe.is_vegan or (recipe.is_vegetarian and recipe.is_dairy_free):
-                recipe.is_vegan = True
-                recipe.is_vegetarian = True
-                recipe.is_dairy_free = True
 
             recipe.save()
             return view_recipe(request, request.user.username, recipe.name)
@@ -161,7 +156,7 @@ def view_user(request, user):
         context_dict['author'] = None
         context_dict['recipes'] = None
     
-    return HttpResponse("view someone elses profile")
+    return render(request, 'cookbook/view_user.html', context_dict)
 
 # Actual recipe view
 def view_recipe(request, user, recipe_slug):
@@ -187,20 +182,18 @@ def view_recipe(request, user, recipe_slug):
             # get the recipes comments
             comments = Comment.objects.filter(recipe=recipe).order_by('-upload_date')
 
-            context_dict['author'] = user
             context_dict['recipe'] = recipe
             context_dict['ingredients'] = ingredients
             context_dict['comments'] = comments
 
 
         except (User.DoesNotExist, Recipe.DoesNotExist):
-            context_dict['author'] = None
             context_dict['recipe'] = None
             context_dict['ingredients'] = None
             context_dict['comments'] = None
 
              
-        return HttpResponse("view a recipe")
+        return render(request, 'cookbook/view_recipe.html', context_dict)
 
 
 
@@ -226,13 +219,13 @@ def view_category(request, category_name):
         context_dict['category'] = None
         context_dict['recipes'] = None
     
-    return HttpResponse("specific category")
+    return render(request, 'cookbook/view_category.html', context_dict)
 
 def bestrated(request):
     context_dict = {}
-    recipes = Recipe.objects.all().order_by('-rating')
+    recipes = Recipe.objects.order_by('-total_rating')
     context_dict['recipes'] = recipes
-    return HttpResponse("best rated recipes here")
+    return render(request, 'cookbook/best_rated.html', context_dict)
 
 # search and search results
 def search(request):
@@ -247,7 +240,7 @@ def faq(request):
     return HttpResponse("FAQ page")
 
 def conversioncharts(request):
-    return HttpResponse("helpful conversion charts")
+    return render(request, "cookbook/conversion-charts.html")
 
 def recipeguide(request):
     return HttpResponse("how to write a recipe")

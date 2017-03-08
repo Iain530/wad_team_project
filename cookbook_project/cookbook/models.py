@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils import timezone
+from PIL import Image, ImageOps
+import os
 
 class Category(models.Model):
     # Primary key
@@ -13,6 +15,22 @@ class Category(models.Model):
         return self.name
     def __unicode__(self):
         return self.name
+
+# resizes a picture to a square of with sides of length (size)px 
+def resizePicture(picture, side):
+    image = Image.open(picture)
+    (width, height) = image.size
+
+    scale = min(width, height)/ (side*1.0)
+    size = ( int(width/scale), int(height/scale) )
+    image = image.resize(size, Image.ANTIALIAS)
+    trim = ( side, side )
+    image = ImageOps.fit(image, trim, Image.ANTIALIAS)
+    image.save(picture.path)
+
+def recipe_file_name(instance, filename):
+    return os.path.join('recipe_images', instance.user.username, filename)
+    
 		
 class Recipe(models.Model):
     # Foreign keys
@@ -39,7 +57,7 @@ class Recipe(models.Model):
     instructions = models.TextField()             # Change field type
     serves = models.PositiveSmallIntegerField()
     cooking_time = models.PositiveIntegerField(default=0)
-    picture = models.ImageField(upload_to="recipe_images", blank="True")
+    picture = models.ImageField(upload_to=recipe_file_name, blank="True")
     
     is_vegetarian = models.BooleanField(default=False)
     is_vegan = models.BooleanField(default=False)
@@ -54,7 +72,7 @@ class Recipe(models.Model):
     # not sure if this works
     def rate(self, user, rate):
         if 0 <= rate <= 5:
-            new_rating = Rating.objects.get_or_create(recipe=self, user=user, value=rate)
+            new_rating = Rating.objects.get_or_create(recipe=self, user=user, value=rate)[0]
             new_rating.save()
 
             # calculate rating
@@ -85,8 +103,18 @@ class Recipe(models.Model):
     def save(self, *args, **kwargs):
         # get slug
         self.slug = slugify(self.name)
+
+        # vegan <=> vegetarian and dairy free
+        if self.is_vegan or (self.is_vegetarian and self.is_dairy_free):
+            self.is_vegan = True
+            self.is_vegetarian = True
+            self.is_dairy_free = True
         
         super(Recipe, self).save(*args, **kwargs)
+
+        # resize recipe picture
+        if self.picture:
+            resizePicture(self.picture, 200)
 
     class Meta:
         unique_together = ('user', 'slug')
