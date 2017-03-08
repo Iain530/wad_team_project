@@ -16,17 +16,25 @@ class Category(models.Model):
     def __unicode__(self):
         return self.name
 
+    def save(self, *args, **kwargs):   
+        super(Category, self).save(*args, **kwargs)
+
+        # resize recipe picture
+        if self.picture:
+            resizePicture(self.picture, 250)
+
 # resizes a picture to a square of with sides of length (size)px 
 def resizePicture(picture, side):
     image = Image.open(picture)
-    (width, height) = image.size
 
-    scale = min(width, height)/ (side*1.0)
-    size = ( int(width/scale), int(height/scale) )
-    image = image.resize(size, Image.ANTIALIAS)
-    trim = ( side, side )
-    image = ImageOps.fit(image, trim, Image.ANTIALIAS)
-    image.save(picture.path)
+    if image.size != (side, side):
+        (width, height) = image.size
+        scale = min(width, height)/ (side*1.0)
+        size = ( int(width/scale), int(height/scale) )
+        image = image.resize(size, Image.ANTIALIAS)
+        trim = ( side, side )
+        image = ImageOps.fit(image, trim, Image.ANTIALIAS)
+        image.save(picture.path)
 
 def recipe_file_name(instance, filename):
     return os.path.join('recipe_images', instance.user.username, filename)

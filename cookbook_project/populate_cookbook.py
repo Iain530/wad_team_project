@@ -32,9 +32,9 @@ def populate():
         {'name': 'Drinks',
          'picture': os.path.join('category_images', 'drinks.jpg')},
         {'name': 'Desserts',
-         'picture': os.path.join('category_images', 'desserts')},
+         'picture': os.path.join('category_images', 'desserts.jpg')},
         {'name': 'Snacks',
-         'picture': os.path.join('category_images', 'snacks')},
+         'picture': os.path.join('category_images', 'snacks.jpg')},
     ]
 
     recipes = [
@@ -130,7 +130,7 @@ def populate():
         add_user(user['username'], user['email'], user['password'])
 
     for cat in categories:
-        add_category(cat['name'])
+        add_category(cat['name'], cat['picture'])
 
     for rec in recipes:
         add_recipe(rec['user'], rec['category'],rec['name'], rec['picture'],
@@ -166,8 +166,8 @@ def add_user(username, email, password):
         u.save()
         return u
 
-def add_category(name):
-    c = Category.objects.get_or_create(name=name)[0]
+def add_category(name, picture):
+    c = Category.objects.get_or_create(name=name, picture=picture)[0]
     c.save()
     return c
 
