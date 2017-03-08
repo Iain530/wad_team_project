@@ -166,3 +166,27 @@ ul.topnav li a:hover {background-color: #555;}
 	margin: 0;
 	
 }
+
+/* VIEWING CATEGORY LISTS--------------------------- */
+
+.category_list {
+	
+}
+
+.category_name {
+	text-align: center;
+	font-size: 20px;
+	margin: 0 5px 5px 0;
+}
+
+.category_detail {
+	display: inline-block;
+	padding: 10px 10px;
+	margin: 5px;
+	overflow: auto;
+	position: relative;
+	background-color: #4a4a4a;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #f2f2f2;
+}
