@@ -237,3 +237,22 @@ ul.topnav li a:hover {background-color: #555;}
 	opacity : 1;
 }
 
+
+/* CONVERSION CHARTS */
+
+#tables {
+	text-align: center;
+}
+
+.table_holder {
+	text-align: center;
+	display: inline-block;
+
+	padding: 0 25px;
+}
+
+table {
+	border: 1px solid #f2f2f2;
+	margin: 0 auto;
+}
+
