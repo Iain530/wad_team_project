@@ -118,25 +118,29 @@ def savedrecipes(request):
 @login_required
 def uploadrecipe(request):
     context_dict = {}
-    
+    form = RecipeForm()
     if request.method == 'POST':
         # check if form is valid
-        recipe_form = RecipeForm(request.POST)
+        form = RecipeForm(request.POST)
         
         if form.is_valid():
             # create
-            recipe = recipe_form.save(commit=False)
+            recipe = form.save(commit=False)
             recipe.user = request.user
-
-            recipe.save()
+            
+            if recipe.is_vegan or (recipe.is_vegetarian and recipe.is_dairy_free):
+                recipe.is_vegan = True
+                recipe.is_vegetarian = True
+                recipe.is_dairy_free = True
+            
+            recipe.save(commit=True)
             return view_recipe(request, request.user.username, recipe.name)
-
+        
         else:
             print(form.errors)
 
     context_dict['form'] = RecipeForm()
-    #return render(request, UPLOAD HTML, context_dict)    
-    return HttpResponse("upload recipe")
+    return render(request, 'cookbook/upload-recipe.html', context_dict)
 
 # view for a user profile
 def view_user(request, user):

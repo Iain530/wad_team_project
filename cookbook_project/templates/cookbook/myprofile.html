@@ -5,7 +5,7 @@
 {% endblock %}
 {% block body_block %}
 	<h1>My Profile - {{ user.username }}</h1>
-	
+	<a class="active" href="{% url 'cookbook:upload-recipe' %}">Add Recipe</a>
 	<div id="recent_comments">
 	<h2>Recent comments</h2>
 	{% if recent_comments %}
