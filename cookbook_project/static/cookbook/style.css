@@ -33,7 +33,7 @@ ul.topnav li a:hover {background-color: #555;}
 .box {
     width: 70%;
     background-color: #333;
-	padding: 25px 25px;
+	padding: 10px 25px;
     position: relative;
 	font-size: 17px;
 	color: #f2f2f2;
@@ -193,5 +193,47 @@ ul.topnav li a:hover {background-color: #555;}
 
 .category_list_image {
 	margin: 0 auto;
+	border: 1px solid #f2f2f2;
+}
+
+/* STAR RATINGS */
+
+.starRating:not(old){
+	margin 		   : 10px 0;
+	display        : inline-block;
+	width          : 7.5em;
+	height         : 1.5em;
+	overflow       : hidden;
+	vertical-align : bottom;
+}
+
+.starRating:not(old) > input{
+	margin-right : -100%;
+	opacity      : 0;
+}
+
+.starRating:not(old) > label{
+	display         : block;
+	float           : right;
+	position        : relative;
+	background      : url('star-off.svg');
+	background-size : contain;
+}
+
+.starRating:not(old) > label:before{
+	content         : '';
+	display         : block;
+	width           : 1.5em;
+	height          : 1.5em;
+	background      : url('star-on.svg');
+	background-size : contain;
+	opacity         : 0;
+	transition      : opacity 0.2s linear;
+}
+
+.starRating:not(old) > label:hover:before,
+.starRating:not(old) > label:hover ~ label:before,
+.starRating:not(:hover) > :checked ~ label:before{
+	opacity : 1;
 }
 
