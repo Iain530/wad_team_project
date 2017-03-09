@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+{% extends 'cookbook/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+{% if recipe %}
+- {{ recipe.user }} - {{ recipe.name }}
+{% else %}
+- Oops
+{% endif %}
+{% endblock %}
+
+{% block body_block %}
+	{% if recipe %}
+		<h1>
+		{{ recipe.name }} -
+		<small> 
+		{% if user == recipe.user %}
+		(edit)
+		</h1>
+		</small>
+		{% else %}
+		by <a href="{% url 'cookbook:view_user' recipe.user.username %}">{{ recipe.user.username }}</a>
+		</small>
+		</h1>
+		{% endif %}
+
+
+		<div id="view_recipe_desc">
+		<img src="{{ MEDIA_URL }}{{ recipe.picture }}" id="view_recipe_image" height="200" width="200">
+		
+		<span class="starRating">
+			<input id="rating5" type="radio" name="rating" value="5">
+			<label for="rating5">5</label>
+			<input id="rating4" type="radio" name="rating" value="4" checked>
+			<label for="rating4">4</label>
+			<input id="rating3" type="radio" name="rating" value="3">
+			<label for="rating3">3</label>
+			<input id="rating2" type="radio" name="rating" value="2">
+			<label for="rating2">2</label>
+			<input id="rating1" type="radio" name="rating" value="1">
+			<label for="rating1">1</label>
+		</span>
+		
+		<div>
+		<i>"{{ recipe.description }}"</i></br></br>
+		serves: {{ recipe.serves }}</br>
+		cooking time: {{ recipe.cooking_time }} minutes</br>
+		</div>
+		
+		<div class="dietary_info">
+		{% if recipe.is_gluten_free %}
+		<img class="dietary_image" src="{% static 'cookbook/images/gluten-free.png' %}" height="60" width="55">
+		{% endif %}
+		{% if recipe.is_vegan %}
+		<img class="dietary_image" src="{% static 'cookbook/images/vegan.png' %}" height="48" width="60">
+		{% else %}
+			{% if recipe.is_vegetarian %}
+			<img class="dietary_image" src="{% static 'cookbook/images/vegetarian.png' %}" height="55" width="55">
+			{% endif %}
+			{% if recipe.is_dairy_free %}
+			<img class="dietary_image" src="{% static 'cookbook/images/dairy-free.png' %}" height="50" width="56">
+			{% endif %}
+		{% endif %}
+		</div>
+		
+		<h3>Ingredients</h3>
+		{% if ingredients %}
+			{% for ingredient in ingredients %}
+				{{ ingredient.quantity }} {{ ingredient.name}}</br>
+			{% endfor %}
+		{% else %}
+			No ingredients!
+		{% endif %}
+		</div>
+		<p id="instructions_section">
+		<h3>Instructions</h3>
+		{{ recipe.instructions }}</br>
+		</p>
+		
+		<div id="comment_section">
+		<h3>Comments</h3>
+		{% if comments %}
+			{% for comment in comments %}
+				<div class="comment_box">
+				<p class="comment_user">
+				<a href="{% url 'cookbook:view_user' comment.user.username %}">{{ comment.user }}</a> on {{ comment.upload_date }}
+				</p>
+				<p class="comment_text">
+				{{ comment.text }}
+				</p>
+				</div>
+			{% endfor %}
+		{% else %}
+			No comments yet!
+		{% endif %}
+		</div>
+		
+	{% else %}
+		Oh no! The recipe you are looking for doesn't exist.
+	{% endif %}
+{% endblock %}

@@ -1,34 +1,25 @@
+<!DOCTYPE html>
 {% extends 'cookbook/base.html' %}
 {% load staticfiles %}
+
 {% block title_block %}
-- {{ user.username }}
+{% if author %}
+- {{ author }}
+{% else %}
+- Oops
+{% endif %}
 {% endblock %}
+
 {% block body_block %}
-	<h1>My Profile - {{ user.username }}</h1>
+	{% if author %}
+		<h1>{{ author }}</h1>
+		
+		<div id="author_details">
+		
+		</div>
 	
-	<div id="recent_comments">
-	<h2>Recent comments</h2>
-	{% if recent_comments %}
-		{% for comment in recent_comments %}
-				<div class="comment_box">
-				<p class="comment_user">
-				<a href="{% url 'cookbook:view_user' comment.user.username %}">{{ comment.user }}</a>
-				on {{ comment.upload_date }} about
-				<a href="{% url 'cookbook:view_recipe' comment.recipe.user comment.recipe.slug %}">{{ comment.recipe.name }}</a>
-				</p>
-				<p class="comment_text">
-				{{ comment.text }}
-				</p>
-				</div>
-		{% endfor %}
-	{% else %}
-		No comments yet!
-	{% endif %}
-	</div>
-	
-	<div class="recipe_list" id="my_recipe_list">
-	<h2>My Recipes</h2>
-	{% if recipes %}
+		<h2>{{ author }}'s Recipes</h2>
+		
 		<div class="recipe_list">
 		{% for recipe in recipes %}
 			<div class="recipe_detail">
@@ -36,8 +27,7 @@
 				<div class="recipe_name">
 				<a href="{% url 'cookbook:view_recipe' recipe.user.username recipe.slug %}">
 				<img class="list_image" src="{{ MEDIA_URL }}{{ recipe.picture }}" height="200" width="200">
-				<big>{{ recipe.name }}</big>
-				</a>
+				<big>{{ recipe.name }}</big></a>
 				</div>
 				
 				<div class="recipe_rating">
@@ -72,9 +62,6 @@
 		{% endfor %}
 		</div>
 	{% else %}
-	
+		This user does not exist!
 	{% endif %}
-	</div>
-
-
 {% endblock %}

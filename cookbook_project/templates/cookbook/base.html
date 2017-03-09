@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'cookbook/style.css' %}" />
+
 
 <html>
 <head>
 <link rel="shortcut icon" href="{% static "cookbook/images/favicon.ico" %}" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'cookbook/style.css' %}" />
 <title>
 Cookbook
 {% block title_block %}
@@ -45,13 +47,11 @@ function myFunction() {
         x.className = "topnav";
     }
 }
-
-$.fn.stars = function() {
-    return $(this).each(function() {
-        $(this).html($('<span />').width(Math.max(0, (Math.min(5, parseFloat($(this).html())))) * 16));
-    });
-}
 </script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script src="{% static 'js/cookbook-jquery.js' %}"></script>
+<script src="{% static 'js/cookbook-ajax.js' %}"></script>
 
 </body>
 </html>

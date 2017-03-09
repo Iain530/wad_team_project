@@ -1,0 +1,28 @@
+{% extends 'cookbook/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+- Categories
+{% endblock %}
+{% block body_block %}
+	<h1>Categories</h1>
+	<div class="category_list">
+	{% if categories %}
+		{% for category in categories %}
+		<div class="category_detail" >
+			<a href="{% url 'cookbook:view_category' category.name %}">
+			
+			<div class="category_name">
+			<big>{{ category.name }}</big></br>
+			</div>
+			
+			<img class="category_list_image" src="{{ MEDIA_URL }}{{ category.picture }}" height="250" width="250">
+			
+			</a>
+		</div>
+		{% endfor %}
+	{% else %}
+		There are no categories!
+	{% endif %}
+	</div>
+
+{% endblock %}

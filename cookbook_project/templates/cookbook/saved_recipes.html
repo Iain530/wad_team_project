@@ -1,43 +1,23 @@
+<!DOCTYPE html>
 {% extends 'cookbook/base.html' %}
 {% load staticfiles %}
+
 {% block title_block %}
-- {{ user.username }}
+- Saved Recipes
 {% endblock %}
+
 {% block body_block %}
-	<h1>My Profile - {{ user.username }}</h1>
-	
-	<div id="recent_comments">
-	<h2>Recent comments</h2>
-	{% if recent_comments %}
-		{% for comment in recent_comments %}
-				<div class="comment_box">
-				<p class="comment_user">
-				<a href="{% url 'cookbook:view_user' comment.user.username %}">{{ comment.user }}</a>
-				on {{ comment.upload_date }} about
-				<a href="{% url 'cookbook:view_recipe' comment.recipe.user comment.recipe.slug %}">{{ comment.recipe.name }}</a>
-				</p>
-				<p class="comment_text">
-				{{ comment.text }}
-				</p>
-				</div>
-		{% endfor %}
-	{% else %}
-		No comments yet!
-	{% endif %}
-	</div>
-	
-	<div class="recipe_list" id="my_recipe_list">
-	<h2>My Recipes</h2>
-	{% if recipes %}
-		<div class="recipe_list">
-		{% for recipe in recipes %}
+	<h1>Your Saved Recipes</h1>
+	<div class="recipe_list">
+	{% if saved_recipes %}
+		{% for recipe in saved_recipes %}
 			<div class="recipe_detail">
 				
 				<div class="recipe_name">
 				<a href="{% url 'cookbook:view_recipe' recipe.user.username recipe.slug %}">
 				<img class="list_image" src="{{ MEDIA_URL }}{{ recipe.picture }}" height="200" width="200">
-				<big>{{ recipe.name }}</big>
-				</a>
+				<big>{{ recipe.name }}</big></a>
+				<small>by <a href="{% url 'cookbook:view_user' recipe.user.username %}">{{ recipe.user.username }}</a></small>
 				</div>
 				
 				<div class="recipe_rating">
@@ -70,11 +50,9 @@
 			
 			</div>
 		{% endfor %}
-		</div>
 	{% else %}
-	
+		Save your favourite recipes and they will appear here!
 	{% endif %}
 	</div>
-
-
+	
 {% endblock %}
