@@ -1,0 +1,4 @@
+{{ object.name }}
+{{ object.user.get_full_name }}
+{{ object.description }}
+{{ object.instructions }}
