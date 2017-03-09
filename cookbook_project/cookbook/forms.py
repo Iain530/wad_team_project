@@ -22,7 +22,7 @@ class UserForm(forms.ModelForm):
 class RecipeForm(forms.ModelForm):
     name = forms.CharField(max_length=Recipe.MAX_NAME_LENGTH,help_text="Recipe Name")
     description=forms.CharField(max_length=Recipe.MAX_DESC_LENGTH,
-    						 help_text="description", widget=forms.Textarea)
+    						 help_text="Description", widget=forms.Textarea)
     instructions = forms.CharField(max_length=Recipe.MAX_INS_LENGTH, 
     					   help_text="Instructions",widget=forms.Textarea)
     serves = forms.IntegerField(min_value=1, max_value=32767,

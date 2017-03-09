@@ -250,7 +250,7 @@ def bestrated(request):
 
 # search and search results
 def search(request):
-    return render(request, 'cookbook/search.html')
+    return render(request, 'search/search.html')
 
 #-HELP-SECTION------------------------------------------------------------
 

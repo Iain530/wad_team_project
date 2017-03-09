@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^cookbook/', include('cookbook.urls')),
     url(r'^', include('cookbook.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^search/', include('haystack.urls')),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
