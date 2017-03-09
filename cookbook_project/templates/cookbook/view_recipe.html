@@ -24,6 +24,16 @@
 		</small>
 		</h1>
 		{% endif %}
+		
+		<div>
+		{% if user.is_authenticated %}
+		<p>saved: <strong id="saved">{{ saved }}</strong></p>
+		<button id="save" data-slug="{{ recipe.slug }}" data-user="{{ recipe.user }}"
+		class="btn btn-primary btn-sm" type="button">
+		Save
+		</button>
+		{% endif %}
+		</div>
 
 
 		<div id="view_recipe_desc">

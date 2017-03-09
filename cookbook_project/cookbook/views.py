@@ -13,17 +13,34 @@ from cookbook.forms import UserForm, IngredientForm, RecipeForm
 
 @login_required
 def save_recipe(request):
-    recipe_user, recipe_slug = None
+    recipe_user = None
+    recipe_slug = None
+    saved = None
+    
     if request.method == 'GET':
-        recipe_user = request.GET['user']
+        # get the recipe author and recipe slug
+        recipe_user = User.objects.get(username=request.GET['user'])
         recipe_slug = request.GET['slug']
+
         
+
+    # if request contains both
     if recipe_user and recipe_slug:
+        # try and get a recipe object
         recipe = Recipe.objects.get(user=recipe_user, slug=recipe_slug)
-        
+
+        # if the recipe object exists
         if recipe:
-            None
-            #recipe.saved_by.add(
+            # either save or unsave the recipe and set saved to new value
+            if recipe not in Recipe.objects.filter(saved_by=request.user):
+                recipe.user_save(request.user)
+                saved = True
+            else:
+                recipe.user_unsave(request.user)
+                saved = False
+    print saved
+    return HttpResponse(saved)
+            
 
 #-HOME-SECTION----------------------------------------------------------
 
@@ -126,7 +143,7 @@ def myprofile(request):
 def savedrecipes(request):
     context_dict = {}
 
-    saved_recipes = Recipe.objects.filter(saved_by=request.user)
+    saved_recipes = Recipe.objects.filter(saved_by=request.user)[::-1]
     context_dict['saved_recipes'] = saved_recipes
     
     return render(request, 'cookbook/saved_recipes.html', context_dict)
@@ -203,15 +220,24 @@ def view_recipe(request, user, recipe_slug):
             # get the recipes comments
             comments = Comment.objects.filter(recipe=recipe).order_by('-upload_date')
 
+            saved = False
+            print Recipe.objects.filter(saved_by=request.user)
+            print request.user
+            print user.saved_recipes
+            if recipe in Recipe.objects.filter(saved_by=request.user):
+                saved = True
+            
             context_dict['recipe'] = recipe
             context_dict['ingredients'] = ingredients
             context_dict['comments'] = comments
+            context_dict['saved'] = saved
 
 
         except (User.DoesNotExist, Recipe.DoesNotExist):
             context_dict['recipe'] = None
             context_dict['ingredients'] = None
             context_dict['comments'] = None
+            context_dict['saved'] = None
 
              
         return render(request, 'cookbook/view_recipe.html', context_dict)

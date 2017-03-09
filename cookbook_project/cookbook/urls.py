@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^help/recipe-writing-guidelines/$', views.recipeguide, name='recipe-writing-guidelines'),
     url(r'^help/commenting-rules/$', views.commentingrules, name='commenting-rules'),    
 
+    url(r'^save_recipe/$', views.save_recipe, name='save_recipe'),
 ]
