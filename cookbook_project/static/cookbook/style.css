@@ -1,0 +1,76 @@
+
+
+/* span.stars, span.stars span {
+    display: block;
+    background: url("images/stars.png") 0 -16px repeat-x;
+	text-indent: -9999px;
+    width: 80px;
+    height: 16px;
+}
+
+span.stars span {
+    background-position: 0 0;
+} */
+
+
+
+body {margin:0;}
+ul.topnav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+ul.topnav li {float: left;}
+
+ul.topnav li.icon {display: none;}
+
+ul.topnav li a {
+  display: inline-block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 6vh 8vh;
+  text-decoration: none;
+  transition: 0.3s;
+  font-size: 24px;
+}
+
+ul.topnav li a:hover {background-color: #555;}
+
+.box {
+    width: 70%;
+    background-color: #333;
+	padding: 25px 25px;
+    position: relative;
+	font-size: 17px;
+	color: #f2f2f2;
+    top: 30px;
+    left: 15%;
+}
+
+@media screen and (max-width:1100px) {
+  ul.topnav li:not(:first-child) {display: none;}
+  ul.topnav li.icon {
+    float: right;
+    display: inline-block;
+  }
+}
+
+@media screen and (max-width:1100px) {
+  ul.topnav.responsive {position: relative;}
+  ul.topnav.responsive li.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  ul.topnav.responsive li {
+    float: none;
+    display: inline;
+  }
+  ul.topnav.responsive li a {
+    display: block;
+    text-align: left;
+  }
+}

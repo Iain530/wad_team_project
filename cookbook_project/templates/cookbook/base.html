@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'cookbook/style.css' %}" />
+
+<html>
+<head>
+<link rel="shortcut icon" href="{% static "cookbook/images/favicon.ico" %}" type="image/x-icon">
+<title>
+Cookbook
+{% block title_block %}
+{% endblock %}
+</title>
+</head>
+
+<body background="{% static "cookbook/images/background.jpg" %}">
+
+<ul class="topnav" id="myTopnav">
+  <li><a id="logo" href="{% url 'cookbook:home' %}" style="padding:0"> <img src="{% static "cookbook/images/logo.png" %}"></a><li>
+  <li><a class="active" href="{% url 'cookbook:home' %}">Home</a></li>
+  <li><a href="{% url 'cookbook:categories' %}">Categories</a></li>
+  <li><a href="{% url 'cookbook:search' %}">Search</a></li>
+  {% if user.is_authenticated %}
+  <li><a href="{% url 'cookbook:myprofile' %}">My profile</a></li>
+  <li><a href="{% url 'cookbook:user_logout' %}">Log out</a></li>
+  {% else %}
+  <li><a href="{% url 'cookbook:user_login' %}">Login</a></li>
+  <li><a href="{% url 'cookbook:signup' %}">Sign Up</a></li>
+  {% endif %}
+  <li><a href="{% url 'cookbook:help' %}">Help</a></li>
+    <li class="icon">
+    <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">☰</a></li>
+</ul>
+
+<div class ="box">
+  {% block body_block %}
+  {% endblock %}
+</div>
+
+<script>
+function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+}
+
+$.fn.stars = function() {
+    return $(this).each(function() {
+        $(this).html($('<span />').width(Math.max(0, (Math.min(5, parseFloat($(this).html())))) * 16));
+    });
+}
+</script>
+
+</body>
+</html>
