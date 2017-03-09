@@ -2,6 +2,15 @@ from django import forms
 from cookbook.models import Category, Recipe, Ingredient, Comment
 from django.contrib.auth.models import User
 
+CATEGORIES = (
+    ('1', 'starters'),
+    ('2', 'dinners'),
+    ('3', 'lunches'),
+    ('4', 'snacks'),
+    ('5', 'desserts'),
+    ('6', 'drinks'),
+    )
+
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
 
@@ -11,24 +20,28 @@ class UserForm(forms.ModelForm):
         
 
 class RecipeForm(forms.ModelForm):
-    name = forms.CharField(max_length=Recipe.MAX_NAME_LENGTH,
-                           help_text="Recipe Name")
+    name = forms.CharField(max_length=Recipe.MAX_NAME_LENGTH,help_text="Recipe Name")
+    description=forms.CharField(max_length=Recipe.MAX_DESC_LENGTH,
+    						 help_text="description", widget=forms.Textarea)
+    instructions = forms.CharField(max_length=Recipe.MAX_INS_LENGTH, 
+    					   help_text="Instructions",widget=forms.Textarea)
     serves = forms.IntegerField(min_value=1, max_value=32767,
                                 help_text="Serves")
     cooking_time = forms.IntegerField(min_value=1,
                                       help_text="Cooking time (minutes)")
+    picture = forms.ImageField(help_text="Picture")
+    category = forms.ChoiceField(choices = CATEGORIES, required=True, help_text="Category")
+    is_vegetarian = forms.BooleanField(required=False,help_text="Vegetarian" )
+    is_vegan = forms.BooleanField(required=False, help_text="Vegan")
+    is_gluten_free = forms.BooleanField(required=False, help_text="Gluten Free")
+    is_dairy_free = forms.BooleanField(required=False,help_text="Dairy Free")
     
-    is_vegetarian = forms.BooleanField(required=False)
-    is_vegan = forms.BooleanField(required=False)
-    is_gluten_free = forms.BooleanField(required=False)
-    is_dairy_free = forms.BooleanField(required=False)
-
-
     class Meta:
         model = Recipe
         fields = ('name', 'picture', 'category', 'instructions', 'serves', 'cooking_time',
                   'description', 'is_vegetarian', 'is_vegan', 'is_gluten_free',
                    'is_dairy_free',)
+        exclude = ('category',)
 
 
 class IngredientForm(forms.ModelForm):
