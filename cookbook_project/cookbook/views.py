@@ -9,6 +9,22 @@ from django.contrib.auth.models import User
 from cookbook.models import Category, Recipe, Comment, Ingredient, Rating
 from cookbook.forms import UserForm, IngredientForm, RecipeForm
 
+#-HELPER-FUNCTIONS------------------------------------------------------
+
+@login_required
+def save_recipe(request):
+    recipe_user, recipe_slug = None
+    if request.method == 'GET':
+        recipe_user = request.GET['user']
+        recipe_slug = request.GET['slug']
+        
+    if recipe_user and recipe_slug:
+        recipe = Recipe.objects.get(user=recipe_user, slug=recipe_slug)
+        
+        if recipe:
+            None
+            #recipe.saved_by.add(
+
 #-HOME-SECTION----------------------------------------------------------
 
 def home(request):
@@ -121,7 +137,7 @@ def uploadrecipe(request):
     form = RecipeForm()
     if request.method == 'POST':
         # check if form is valid
-        form = RecipeForm(request.POST)
+        form = RecipeForm(request.POST, request.FILES)
         
         if form.is_valid():
             # create
@@ -133,7 +149,7 @@ def uploadrecipe(request):
                 recipe.is_vegetarian = True
                 recipe.is_dairy_free = True
             
-            recipe.save(commit=True)
+            recipe.save()
             return view_recipe(request, request.user.username, recipe.name)
         
         else:

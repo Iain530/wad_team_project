@@ -9,7 +9,7 @@ CATEGORIES = (
     ('4', 'snacks'),
     ('5', 'desserts'),
     ('6', 'drinks'),
-    )
+    ) #These need to be Category objects not strings and it should work
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -29,7 +29,7 @@ class RecipeForm(forms.ModelForm):
                                 help_text="Serves")
     cooking_time = forms.IntegerField(min_value=1,
                                       help_text="Cooking time (minutes)")
-    picture = forms.ImageField(help_text="Picture")
+    
     category = forms.ChoiceField(choices = CATEGORIES, required=True, help_text="Category")
     is_vegetarian = forms.BooleanField(required=False,help_text="Vegetarian" )
     is_vegan = forms.BooleanField(required=False, help_text="Vegan")
@@ -41,7 +41,7 @@ class RecipeForm(forms.ModelForm):
         fields = ('name', 'picture', 'category', 'instructions', 'serves', 'cooking_time',
                   'description', 'is_vegetarian', 'is_vegan', 'is_gluten_free',
                    'is_dairy_free',)
-        exclude = ('category',)
+        
 
 
 class IngredientForm(forms.ModelForm):
