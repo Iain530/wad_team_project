@@ -38,7 +38,6 @@ def save_recipe(request):
             else:
                 recipe.user_unsave(request.user)
                 saved = False
-    print saved
     return HttpResponse(saved)
             
 
@@ -220,12 +219,10 @@ def view_recipe(request, user, recipe_slug):
             # get the recipes comments
             comments = Comment.objects.filter(recipe=recipe).order_by('-upload_date')
 
-            saved = False
-            print Recipe.objects.filter(saved_by=request.user)
-            print request.user
-            print user.saved_recipes
-            if recipe in Recipe.objects.filter(saved_by=request.user):
-                saved = True
+            try:
+                saved = recipe in Recipe.objects.filter(saved_by=request.user)
+            except (TypeError):
+                saved = None
             
             context_dict['recipe'] = recipe
             context_dict['ingredients'] = ingredients

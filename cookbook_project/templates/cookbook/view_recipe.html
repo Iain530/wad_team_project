@@ -13,44 +13,55 @@
 {% block body_block %}
 	{% if recipe %}
 		<h1>
+		
 		{{ recipe.name }} -
 		<small> 
 		{% if user == recipe.user %}
 		(edit)
-		</h1>
 		</small>
 		{% else %}
 		by <a href="{% url 'cookbook:view_user' recipe.user.username %}">{{ recipe.user.username }}</a>
 		</small>
-		</h1>
+		
 		{% endif %}
 		
-		<div>
+
+		
+		<div id="save_button_holder">
 		{% if user.is_authenticated %}
-		<p>saved: <strong id="saved">{{ saved }}</strong></p>
-		<button id="save" data-slug="{{ recipe.slug }}" data-user="{{ recipe.user }}"
+		<button id="save_button" data-slug="{{ recipe.slug }}" data-user="{{ recipe.user }}"
 		class="btn btn-primary btn-sm" type="button">
-		Save
+		{% if saved %}
+			Remove
+		{% else %}
+			Save
+		{% endif %}
 		</button>
 		{% endif %}
 		</div>
+		
+		<div id="starRating_holder">
+			Rate this recipe:
+			<span class="starRating">
+				<input id="rating5" type="radio" name="rating" value="5">
+				<label for="rating5">5</label>
+				<input id="rating4" type="radio" name="rating" value="4">
+				<label for="rating4">4</label>
+				<input id="rating3" type="radio" name="rating" value="3">
+				<label for="rating3">3</label>
+				<input id="rating2" type="radio" name="rating" value="2">
+				<label for="rating2">2</label>
+				<input id="rating1" type="radio" name="rating" value="1">
+				<label for="rating1">1</label>
+			</span>
+		</div>
+		
+		</h1>
+	
 
 
 		<div id="view_recipe_desc">
 		<img src="{{ MEDIA_URL }}{{ recipe.picture }}" id="view_recipe_image" height="200" width="200">
-		
-		<span class="starRating">
-			<input id="rating5" type="radio" name="rating" value="5">
-			<label for="rating5">5</label>
-			<input id="rating4" type="radio" name="rating" value="4" checked>
-			<label for="rating4">4</label>
-			<input id="rating3" type="radio" name="rating" value="3">
-			<label for="rating3">3</label>
-			<input id="rating2" type="radio" name="rating" value="2">
-			<label for="rating2">2</label>
-			<input id="rating1" type="radio" name="rating" value="1">
-			<label for="rating1">1</label>
-		</span>
 		
 		<div>
 		<i>"{{ recipe.description }}"</i></br></br>

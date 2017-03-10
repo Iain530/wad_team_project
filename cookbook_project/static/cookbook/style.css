@@ -121,6 +121,15 @@ ul.topnav li a:hover {background-color: #555;}
 
 /* VIEW RECIPE ------------------------ */
 
+#save_button_holder {
+	float: right;
+	margin: 0 20px;
+}
+
+#save_button {
+	
+}
+
 #view_recipe_desc {
 	overflow: auto;
 	/* border-style: solid none none none; */
@@ -197,6 +206,13 @@ ul.topnav li a:hover {background-color: #555;}
 }
 
 /* STAR RATINGS */
+
+#starRating_holder {
+	display: inline-block;
+	font-size:17px;
+	float: right;
+}
+
 
 .starRating:not(old){
 	margin 		   : 10px 0;

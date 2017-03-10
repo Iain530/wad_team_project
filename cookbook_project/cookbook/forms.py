@@ -51,6 +51,10 @@ class IngredientForm(forms.ModelForm):
         fields = ('quantity', 'name',)
 
 
-#class CommentForm(forms.ModelForm):
+class CommentForm(forms.ModelForm):
+    
+    class Meta:
+        model = Comment
+        fields = ('text',)
     
     
