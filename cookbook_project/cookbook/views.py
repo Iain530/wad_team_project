@@ -39,6 +39,32 @@ def save_recipe(request):
                 recipe.user_unsave(request.user)
                 saved = False
     return HttpResponse(saved)
+
+# not finished
+@login_required
+def rate_recipe(request):
+    recipe_user = None
+    recipe_slug = None
+    rating = None
+    no_of_ratings = None
+    done = False
+    
+    if request.method == 'GET':
+        # get the recipe author and recipe slug
+        recipe_user = User.objects.get(username=request.GET['user'])
+        recipe_slug = request.GET['slug']
+        rating = request.GET['rating']
+
+    if recipe_user and recipe_slug and rating:
+        recipe = Recipe.objects.get(user=recipe_user, slug=recipe_slug)
+        no_of_ratings = recipe.rate(request.user, rating)
+        if no_of_ratings:
+            None
+
+    return no_of_ratings
+            
+        
+
             
 
 #-HOME-SECTION----------------------------------------------------------
