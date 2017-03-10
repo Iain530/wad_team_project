@@ -97,7 +97,7 @@ class Recipe(models.Model):
 
                 # TODO weighted rating here
             self.save()
-            return (self.no_of_ratings)
+            return self.no_of_ratings
         else:
             print('Invalid rating: {0}'.format(rate))
             return None
