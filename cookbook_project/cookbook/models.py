@@ -141,12 +141,14 @@ class Ingredient(models.Model):
         return self.name
 	
 class Comment(models.Model):
+    MAX_COMMENT_LENGTH = 512
+    
     # Foreign keys
     user = models.ForeignKey(User)
     recipe = models.ForeignKey(Recipe)
 	
     upload_date = models.DateTimeField(auto_now_add=True)
-    text = models.CharField(max_length=200)
+    text = models.CharField(max_length=MAX_COMMENT_LENGTH)
 	
     def __str__(self):
         return self.text	

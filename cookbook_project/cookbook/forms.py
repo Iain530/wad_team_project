@@ -52,6 +52,7 @@ class IngredientForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
+    text = forms.CharField(required=True, widget=forms.Textarea, max_length=Comment.MAX_COMMENT_LENGTH)
     
     class Meta:
         model = Comment

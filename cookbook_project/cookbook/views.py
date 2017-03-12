@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 # COOKBOOK IMPORTS
 from cookbook.models import Category, Recipe, Comment, Ingredient, Rating
-from cookbook.forms import UserForm, IngredientForm, RecipeForm
+from cookbook.forms import UserForm, IngredientForm, RecipeForm, CommentForm
 
 #-HELPER-FUNCTIONS------------------------------------------------------
 
@@ -225,8 +225,14 @@ def view_recipe(request, user, recipe_slug):
     context_dict = {}
 
     if request.method == 'POST':
-        # (posting a comment/rating)
-        return HttpResponse("comment/rating posted")
+        commentForm = CommentForm(request.POST)
+        if commentForm.is_valid():
+            comment = commentForm.save(commit=False)
+            comment.user = request.user
+            comment.recipe = Recipe.objects.get(user=User.objects.get(username=user), slug=recipe_slug)
+            comment.save()
+
+            return HttpResponseRedirect(reverse('cookbook:view_recipe', args=[user, recipe_slug]))
     
     else:
         #HTTP GET so show the recipe
@@ -254,13 +260,14 @@ def view_recipe(request, user, recipe_slug):
             context_dict['ingredients'] = ingredients
             context_dict['comments'] = comments
             context_dict['saved'] = saved
-
+            context_dict['commentForm'] = CommentForm()
 
         except (User.DoesNotExist, Recipe.DoesNotExist):
             context_dict['recipe'] = None
             context_dict['ingredients'] = None
             context_dict['comments'] = None
             context_dict['saved'] = None
+            context_dict['commentForm'] = None
 
              
         return render(request, 'cookbook/view_recipe.html', context_dict)

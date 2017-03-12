@@ -70,22 +70,6 @@
 		cooking time: {{ recipe.cooking_time }} minutes</br>
 		</div>
 		
-		<div class="dietary_info">
-		{% if recipe.is_gluten_free %}
-		<img class="dietary_image" src="{% static 'cookbook/images/gluten-free.png' %}" height="60" width="55">
-		{% endif %}
-		{% if recipe.is_vegan %}
-		<img class="dietary_image" src="{% static 'cookbook/images/vegan.png' %}" height="48" width="60">
-		{% else %}
-			{% if recipe.is_vegetarian %}
-			<img class="dietary_image" src="{% static 'cookbook/images/vegetarian.png' %}" height="55" width="55">
-			{% endif %}
-			{% if recipe.is_dairy_free %}
-			<img class="dietary_image" src="{% static 'cookbook/images/dairy-free.png' %}" height="50" width="56">
-			{% endif %}
-		{% endif %}
-		</div>
-		
 		<h3>Ingredients</h3>
 		{% if ingredients %}
 			{% for ingredient in ingredients %}
@@ -94,7 +78,27 @@
 		{% else %}
 			No ingredients!
 		{% endif %}
+		
+		<div class="dietary_info">
+			{% if recipe.is_gluten_free %}
+			<img class="dietary_image" src="{% static 'cookbook/images/gluten-free.png' %}" height="60" width="55">
+			{% endif %}
+			{% if recipe.is_vegan %}
+			<img class="dietary_image" src="{% static 'cookbook/images/vegan.png' %}" height="48" width="60">
+			{% else %}
+				{% if recipe.is_vegetarian %}
+				<img class="dietary_image" src="{% static 'cookbook/images/vegetarian.png' %}" height="55" width="55">
+				{% endif %}
+				{% if recipe.is_dairy_free %}
+				<img class="dietary_image" src="{% static 'cookbook/images/dairy-free.png' %}" height="50" width="56">
+				{% endif %}
+			{% endif %}
+			
 		</div>
+		
+		
+		</div>
+		
 		<p id="instructions_section">
 		<h3>Instructions</h3>
 		{{ recipe.instructions }}</br>
@@ -117,6 +121,16 @@
 			No comments yet!
 		{% endif %}
 		</div>
+		
+		{% if user.is_authenticated %}
+		<div id="comment_form">
+			<form id="commentForm" method="post" action="{% url 'cookbook:view_recipe' recipe.user recipe.slug %}" enctype="multipart/form-data">
+				{% csrf_token %}
+				{{ commentForm.as_p }}
+				<input type="submit" name="submit" value="Post" />
+			</form>
+		</div>
+		{% endif %}
 		
 	{% else %}
 		Oh no! The recipe you are looking for doesn't exist.
