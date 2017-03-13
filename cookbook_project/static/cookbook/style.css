@@ -101,7 +101,10 @@ ul.topnav li a:hover {background-color: #555;}
 }
 
 .recipe_rating {
-	
+	display: inline-block;
+	/* position: absolute; */
+	/* top: 10px; */
+	/* right: 20px; */
 }
 
 .recipe_desc {
@@ -130,7 +133,7 @@ ul.topnav li a:hover {background-color: #555;}
 	margin: 0 20px;
 }
 
-#save_button {
+button, input[type=button], input[type=submit] {
   font-family: arial;
   color: #F2F2F2 !important;
   font-size: 17px;
@@ -148,8 +151,9 @@ ul.topnav li a:hover {background-color: #555;}
   outline: none;
 }
 
-#save_button:hover {
+button:hover, input[type=button]:hover, input[type=submit]:hover {
   color: #F2F2F2 !important;
+  cursor: pointer;
   transition: 0.5s;
   background: #446688;
   background: linear-gradient(top,  #4A4A4A,  #7a7a7a);
@@ -282,6 +286,19 @@ ul.topnav li a:hover {background-color: #555;}
 .starRating:not(old) > label:hover ~ label:before,
 .starRating:not(:hover) > :checked ~ label:before{
 	opacity : 1;
+}
+
+/* LIST STAR RATING */
+
+span.stars, span.stars span {
+    display: block;
+    background: url('images/stars.png') 0 -16px repeat-x;
+    width: 80px;
+    height: 16px;
+}
+
+span.stars span {
+    background-position: 0 0;
 }
 
 

@@ -15,11 +15,12 @@
 				<a href="{% url 'cookbook:view_recipe' recipe.user.username recipe.slug %}">
 				<img class="list_image" src="{{ MEDIA_URL }}{{ recipe.picture }}" height="200" width="200">
 				<big>{{ recipe.name }}</big></a>
-				<small>by <a href="{% url 'cookbook:view_user' recipe.user.username %}">{{ recipe.user.username }}</a></small>
-				</div>
+				<small>by <a class="user_link" href="{% url 'cookbook:view_user' recipe.user.username %}">{{ recipe.user.username }}</a></small>
 				
+				</div>
+
 				<div class="recipe_rating">
-				{{ recipe.total_rating }}
+				<span class="stars">{{ recipe.total_rating }}</span>
 				</div>
 				
 				<div class="recipe_desc">

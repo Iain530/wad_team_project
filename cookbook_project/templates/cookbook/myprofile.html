@@ -5,7 +5,6 @@
 {% endblock %}
 {% block body_block %}
 	<h1>My Profile - {{ user.username }}</h1>
-	<a class="active" href="{% url 'cookbook:upload-recipe' %}">Add Recipe</a><br>
 	<a class="active" href="{% url 'cookbook:saved-recipes' %}">Saved Recipes</a>
 	<div id="recent_comments">
 	<h2>Recent comments</h2>
@@ -28,7 +27,7 @@
 	</div>
 	
 	<div class="recipe_list" id="my_recipe_list">
-	<h2>My Recipes</h2>
+	<h2>My Recipes <small>- <a class="active" href="{% url 'cookbook:upload-recipe' %}">Add Recipe</a></small></h2>
 	{% if recipes %}
 		<div class="recipe_list">
 		{% for recipe in recipes %}

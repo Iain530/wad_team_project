@@ -124,6 +124,10 @@
 		
 		{% if user.is_authenticated %}
 		<div id="comment_form">
+			<input id="comment_text" type="text" name="comment_text">
+			<input id="post_comment" type="button" value="Post">
+		
+		
 			<form id="commentForm" method="post" action="{% url 'cookbook:view_recipe' recipe.user recipe.slug %}" enctype="multipart/form-data">
 				{% csrf_token %}
 				{{ commentForm.as_p }}
@@ -131,6 +135,7 @@
 			</form>
 		</div>
 		{% endif %}
+		
 		
 	{% else %}
 		Oh no! The recipe you are looking for doesn't exist.
