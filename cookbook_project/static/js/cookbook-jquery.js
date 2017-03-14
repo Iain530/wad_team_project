@@ -4,7 +4,6 @@ $(document).ready(function() {
 	$(function() {
 		$('span.stars').stars();
 	});
-
 	
 	
 	$.fn.stars = function() {

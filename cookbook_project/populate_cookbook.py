@@ -51,6 +51,7 @@ def populate():
                          pepper and cilantro. Return the tofu to the skillet. Simmer over low 
                          heat for 15 minutes, stirring occasionally.""",
          'serves': 4,
+         'spice': 2,
          'cooking_time': 60,
          'is_vegetarian': True,
          'is_vegan': True,
@@ -66,6 +67,7 @@ def populate():
                          the vegetables. Place the tray in the oven, then turn the heat down
                          immediately to 200 degrees C and cook for 1 hour for medium beef.""",
          'serves': 3,
+         'spice': 0,
          'cooking_time': 90,
          'is_vegetarian': False,
          'is_vegan': False,
@@ -82,6 +84,14 @@ def populate():
          'recipe_author': 'HummusLover123',
          'name': 'salt',
          'quantity': 'pinch of'},
+        {'recipe_name': 'Tofu Curry',
+         'recipe_author': 'HummusLover123',
+         'name': 'curry powder',
+         'quantity': '2 tablespoons'},
+        {'recipe_name': 'Tofu Curry',
+         'recipe_author': 'HummusLover123',
+         'name': 'chickpeas',
+         'quantity': '200g'},
         {'recipe_name': 'Roast Beef',
          'recipe_author': 'HealthyDad',
          'name': 'beef',
@@ -135,7 +145,8 @@ def populate():
     for rec in recipes:
         add_recipe(rec['user'], rec['category'],rec['name'], rec['picture'],
                    rec['description'], rec['instructions'],
-                   rec['serves'], rec['cooking_time'], rec['is_vegetarian'],
+                   rec['serves'], rec['spice'], rec['cooking_time'],
+                   rec['is_vegetarian'],
                    rec['is_vegan'], rec['is_gluten_free'], rec['is_dairy_free'])
 
     for ing in ingredients:
@@ -171,7 +182,8 @@ def add_category(name, picture):
     c.save()
     return c
 
-def add_recipe(username, category, name, picture, description, instructions, serves, cooking_time,
+def add_recipe(username, category, name, picture, description, instructions, serves,
+               spice, cooking_time,
                is_vegetarian, is_vegan, is_gluten_free, is_dairy_free):
     
     user = User.objects.get(username=username)
@@ -180,7 +192,7 @@ def add_recipe(username, category, name, picture, description, instructions, ser
     r = Recipe.objects.get_or_create(user=user, category=cat, name=name,
                                      picture=picture, description=description,
                                      instructions=instructions, serves=serves,
-                                     cooking_time=cooking_time,
+                                     spice=spice, cooking_time=cooking_time,
                                      is_vegetarian=is_vegetarian,
                                      is_vegan=is_vegan, is_gluten_free=is_gluten_free,
                                      is_dairy_free=is_dairy_free)[0]

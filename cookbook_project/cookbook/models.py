@@ -65,6 +65,7 @@ class Recipe(models.Model):
     slug = models.SlugField() # name as slug
     description = models.CharField(max_length=MAX_DESC_LENGTH)
     instructions = models.TextField()             # Change field type
+    spice = models.PositiveSmallIntegerField(default=0)
     serves = models.PositiveSmallIntegerField()
     cooking_time = models.PositiveIntegerField(default=0)
     picture = models.ImageField(upload_to=recipe_file_name, blank="True")
@@ -82,9 +83,10 @@ class Recipe(models.Model):
     # not sure if this works
     def rate(self, user, rate):
         if 0 <= rate <= 5:
-            new_rating = Rating.objects.get_or_create(recipe=self, user=user)[0]
-            new_rating.value = rate
-            new_rating.save()
+            rating = Rating.objects.filter(recipe=self, user=user)
+            if not rating:
+                rating = Rating.objects.create(recipe=self, user=user, value=rate)
+            rating.save()
 
             # calculate rating
             all_ratings = Rating.objects.filter(recipe=self)

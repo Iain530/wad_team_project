@@ -100,20 +100,35 @@ ul.topnav li a:hover {background-color: #555;}
 	border: 1px solid;
 }
 
-.recipe_rating {
-	display: inline-block;
-	/* position: absolute; */
-	/* top: 10px; */
-	/* right: 20px; */
+
+.recipe_date {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	font-size: 15px;
 }
 
 .recipe_desc {
-	
+	position: absolute;
+	top: 35%;
+	bottom: 35%;
+	right: 25%;
+	left: 35%;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 100%;
 }
 
 .recipe_info {
-	
+	position: absolute;
+	bottom: 15px;
+	left: 160px;
 }
+
+.recipe_rating, .recipe_spicy {
+	display: inline-block;
+}
+
 
 .dietary_info {
 	margin: 5px;
@@ -126,23 +141,18 @@ ul.topnav li a:hover {background-color: #555;}
 	float: right;
 }
 
-/* VIEW RECIPE ------------------------ */
-
-#save_button_holder {
-	float: right;
-	margin: 0 20px;
-}
+/* BUTTONS */
 
 button, input[type=button], input[type=submit] {
   font-family: arial;
   color: #F2F2F2 !important;
   font-size: 17px;
   text-shadow: 1px 1px 1px #4A4A4A;
-  padding: 10px 20px;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  border: 2px solid #F2F2F2;
+  padding: 5px 15px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid #F2F2F2;
   background: #4A4A4A;
   background: linear-gradient(top,  #7A7A7A,  #4A4A4A);
   background: -ms-linear-gradient(top,  #7A7A7A,  #4A4A4A);
@@ -161,6 +171,14 @@ button:hover, input[type=button]:hover, input[type=submit]:hover {
   background: -webkit-gradient(linear, left top, left bottom, from(#4A4A4A), to(#7a7a7a));
   background: -moz-linear-gradient(top,  #4A4A4A,  #7a7a7a);
 }
+
+/* VIEW RECIPE ------------------------ */
+
+#save_button_holder {
+	float: right;
+	margin: 0 20px;
+}
+
 
 #view_recipe_desc {
 	position: relative;
@@ -291,7 +309,7 @@ button:hover, input[type=button]:hover, input[type=submit]:hover {
 /* LIST STAR RATING */
 
 span.stars, span.stars span {
-    display: block;
+    display: inline-block;
     background: url('images/stars.png') 0 -16px repeat-x;
     width: 80px;
     height: 16px;
