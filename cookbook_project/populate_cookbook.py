@@ -71,8 +71,8 @@ def populate():
          'cooking_time': 90,
          'is_vegetarian': False,
          'is_vegan': False,
-         'is_gluten_free': False,
-         'is_dairy_free': False},
+         'is_gluten_free': True,
+         'is_dairy_free': True},
     ]
 
     ingredients = [

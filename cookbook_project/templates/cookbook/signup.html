@@ -5,17 +5,17 @@
 {% endblock %}
 {% block body_block %}
 <h1>Register to CookBook</h1>
-<br />
-{% if registered %}
-Thank you for registering! Click <a href="{% url 'cookbook:user_login' %}">here</a> to sign in.
-{% else %}
-<strong>Register here!</strong><br />
-<form id="user_form" method="post" action="{% url 'cookbook:signup' %}" enctype="multipart/form-data">
-	{% csrf_token %}
-	<!-- Display each form -->
-	{{ user_form.as_p }}
-	<!-- Provide a button to click to submit the form. -->
-	<input type="submit" name="submit" value="Register" />
-</form>
-{% endif %}
+<div id="signup">
+	<form id="user_form" method="post" action="{% url 'cookbook:signup' %}" enctype="multipart/form-data">
+		{% csrf_token %}
+		<!-- Display each form -->
+		<label class="form_label" >Username: </label>{{ user_form.username }}</br>
+		<label class="form_label">Email: </label>{{ user_form.email }}</br>
+		<label class="form_label">Password: </label>{{ user_form.password }}</br>
+		<!-- Provide a button to click to submit the form. -->
+		<div class="button_wrapper">
+			<input id="register_button" type="submit" name="submit" value="Register" />
+		</div>
+	</form>
+</div>
 {% endblock %}

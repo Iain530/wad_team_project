@@ -31,7 +31,7 @@
 	{% if recipes %}
 		<div class="recipe_list">
 		{% for recipe in recipes %}
-			<div class="recipe_detail">
+			<div class="recipe_detail" id="{{ recipe.id }}">
 				
 				<div class="recipe_name">
 					<a href="{% url 'cookbook:view_recipe' recipe.user.username recipe.slug %}">
@@ -92,6 +92,8 @@
 						{% endif %}
 					{% endif %}
 				</div>
+				
+				<button id="{{ recipe.id }}" data-name="{{ recipe.name }}" title="Delete" class="delete_recipe_button" >&#10006 </button>
 			
 			</div>
 		{% endfor %}

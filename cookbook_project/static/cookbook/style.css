@@ -67,6 +67,50 @@ ul.topnav li a:hover {background-color: #555;}
   }
 }
 
+/* SIGN UP PAGE */
+
+#signup{
+	width: 40%;
+	margin: 0 auto;
+	overflow: auto;
+	background: #4a4a4a;
+	padding: 10px 10px;
+	border:1px solid #f2f2f2;
+}
+
+.form_label {
+	line-height: 25px;
+}
+
+#user_form > input:not([type=submit]) {
+	float: right;
+} 
+
+.button_wrapper {
+	text-align: center;
+	
+}
+
+/* LOGIN PAGE */
+
+#login {
+	width: 40%;
+	margin: 0 auto;
+	overflow: auto;
+	background: #4a4a4a;
+	padding: 10px 10px;
+	border:1px solid #f2f2f2;
+}
+
+.login_form_label {
+	line-height: 25px;
+}
+
+#login_form > input:not([type=submit]) {
+	float: right;
+} 
+
+
 /* VIEWING RECIPE LISTS--------------------------- */
 
 .recipe_list {
@@ -243,7 +287,7 @@ button:hover, input[type=button]:hover, input[type=submit]:hover {
 }
 
 
-.delete_button {
+.delete_comment_button {
 	background: #4a4a4a;
 	padding: 0;
 	border: none;
@@ -258,7 +302,21 @@ button:hover, input[type=button]:hover, input[type=submit]:hover {
 	
 }
 
-.delete_button:hover {
+.delete_recipe_button {
+	background: #4a4a4a;
+	padding: 0;
+	border: none;
+	border-radius: 0;
+	height: 17px;
+	width: 17px;
+	text-align: center;
+	line-height: 17px;
+	position: absolute;
+	top: 2px;
+	right: 2px;
+}
+
+.delete_comment_button:hover, .delete_recipe_button:hover {
 	background: #333;
 	border: none;
 	border-radius: 0;

@@ -9,9 +9,24 @@ from django.contrib.auth.models import User
 from cookbook.models import Category, Recipe, Comment, Ingredient, Rating
 from cookbook.forms import UserForm, IngredientForm, RecipeForm, CommentForm
 # HAYSTACK IMPORTS
-from haystack.query import SearchQuerySet
+#from haystack.query import SearchQuerySet
 
 #-HELPER-FUNCTIONS------------------------------------------------------
+
+@login_required
+def delete_recipe(request):
+    recipe_id = None
+    deleted = False
+    if request.method == 'GET':
+        recipe_id = request.GET['recipe_id']
+        recipe = Recipe.objects.get(id=recipe_id)
+
+        if recipe and recipe.user == request.user:
+            recipe.delete()
+            deleted = True
+
+    return HttpResponse(deleted)
+            
 
 @login_required
 def delete_comment(request):
@@ -21,8 +36,7 @@ def delete_comment(request):
         comment_id = request.GET['comment_id']
         comment = Comment.objects.get(id=comment_id)
 
-    if comment:
-        if request.user == comment.user:
+        if comment and request.user == comment.user:
             comment.delete()
             deleted = True
 
@@ -39,23 +53,21 @@ def save_recipe(request):
         # get the recipe author and recipe slug
         recipe_user = User.objects.get(username=request.GET['user'])
         recipe_slug = request.GET['slug']
+            
+        # if request contains both
+        if recipe_user and recipe_slug:
+            # try and get a recipe object
+            recipe = Recipe.objects.get(user=recipe_user, slug=recipe_slug)
 
-        
-
-    # if request contains both
-    if recipe_user and recipe_slug:
-        # try and get a recipe object
-        recipe = Recipe.objects.get(user=recipe_user, slug=recipe_slug)
-
-        # if the recipe object exists
-        if recipe:
-            # either save or unsave the recipe and set saved to new value
-            if recipe not in Recipe.objects.filter(saved_by=request.user):
-                recipe.user_save(request.user)
-                saved = True
-            else:
-                recipe.user_unsave(request.user)
-                saved = False
+            # if the recipe object exists
+            if recipe:
+                # either save or unsave the recipe and set saved to new value
+                if recipe not in Recipe.objects.filter(saved_by=request.user):
+                    recipe.user_save(request.user)
+                    saved = True
+                else:
+                    recipe.user_unsave(request.user)
+                    saved = False
     return HttpResponse(saved)
 
 # not finished
@@ -324,9 +336,10 @@ def bestrated(request):
 
 # search and search results
 def search(request):
-    recipes = SearchQuerySet().autocomplete(content_auto=request.POST.get('search_text', ''))
-    context_dict['recipes'] = recipes
-    return render(request, 'search/search.html', context_dict)
+    #recipes = SearchQuerySet().autocomplete(content_auto=request.POST.get('search_text', ''))
+    #context_dict['recipes'] = recipes
+    #return render(request, 'search/search.html', context_dict)
+    return HttpResponse('search')
 
 #-HELP-SECTION------------------------------------------------------------
 

@@ -13,6 +13,7 @@ CATEGORIES = (
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
+    username = forms.CharField(help_text='')
 
     class Meta:
         model = User

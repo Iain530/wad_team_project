@@ -27,4 +27,5 @@ urlpatterns = [
     # Ajax urls
     url(r'^save_recipe/$', views.save_recipe, name='save_recipe'),
     url(r'^delete_comment/$', views.delete_comment, name='delete_comment'),
+    url(r'^delete_recipe/$', views.delete_recipe, name='delete_recipe'),
 ]
