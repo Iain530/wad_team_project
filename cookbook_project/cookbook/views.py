@@ -324,8 +324,8 @@ def bestrated(request):
 
 # search and search results
 def search(request):
-	recipes = SearchQuerySet().autocomplete(content_auto=request.POST.get('search_text', ''))
-	context_dict['recipes'] = recipes
+    recipes = SearchQuerySet().autocomplete(content_auto=request.POST.get('search_text', ''))
+    context_dict['recipes'] = recipes
     return render(request, 'search/search.html', context_dict)
 
 #-HELP-SECTION------------------------------------------------------------
