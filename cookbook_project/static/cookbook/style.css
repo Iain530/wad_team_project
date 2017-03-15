@@ -2,6 +2,10 @@ a {
 	color: #f2f2f2;
 }
 
+.link_no_underline {
+	text-decoration: none;
+}
+
 body {
 	margin:0;
 	font-family: 'Slabo 27px', serif, 'Droid Sans', sans-serif, 'Vollkorn', serif;
@@ -272,15 +276,12 @@ button:hover, input[type=button]:hover, input[type=submit]:hover {
 #comment_form {
 	padding: 10px 0;
 	margin: 0 auto;
-	width: 80%;
+	width: 85%;
+	text-align: center;
 }
 
 #post_comment_button {
-	margin: 0 10px;
-}
-
-#comment_form_text {
-	margin: 0 10px;
+	margin: 0 0 0 10px;
 }
 
 

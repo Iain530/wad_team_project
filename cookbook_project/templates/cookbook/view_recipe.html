@@ -129,14 +129,8 @@
 		<div id="comment_form">
 			<form id="commentForm" method="post" action="{% url 'cookbook:view_recipe' recipe.user recipe.slug %}" enctype="multipart/form-data">
 				{% csrf_token %}
-				<input id="comment_form_text" size="80" type="text" name="comment_text">
+				{{ commentForm.text }}
 				<input id="post_comment_button" type="submit" value="Post">
-		
-		
-			
-				
-				{{ commentForm.as_p }}
-				<input type="submit" name="submit" value="Post" />
 			</form>
 		</div>
 		{% endif %}

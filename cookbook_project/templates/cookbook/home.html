@@ -6,7 +6,7 @@
 {% endblock %}
 {% block body_block %}
 	<div class="recipe_list">
-	<h1>Best Rated</h1>
+	<h1><a class="link_no_underline" href="{% url 'cookbook:best-rated' %}">Best Rated</a></h1>
 	{% if best_rated %}
 		{% for recipe in best_rated %}
 			<div class="recipe_detail">
@@ -54,7 +54,7 @@
 				
 				<div class="dietary_info">
 					{% if recipe.is_gluten_free %}
-					<img class="dietary_image" src="{% static 'cookbook/images/gluten-free.png' %}" height="60" width="55">
+					<img class="dietary_image" src="{% static 'cookbook/images/gluten-free.png' %}" height="54" width="49">
 					{% endif %}
 					{% if recipe.is_vegan %}
 					<img class="dietary_image" src="{% static 'cookbook/images/vegan.png' %}" height="48" width="60">
