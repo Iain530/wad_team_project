@@ -8,6 +8,8 @@ from django.contrib.auth.models import User
 # COOKBOOK IMPORTS
 from cookbook.models import Category, Recipe, Comment, Ingredient, Rating
 from cookbook.forms import UserForm, IngredientForm, RecipeForm, CommentForm
+# HAYSTACK IMPORTS
+from haystack.query import SearchQuerySet
 
 #-HELPER-FUNCTIONS------------------------------------------------------
 
@@ -306,7 +308,9 @@ def bestrated(request):
 
 # search and search results
 def search(request):
-    return render(request, 'search/search.html')
+	recipes = SearchQuerySet().autocomplete(content_auto=request.POST.get('search_text', ''))
+	context_dict['recipes'] = recipes
+    return render(request, 'search/search.html', context_dict)
 
 #-HELP-SECTION------------------------------------------------------------
 

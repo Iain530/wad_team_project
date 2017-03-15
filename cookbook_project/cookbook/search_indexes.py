@@ -5,7 +5,6 @@ import datetime
 
 class RecipeIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
-    author = indexes.CharField(model_attr='user')
     category = indexes.CharField(model_attr='category')
 
     views = indexes.IntegerField(model_attr='views')
@@ -21,10 +20,12 @@ class RecipeIndex(indexes.SearchIndex, indexes.Indexable):
     is_vegan = indexes.BooleanField(model_attr='is_vegan')
     is_gluten_free = indexes.BooleanField(model_attr='is_gluten_free')
     is_dairy_free = indexes.BooleanField(model_attr='is_dairy_free')
+	
+	content_auto = indexes.EdgeNgramField(model_attr='name')
 
     def get_model(self):
         return Recipe
 
     def index_queryset(self, using=None):
         """Used when the entire index for model is updated."""
-        return self.get_model().objects.filter(upload_date__lte=datetime.datetime.now())
+        return self.get_model().objects.all()
