@@ -102,9 +102,6 @@ ul.topnav li a:hover {background-color: #555;}
 	border:1px solid #f2f2f2;
 }
 
-.login_form_label {
-	line-height: 25px;
-}
 
 #login_form > input:not([type=submit]) {
 	float: right;
