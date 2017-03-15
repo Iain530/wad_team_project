@@ -54,7 +54,7 @@ class Recipe(models.Model):
     no_of_ratings = models.PositiveIntegerField(default=0)
     
     upload_date = models.DateTimeField(auto_now_add=True)
-    last_modified = models.DateTimeField(default=timezone.now)
+    last_modified = models.DateTimeField(null=True)
 
 	
     # Fields input by user

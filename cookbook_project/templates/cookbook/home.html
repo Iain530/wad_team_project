@@ -20,7 +20,7 @@
 				
 				<div class="recipe_date">
 					uploaded: {{ recipe.upload_date }}<br>
-					{% if recipe.upload_date != recipe.last_modified %}
+					{% if recipe.last_modified %}
 						last modified: {{ recipe.last_modified }}
 					{% endif %}
 					</div>
@@ -90,7 +90,7 @@
 				
 				<div class="recipe_date">
 					uploaded: {{ recipe.upload_date }}<br>
-					{% if recipe.upload_date != recipe.last_modified %}
+					{% if recipe.last_modified %}
 						last modified: {{ recipe.last_modified }}
 					{% endif %}
 					</div>

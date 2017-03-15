@@ -14,6 +14,22 @@ from haystack.query import SearchQuerySet
 #-HELPER-FUNCTIONS------------------------------------------------------
 
 @login_required
+def delete_comment(request):
+    comment_id = None
+    deleted = False
+    if request.method == 'GET':
+        comment_id = request.GET['comment_id']
+        comment = Comment.objects.get(id=comment_id)
+
+    if comment:
+        if request.user == comment.user:
+            comment.delete()
+            deleted = True
+
+    return HttpResponse(deleted)
+            
+
+@login_required
 def save_recipe(request):
     recipe_user = None
     recipe_slug = None

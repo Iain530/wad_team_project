@@ -108,13 +108,16 @@
 		<h3>Comments</h3>
 		{% if comments %}
 			{% for comment in comments %}
-				<div class="comment_box">
-				<p class="comment_user">
-				<a href="{% url 'cookbook:view_user' comment.user.username %}">{{ comment.user }}</a> on {{ comment.upload_date }}
-				</p>
-				<p class="comment_text">
-				{{ comment.text }}
-				</p>
+				<div class="comment_box" id="{{ comment.id }}">
+					<p class="comment_user">
+						<a href="{% url 'cookbook:view_user' comment.user.username %}">{{ comment.user }}</a> on {{ comment.upload_date }}
+					</p>
+					<p class="comment_text">
+						{{ comment.text }}
+					</p>
+					{% if user == comment.user %}
+						<button id="{{ comment.id }}" title="Delete" class="delete_button" >&#10006 </button>
+					{% endif %}
 				</div>
 			{% endfor %}
 		{% else %}
@@ -124,12 +127,14 @@
 		
 		{% if user.is_authenticated %}
 		<div id="comment_form">
-			<input id="comment_text" type="text" name="comment_text">
-			<input id="post_comment" type="button" value="Post">
-		
-		
 			<form id="commentForm" method="post" action="{% url 'cookbook:view_recipe' recipe.user recipe.slug %}" enctype="multipart/form-data">
 				{% csrf_token %}
+				<input id="comment_form_text" size="80" type="text" name="comment_text">
+				<input id="post_comment_button" type="submit" value="Post">
+		
+		
+			
+				
 				{{ commentForm.as_p }}
 				<input type="submit" name="submit" value="Post" />
 			</form>
