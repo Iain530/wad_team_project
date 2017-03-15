@@ -24,5 +24,7 @@ urlpatterns = [
     url(r'^help/recipe-writing-guidelines/$', views.recipeguide, name='recipe-writing-guidelines'),
     url(r'^help/commenting-rules/$', views.commentingrules, name='commenting-rules'),    
 
+    # Ajax urls
     url(r'^save_recipe/$', views.save_recipe, name='save_recipe'),
+    url(r'^delete_comment/$', views.delete_comment, name='delete_comment'),
 ]

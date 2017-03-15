@@ -16,6 +16,22 @@ $('#save_button').click(function(event){
 	});
 });
 
+$('.delete_button').click(function(event) {
+	if (confirm('Are you sure you want to delete this comment?')) {
+		var comment_id;
+		var comment_div;
+		comment_id = $(this).attr('id');
+		comment_div = $(this).parent().attr('id');
+		$.get('/cookbook/delete_comment/', {comment_id: comment_id}, function(data){
+			if (data == 'True') {
+				$('#'+comment_div).remove();
+			} else {
+				alert('Comment could not be deleted');
+			}
+		});
+	}
+});
+
 // Posting comments (unfinished)
 
 // $('#post_comment').click(function() {
