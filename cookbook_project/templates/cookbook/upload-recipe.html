@@ -5,24 +5,25 @@
 {% endblock %}
 
 {% block body_block %}
-	
 	<h1>Upload a New Recipe</h1>
-	<div id="upload_recipe">
-		<form id="upload_recipe_holder" method="post" action="{% url 'cookbook:upload-recipe' %}">
+	<div id="recipe_form_holder">
+		<form id="recipe_form" method="post" action="{% url 'cookbook:upload-recipe' %}">
 			{% csrf_token %}
-			{% if errors %}
-				<ul>
-				{% for error in errors %}
-					<li>{{ error }}</li>
-				{% endfor %}
-				</ul>
-			{% endif %}
-			<label class="form_label" >Recipe Name: </label>{{ upload_recipe_holder.name }}</br>
-			<label class="form_label" >Image: </label>
+			<!-- Display forms -->
+			<label class="recipe_label" >Name: </label>{{ recipe_form.name }}</br>
+			<label class="recipe_label" >Image: </label>{{ recipe_form.picture }}</br>
+			<label class="recipe_label" >Instructions: </label>{{ recipe_form.instructions }}</br>
+			<label class="recipe_label" >Serves: </label>{{ recipe_form.serves }}</br>
+			<label class="recipe_label" >Cooking Time: </label>{{ recipe_form.cooking_time }}</br>
+			<label class="recipe_label" >Description: </label>{{ recipe_form.description }}</br>
+			<label class="recipe_label" >Vegetarian: </label>{{ recipe_form.is_vegetarian }}</br>
+			<label class="recipe_label" >Vegan: </label>{{ recipe_form.is_vegan }}</br>
+			<label class="recipe_label" >Gluten Free: </label>{{ recipe_form.is_gluten_free }}</br>
+			<label class="recipe_label" >Dairy Free: </label>{{ recipe_form.is_dairy_free }}</br>
+			<!-- Button for upload -->
 			<div class="button_wrapper">
 				<input type="submit" value="Upload" />
 			</div>
 		</form>
 	</div>
-	
 {% endblock %}

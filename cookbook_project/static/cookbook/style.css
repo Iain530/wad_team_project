@@ -323,7 +323,7 @@ button:hover, input[type=button]:hover, input[type=submit]:hover {
 
 /* UPLOAD A RECIPE---------------------------------- */
 
-#upload_recipe {
+#recipe_form_holder {
 	width: 60%;
 	margin: 0 auto;
 	overflow: auto;
@@ -332,9 +332,19 @@ button:hover, input[type=button]:hover, input[type=submit]:hover {
 	border:1px solid #f2f2f2;
 }
 
-#upload_recipe_holder > input:not([type=submit]) {
-	float: right;
-} 
+#recipe_form > input:not([type=submit]) {
+	display: inline-block;
+	float: left;
+}
+
+.recipe_label {
+	margin-right:15px;
+	display: inline-block;
+    float: left;
+    clear: left;
+	width: 20%;
+    text-align: right;
+}
 
 
 /* VIEWING CATEGORY LISTS--------------------------- */

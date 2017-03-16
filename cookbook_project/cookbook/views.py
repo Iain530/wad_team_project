@@ -196,14 +196,14 @@ def savedrecipes(request):
 @login_required
 def uploadrecipe(request):
     context_dict = {}
-    form = RecipeForm()
+    recipe_form = RecipeForm()
     if request.method == 'POST':
         # check if form is valid
-        form = RecipeForm(request.POST, request.FILES)
+        recipe_form = RecipeForm(request.POST, request.FILES)
         
-        if form.is_valid():
+        if recipe_form.is_valid():
             # create
-            recipe = form.save(commit=False)
+            recipe = recipe_form.save(commit=False)
             recipe.user = request.user
             
             if recipe.is_vegan or (recipe.is_vegetarian and recipe.is_dairy_free):
@@ -215,9 +215,9 @@ def uploadrecipe(request):
             return view_recipe(request, request.user.username, recipe.name)
         
         else:
-            print(form.errors)
+            print(recipe_form.errors)
 
-    context_dict['form'] = RecipeForm()
+    context_dict['recipe_form'] = RecipeForm()
     return render(request, 'cookbook/upload-recipe.html', context_dict)
 
 # view for a user profile
@@ -271,16 +271,26 @@ def view_recipe(request, user, recipe_slug):
             # get the recipes comments
             comments = Comment.objects.filter(recipe=recipe).order_by('-upload_date')
 
-            try:
+            if request.user.is_authenticated():
                 saved = recipe in Recipe.objects.filter(saved_by=request.user)
-            except (TypeError):
+                if request.user != recipe.user:
+                    my_rating = Rating.objects.filter(user=request.user, recipe=recipe)
+                    if len(my_rating) > 0:
+                        rating = my_rating[0].value
+                    else:
+                        rating = None
+                else:
+                    rating = None
+            else:
                 saved = None
+                rating = None
             
             context_dict['recipe'] = recipe
             context_dict['ingredients'] = ingredients
             context_dict['comments'] = comments
             context_dict['saved'] = saved
             context_dict['commentForm'] = CommentForm()
+            context_dict['rating'] = rating
 
         except (User.DoesNotExist, Recipe.DoesNotExist):
             context_dict['recipe'] = None
