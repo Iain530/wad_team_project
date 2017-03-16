@@ -32,8 +32,11 @@ Cookbook
   {% endif %}
   <li><a href="{% url 'cookbook:help' %}">Help</a></li>
   <li><a>
-  <input type="text" id="search" name="search" placeholder="Search for recipes"/>
-  </a></li>
+  <form type="get" action="{% url 'cookbook:search' %}" style="margin: 0">
+    <input  id="search_box" type="text" name="search_box"  placeholder="Search for recipes..." >
+    <button id="search_submit" type="submit" >Submit</button>
+  </form>
+  </li></a>
     <li class="icon">
     <a href="javascript:void(0);" onclick="myFunction()">☰</a></li>
   

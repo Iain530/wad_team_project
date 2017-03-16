@@ -83,28 +83,6 @@ $('.delete_comment_button').click(function(event) {
 	}
 });
 
-// Search function
-$('#search').keyup(function(e) {
-	var code = e.which;
-		if (code == 13){
-		$.ajax({
-			type:"POST",
-			url:"/search/",
-			data:{
-				'search_text': $('#search').val(),
-				'csrfmiddlewaretoken':$("input[name=csrfmiddlewaretoken]").val()
-			},
-			success: searchSuccess,
-			datatype:'html'
-			});
-	}
-});
-
-function searchSuccess(data, textStatus, jqXHR)
-{
-	$('#search-results').html(data);
-}
-
 
 // Posting comments (unfinished)
 

@@ -334,8 +334,8 @@ def newestrecipes(request):
 # search only for article names
 def search(request):
     context_dict = {}
-    if request.method == "POST":
-        search_text = request.POST['search_text']
+    if request.method == "GET":
+        search_text = request.GET.get('search_box', None)
     else:
         return render(request, 'search/search.html', context_dict)
     if search_text == "":
