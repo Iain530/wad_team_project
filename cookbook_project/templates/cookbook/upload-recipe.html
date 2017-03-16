@@ -5,15 +5,24 @@
 {% endblock %}
 
 {% block body_block %}
+	
 	<h1>Upload a New Recipe</h1>
-	<form id="recipe_form" method="post" action="{% url 'cookbook:upload-recipe' %}">
+	<div id="upload_recipe">
+		<form id="upload_recipe_holder" method="post" action="{% url 'cookbook:upload-recipe' %}">
 			{% csrf_token %}
-                {% for field in form.visible_fields %}
-                    {{ field.errors }}
-                    {{ field.help_text }}
-                    {{ field }}
-                    <br>
-                {% endfor %}
-		<input type="submit" name="submit" value="Upload Recipe" />
-	</form>
+			{% if errors %}
+				<ul>
+				{% for error in errors %}
+					<li>{{ error }}</li>
+				{% endfor %}
+				</ul>
+			{% endif %}
+			<label class="form_label" >Recipe Name: </label>{{ upload_recipe_holder.name }}</br>
+			<label class="form_label" >Image: </label>
+			<div class="button_wrapper">
+				<input type="submit" value="Upload" />
+			</div>
+		</form>
+	</div>
+	
 {% endblock %}
