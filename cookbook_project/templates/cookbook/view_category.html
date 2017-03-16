@@ -54,9 +54,9 @@
 		{% else %}
 			<strong>There are currently no {{ category.name }} on Cookbook!</strong><br>
 			{% if user.is_authenticated%}
-				Help us by adding some of your own.
+				Click <a href="{% url 'cookbook:upload-recipe' %}">here</a> to add your own.
 			{% else %}
-				<a href="{% url 'cookbook:user_login' %}">Login</a> to add some of your own!
+				Login <a href="{% url 'cookbook:user_login' %}">here</a> to add some of your own!
 			{% endif %}
 		{% endif %}
 	{% else %}
