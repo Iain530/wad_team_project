@@ -47,7 +47,7 @@ ul.topnav li a:hover {background-color: #555;}
 }
 
 @media screen and (max-width:1000px) {
-	.box{width: 900px}
+	.box{width: 700px}
 }
 
 @media screen and (max-width:1320px) {
