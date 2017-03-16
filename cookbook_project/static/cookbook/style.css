@@ -88,6 +88,7 @@ ul.topnav li a:hover:not(#search) {background-color: #555;}
 
 .form_label {
 	line-height: 25px;
+    
 }
 
 #user_form > input:not([type=submit]) {
@@ -95,8 +96,8 @@ ul.topnav li a:hover:not(#search) {background-color: #555;}
 } 
 
 .button_wrapper {
+	margin-top: 10px;
 	text-align: center;
-	
 }
 
 /* LOGIN PAGE */
