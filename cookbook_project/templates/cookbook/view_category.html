@@ -53,7 +53,11 @@
 			{% endfor %}
 		{% else %}
 			<strong>There are currently no {{ category.name }} on Cookbook!</strong><br>
-			Help us by adding some of your own.
+			{% if user.is_authenticated%}
+				Help us by adding some of your own.
+			{% else %}
+				<a href="{% url 'cookbook:user_login' %}">Login</a> to add some of your own!
+			{% endif %}
 		{% endif %}
 	{% else %}
 		This category doesn't exist!
