@@ -5,10 +5,11 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from itertools import chain
 # COOKBOOK IMPORTS
 from cookbook.models import Category, Recipe, Comment, Ingredient, Rating
 from cookbook.forms import UserForm, IngredientForm, RecipeForm, CommentForm
+# HAYSTACK IMPORTS
+#from haystack.query import SearchQuerySet
 
 
 #-HELPER-FUNCTIONS------------------------------------------------------
@@ -196,14 +197,14 @@ def savedrecipes(request):
 @login_required
 def uploadrecipe(request):
     context_dict = {}
-    recipe_form = RecipeForm()
+    form = RecipeForm()
     if request.method == 'POST':
         # check if form is valid
-        recipe_form = RecipeForm(request.POST, request.FILES)
+        form = RecipeForm(request.POST, request.FILES)
         
-        if recipe_form.is_valid():
+        if form.is_valid():
             # create
-            recipe = recipe_form.save(commit=False)
+            recipe = form.save(commit=False)
             recipe.user = request.user
             
             if recipe.is_vegan or (recipe.is_vegetarian and recipe.is_dairy_free):
@@ -215,9 +216,9 @@ def uploadrecipe(request):
             return view_recipe(request, request.user.username, recipe.name)
         
         else:
-            print(recipe_form.errors)
+            print(form.errors)
 
-    context_dict['recipe_form'] = RecipeForm()
+    context_dict['form'] = RecipeForm()
     return render(request, 'cookbook/upload-recipe.html', context_dict)
 
 # view for a user profile
@@ -298,6 +299,7 @@ def view_recipe(request, user, recipe_slug):
             context_dict['comments'] = None
             context_dict['saved'] = None
             context_dict['commentForm'] = None
+            context_dict['rating'] = None
 
              
         return render(request, 'cookbook/view_recipe.html', context_dict)
@@ -347,14 +349,9 @@ def search(request):
         search_text = request.GET.get('search_box', None)
     else:
         return render(request, 'search/search.html', context_dict)
-    if len(search_text) < 3:
+    if search_text == "":
         return render(request, 'search/search.html', context_dict)	
-    recipes_name = Recipe.objects.filter(name__contains=search_text)
-    users = User.objects.filter(username__contains=search_text)
-    recipes_user = Recipe.objects.filter(user__in=users)
-    recipes_description = Recipe.objects.filter(description__contains=search_text)
-    recipes = list(chain(recipes_user,recipes_name,recipes_description))
-    recipes = set(recipes)
+    recipes = Recipe.objects.filter(name__contains=search_text)
     context_dict['recipes'] = recipes
     return render(request, 'search/search.html', context_dict)
     #return HttpResponse('search')
@@ -365,13 +362,13 @@ def about(request):
     return render(request, 'cookbook/help.html')
 
 def faq(request):
-    return render(request, 'cookbook/faq.html')
+    return HttpResponse("FAQ page")
 
 def conversioncharts(request):
     return render(request, "cookbook/conversion-charts.html")
 
 def recipeguide(request):
-    return render(request, "cookbook/recipeguide.html")
+    return HttpResponse("how to write a recipe")
 
 def commentingrules(request):
-    return render(request, "cookbook/commeting-rules.html")
+    return HttpResponse("commenting and website rules")
