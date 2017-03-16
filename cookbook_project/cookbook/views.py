@@ -333,6 +333,12 @@ def bestrated(request):
     recipes = Recipe.objects.order_by('-total_rating')
     context_dict['recipes'] = recipes
     return render(request, 'cookbook/best_rated.html', context_dict)
+	
+def newestrecipes(request):
+    context_dict = {}
+    recipes = Recipe.objects.order_by('-upload_date')
+    context_dict['recipes'] = recipes
+    return render(request, 'cookbook/newest_recipes.html', context_dict)
 
 # search only for article names
 def search(request):

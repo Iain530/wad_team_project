@@ -76,7 +76,7 @@
 	</div>
 	
 	<div class="recipe_list">
-	<h1>New Recipes</h1>
+	<h1><a class="link_no_underline" href="{% url 'cookbook:newest-recipes' %}">New Recipes</a></h1>
 	{% if new_recipes %}
 		{% for recipe in new_recipes %}
 			<div class="recipe_detail">
