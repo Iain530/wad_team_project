@@ -1,18 +1,3 @@
-// Rate a recipe
-$('input.star').click(function(event){
-	var recipe_id;
-	var value;
-	recipe_id = $(this).attr("data-recipe_id");
-	value = parseInt($(this).attr("data-value"));
-	$.get('/cookbook/rate_recipe/', {recipe_id: recipe_id, value: value}, function(data){
-		var rating = parseInt(data);
-		if (rating != value) {
-			$("#star-" + data).prop("checked",true)
-			alert('Error posting rating');
-		}
-	});
-});
-
 
 // Save/Unsave a recipe
 $('#save_button').click(function(event){
@@ -84,9 +69,8 @@ $('.delete_comment_button').click(function(event) {
 });
 
 // Search function
-$('#search').keyup(function(e) {
-	var code = e.which;
-		if (code == 13){
+$(function(){
+	$('#search').keyup(function() {
 		$.ajax({
 			type:"POST",
 			url:"/search/",
@@ -97,7 +81,7 @@ $('#search').keyup(function(e) {
 			success: searchSuccess,
 			datatype:'html'
 			});
-	}
+	});
 });
 
 function searchSuccess(data, textStatus, jqXHR)
