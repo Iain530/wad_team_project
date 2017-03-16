@@ -82,9 +82,13 @@ class Recipe(models.Model):
 
     # not sure if this works
     def rate(self, user, rate):
-        if 0 <= rate <= 5:
+        if 0 <= rate <= 5 and user != self.user:
             rating = Rating.objects.filter(recipe=self, user=user)
-            if not rating:
+            if len(rating) > 0:
+                rating = rating[0]
+                rating.value = rate
+            
+            else:
                 rating = Rating.objects.create(recipe=self, user=user, value=rate)
             rating.save()
 
@@ -99,7 +103,7 @@ class Recipe(models.Model):
 
                 # TODO weighted rating here
             self.save()
-            return self.no_of_ratings
+            return rating.value
         else:
             print('Invalid rating: {0}'.format(rate))
             return None
