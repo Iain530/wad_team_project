@@ -9,66 +9,7 @@
 	<h1><a class="link_no_underline" href="{% url 'cookbook:best-rated' %}">Best Rated</a></h1>
 	{% if best_rated %}
 		{% for recipe in best_rated %}
-			<div class="recipe_detail">
-				
-				<div class="recipe_name">
-					<a href="{% url 'cookbook:view_recipe' recipe.user.username recipe.slug %}">
-					<img class="list_image" src="{{ MEDIA_URL }}{{ recipe.picture }}" height="125" width="125">
-					<big>{{ recipe.name }}</big></a>
-					<small>by <a class="user_link" href="{% url 'cookbook:view_user' recipe.user.username %}">{{ recipe.user.username }}</a></small>
-				</div>
-				
-				<div class="recipe_date">
-					uploaded: {{ recipe.upload_date }}<br>
-					{% if recipe.last_modified %}
-						last modified: {{ recipe.last_modified }}
-					{% endif %}
-					</div>
-					
-					<div class="recipe_desc">
-						<i>"{{ recipe.description }}"</i>
-					</div>
-				
-				<div class="recipe_info">
-					
-					{{ recipe.category }} 
-					| Serves: {{ recipe.serves }} 
-					| Cooking time: {{ recipe.cooking_time }} minutes 
-					
-					<div class="recipe_rating">
-					| <span class="stars">{{ recipe.total_rating }}</span> ({{ recipe.no_of_ratings }})
-					</div>
-					
-					{% if recipe.spice > 0 %}
-					<div class="recipe_spicy">
-					|
-					{% with ''|center:recipe.spice as range %}
-					{% for _ in range %}
-						<img class="spicy" src="{% static 'cookbook/images/spicy.png' %}" height="14" width="15">			
-					{% endfor %}
-					{% endwith %}
-					</div>
-					{% endif %}
-	
-				</div>
-				
-				<div class="dietary_info">
-					{% if recipe.is_gluten_free %}
-					<img class="dietary_image" src="{% static 'cookbook/images/gluten-free.png' %}" height="54" width="49">
-					{% endif %}
-					{% if recipe.is_vegan %}
-					<img class="dietary_image" src="{% static 'cookbook/images/vegan.png' %}" height="48" width="60">
-					{% else %}
-						{% if recipe.is_vegetarian %}
-						<img class="dietary_image" src="{% static 'cookbook/images/vegetarian.png' %}" height="55" width="55">
-						{% endif %}
-						{% if recipe.is_dairy_free %}
-						<img class="dietary_image" src="{% static 'cookbook/images/dairy-free.png' %}" height="50" width="56">
-						{% endif %}
-					{% endif %}
-				</div>
-			
-			</div>
+			{% include 'cookbook/include/recipe_detail.html' %}
 		{% endfor %}
 	{% else %}
 		The best rated recipes will appear here!
@@ -79,66 +20,7 @@
 	<h1><a class="link_no_underline" href="{% url 'cookbook:newest-recipes' %}">New Recipes</a></h1>
 	{% if new_recipes %}
 		{% for recipe in new_recipes %}
-			<div class="recipe_detail">
-				
-				<div class="recipe_name">
-					<a href="{% url 'cookbook:view_recipe' recipe.user.username recipe.slug %}">
-					<img class="list_image" src="{{ MEDIA_URL }}{{ recipe.picture }}" height="125" width="125">
-					<big>{{ recipe.name }}</big></a>
-					<small>by <a class="user_link" href="{% url 'cookbook:view_user' recipe.user.username %}">{{ recipe.user.username }}</a></small>
-				</div>
-				
-				<div class="recipe_date">
-					uploaded: {{ recipe.upload_date }}<br>
-					{% if recipe.last_modified %}
-						last modified: {{ recipe.last_modified }}
-					{% endif %}
-					</div>
-					
-					<div class="recipe_desc">
-						<i>"{{ recipe.description }}"</i>
-					</div>
-				
-				<div class="recipe_info">
-					
-					{{ recipe.category }} 
-					| Serves: {{ recipe.serves }} 
-					| Cooking time: {{ recipe.cooking_time }} minutes 
-					
-					<div class="recipe_rating">
-					| <span class="stars">{{ recipe.total_rating }}</span> ({{ recipe.no_of_ratings }})
-					</div>
-					
-					{% if recipe.spice > 0 %}
-					<div class="recipe_spicy">
-					|
-					{% with ''|center:recipe.spice as range %}
-					{% for _ in range %}
-						<img class="spicy" src="{% static 'cookbook/images/spicy.png' %}" height="14" width="15">			
-					{% endfor %}
-					{% endwith %}
-					</div>
-					{% endif %}
-	
-				</div>
-				
-				<div class="dietary_info">
-					{% if recipe.is_gluten_free %}
-					<img class="dietary_image" src="{% static 'cookbook/images/gluten-free.png' %}" height="60" width="55">
-					{% endif %}
-					{% if recipe.is_vegan %}
-					<img class="dietary_image" src="{% static 'cookbook/images/vegan.png' %}" height="48" width="60">
-					{% else %}
-						{% if recipe.is_vegetarian %}
-						<img class="dietary_image" src="{% static 'cookbook/images/vegetarian.png' %}" height="55" width="55">
-						{% endif %}
-						{% if recipe.is_dairy_free %}
-						<img class="dietary_image" src="{% static 'cookbook/images/dairy-free.png' %}" height="50" width="56">
-						{% endif %}
-					{% endif %}
-				</div>
-			
-			</div>
+			{% include 'cookbook/include/recipe_detail.html' %}
 		{% endfor %}
 	{% else %}
 		The newest recipes will appear here!
