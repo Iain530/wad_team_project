@@ -272,16 +272,26 @@ def view_recipe(request, user, recipe_slug):
             # get the recipes comments
             comments = Comment.objects.filter(recipe=recipe).order_by('-upload_date')
 
-            try:
+            if request.user.is_authenticated():
                 saved = recipe in Recipe.objects.filter(saved_by=request.user)
-            except (TypeError):
+                if request.user != recipe.user:
+                    my_rating = Rating.objects.filter(user=request.user, recipe=recipe)
+                    if len(my_rating) > 0:
+                        rating = my_rating[0].value
+                    else:
+                        rating = None
+                else:
+                    rating = None
+            else:
                 saved = None
+                rating = None
             
             context_dict['recipe'] = recipe
             context_dict['ingredients'] = ingredients
             context_dict['comments'] = comments
             context_dict['saved'] = saved
             context_dict['commentForm'] = CommentForm()
+            context_dict['rating'] = rating
 
         except (User.DoesNotExist, Recipe.DoesNotExist):
             context_dict['recipe'] = None

@@ -40,10 +40,10 @@
 		{% endif %}
 		</div>
 		
-		{% if user != recipe.user %}
+		{% if user.is_authenticated and user != recipe.user %}
 		<div id="star_rating_holder">
 			<p id="rate_this">Rate this recipe:</p>
-			<div class="stars">
+			<div class="stars" data-initial="{{ rating }}">
 			  <form action="">
 				<input data-recipe_id="{{ recipe.id }}" data-value="5" class="star star-5" id="star-5" type="radio" name="star"/>
 				<label class="star star-5" for="star-5"></label>

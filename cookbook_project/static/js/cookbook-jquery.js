@@ -1,5 +1,10 @@
 $(document).ready(function() {
 	
+	$(function() {
+		var rating = $('.stars').attr('data-initial');
+		$("#star-" + rating).prop("checked",true)
+	});
+	
 	// Display star rating on page
 	$(function() {
 		$('span.stars').stars();
