@@ -1,0 +1,23 @@
+{% extends 'cookbook/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+- FAQ
+{% endblock %}
+{% block body_block %}
+	<h1>Frequently Asked Questions</h1>
+	<p style="font-size:22px">How do I write a recipe?</p>
+	You can find guidelines for writing recipes <a href="{% url 'cookbook:recipe-writing-guidelines' %}">here</a>.
+	<p style="font-size:22px">There is a bug on the website, what do I do?</p>
+	If you find a bug on our website, please contact Peter Maitland at <a href>2200049m@student.gla.ac.uk</a>, explaining the bug, what you were doing when it happened,
+	and a screenshot if possible. We will keep you up to date on how we are dealing with the bug.
+	<p style="font-size:22px">I want to report a user, who can I contact?</p>
+	You should only report users that have broken the <a href="{% url 'cookbook:commenting-rules' %}">commenting rules</a>.
+	If you want to report a user, you can write an email to Hope Doolan at <a href>xxxxxxxD@student.gla.ac.uk</a>, state your username, 
+	the username of the person you want to report and why you want to report him with links to pages where you think the user may have broken some rules. 
+	<p style="font-size:22px">I have a suggestion for the website, who can I contact to pitch my idea?</p>
+	If you have an idea that you want for improving CookBook that you want to share with us, contact Iain Cattermole at <a href>2189570c@student.gla.ac.uk</a>.
+	We may use your idea and make the site even better!
+	<p style="font-size:22px">I would like to work with/for CookBook, who can I contact?</p>
+	If you want to work for us or in partnership with us, please contact Lukas Backis at <a href>2145673B@student.gla.ac.uk</a>.
+
+{% endblock %}

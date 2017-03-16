@@ -1,3 +1,4 @@
+
 {% extends 'cookbook/base.html' %}
 {% load staticfiles %}
 {% block title_block %}
@@ -5,6 +6,11 @@
 {% endblock %}
 {% block body_block %}
 	<h1>Help</h1>
-	Needing some help? Try one of the links below.<br>
-	<a href="{% url 'cookbook:conversion-charts' %}">Conversion Charts</a></li>
+	<p style="font-size:22px">Needing some help? Try one of the links below.</p>
+	<ul>
+	<a href="{% url 'cookbook:conversion-charts' %}" style="font-size:22px"><li>Conversion Charts</li></a>
+	<a href="{% url 'cookbook:faq' %}" style="font-size:22px"><li>Frequently Asked Questions</li></a>
+	<a href="{% url 'cookbook:recipe-writing-guidelines' %}" style="font-size:22px"><li>Recipe writing guidelines</li></a>
+	<a href="{% url 'cookbook:commenting-rules' %}" style="font-size:22px"><li>Commenting rules</li></a>
+	</ul>
 {% endblock %}

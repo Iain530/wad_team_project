@@ -365,13 +365,13 @@ def about(request):
     return render(request, 'cookbook/help.html')
 
 def faq(request):
-    return HttpResponse("FAQ page")
+    return render(request, 'cookbook/faq.html')
 
 def conversioncharts(request):
     return render(request, "cookbook/conversion-charts.html")
 
 def recipeguide(request):
-    return HttpResponse("how to write a recipe")
+    return render(request, "cookbook/recipeguide.html")
 
 def commentingrules(request):
-    return HttpResponse("commenting and website rules")
+    return render(request, "cookbook/commeting-rules.html")
