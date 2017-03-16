@@ -46,6 +46,10 @@ ul.topnav li a:hover {background-color: #555;}
 	overflow: auto;
 }
 
+@media screen and (max-width:1000px) {
+	.box{width: 900px}
+}
+
 @media screen and (max-width:1320px) {
   ul.topnav li:not(:first-child) {display: none;}
   ul.topnav li.icon {
