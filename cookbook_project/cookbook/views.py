@@ -5,11 +5,10 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from itertools import chain
 # COOKBOOK IMPORTS
 from cookbook.models import Category, Recipe, Comment, Ingredient, Rating
 from cookbook.forms import UserForm, IngredientForm, RecipeForm, CommentForm
-# HAYSTACK IMPORTS
-#from haystack.query import SearchQuerySet
 
 
 #-HELPER-FUNCTIONS------------------------------------------------------
@@ -338,9 +337,14 @@ def search(request):
         search_text = request.GET.get('search_box', None)
     else:
         return render(request, 'search/search.html', context_dict)
-    if search_text == "":
+    if len(search_text) < 3:
         return render(request, 'search/search.html', context_dict)	
-    recipes = Recipe.objects.filter(name__contains=search_text)
+    recipes_name = Recipe.objects.filter(name__contains=search_text)
+    users = User.objects.filter(username__contains=search_text)
+    recipes_user = Recipe.objects.filter(user__in=users)
+    recipes_description = Recipe.objects.filter(description__contains=search_text)
+    recipes = list(chain(recipes_user,recipes_name,recipes_description))
+    recipes = set(recipes)
     context_dict['recipes'] = recipes
     return render(request, 'search/search.html', context_dict)
     #return HttpResponse('search')

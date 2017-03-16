@@ -68,6 +68,9 @@
 			</div>
 		{% endfor %}
 	{% else %}
-	Your search returned no results!
+	<p style="text-align:center">
+	<img src="{% static 'cookbook/images/sad.png' %}" height="100" width="100"></br>
+	Either because your search entry was too short or because no recipes matched it, your search returned no results.
+	</p>
 	{% endif %}
 {% endblock %}
