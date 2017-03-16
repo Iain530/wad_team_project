@@ -22,7 +22,9 @@ Cookbook
   <li><a id="logo" href="{% url 'cookbook:home' %}" style="padding:0"> <img src="{% static "cookbook/images/logo.png" %}"></a><li>
   <li><a class="active" href="{% url 'cookbook:home' %}">Home</a></li>
   <li><a href="{% url 'cookbook:categories' %}">Categories</a></li>
-  <li><a href="{% url 'cookbook:search' %}">Search</a></li>
+  <li><a>
+  <input type="text" id="search" name="search" placeholder="Search for recipes"/>
+  </a></li>
   {% if user.is_authenticated %}
   <li><a href="{% url 'cookbook:myprofile' %}">My profile</a></li>
   <li><a href="{% url 'cookbook:user_logout' %}">Log out</a></li>
@@ -32,7 +34,7 @@ Cookbook
   {% endif %}
   <li><a href="{% url 'cookbook:help' %}">Help</a></li>
     <li class="icon">
-    <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">☰</a></li>
+    <a href="javascript:void(0);" onclick="myFunction()">☰</a></li>
 </ul>
 
 <div class ="box">

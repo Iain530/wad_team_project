@@ -69,9 +69,8 @@ $('.delete_comment_button').click(function(event) {
 });
 
 // Search function
-$('#search').keyup(function(e) {
-	var code = e.which;
-		if (code == 13){
+$(function(){
+	$('#search').keyup(function() {
 		$.ajax({
 			type:"POST",
 			url:"/search/",
@@ -82,7 +81,7 @@ $('#search').keyup(function(e) {
 			success: searchSuccess,
 			datatype:'html'
 			});
-	}
+	});
 });
 
 function searchSuccess(data, textStatus, jqXHR)

@@ -4,11 +4,11 @@
 - Search
 {% endblock %}
 {% block body_block %}
-	{% if recipes.count > 0 %}
+	{% if recipes %}
 	{% for recipe in recipes %}
-		<li><a href="{{ recipe.object.get_absolute_url }}">{{ recipe.object.name }}</a></li>
+		<li><a href="{% url 'cookbook:view_recipe' recipe.user.username recipe.slug %}">{{ recipe.name }}</a></li>
 	{% endfor %}
 	{% else %}
-		<li> No recipes matched your search!</li>
+	Your search returned no results!
 	{% endif %}
 {% endblock %}

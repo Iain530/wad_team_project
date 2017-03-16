@@ -334,12 +334,19 @@ def bestrated(request):
     context_dict['recipes'] = recipes
     return render(request, 'cookbook/best_rated.html', context_dict)
 
-# search and search results
+# search only for article names
 def search(request):
-    #recipes = SearchQuerySet().autocomplete(content_auto=request.POST.get('search_text', ''))
-    #context_dict['recipes'] = recipes
-    #return render(request, 'search/search.html', context_dict)
-    return HttpResponse('search')
+    context_dict = {}
+    if request.method == "POST":
+        search_text = request.POST['search_text']
+    else:
+        return render(request, 'search/search.html', context_dict)
+    if search_text == "":
+        return render(request, 'search/search.html', context_dict)	
+    recipes = Recipe.objects.filter(name__contains=search_text)
+    context_dict['recipes'] = recipes
+    return render(request, 'search/search.html', context_dict)
+    #return HttpResponse('search')
 
 #-HELP-SECTION------------------------------------------------------------
 
