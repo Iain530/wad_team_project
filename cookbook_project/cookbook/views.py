@@ -11,7 +11,24 @@ from cookbook.forms import UserForm, IngredientForm, RecipeForm, CommentForm
 # HAYSTACK IMPORTS
 #from haystack.query import SearchQuerySet
 
+
 #-HELPER-FUNCTIONS------------------------------------------------------
+
+@login_required
+def rate_recipe(request):
+    recipe_id = None
+    value = None
+    rating  = None
+    if request.method == 'GET':
+        recipe_id = request.GET['recipe_id']
+        recipe = Recipe.objects.get(id=recipe_id)
+        value = request.GET['value']
+
+        if recipe and value:
+            rating = recipe.rate(request.user, int(value))
+
+    return HttpResponse(rating)
+
 
 @login_required
 def delete_recipe(request):
@@ -68,34 +85,8 @@ def save_recipe(request):
                 else:
                     recipe.user_unsave(request.user)
                     saved = False
-    return HttpResponse(saved)
+    return HttpResponse(saved)        
 
-# not finished
-@login_required
-def rate_recipe(request):
-    recipe_user = None
-    recipe_slug = None
-    rating = None
-    no_of_ratings = None
-    done = False
-    
-    if request.method == 'GET':
-        # get the recipe author and recipe slug
-        recipe_user = User.objects.get(username=request.GET['user'])
-        recipe_slug = request.GET['slug']
-        rating = request.GET['rating']
-
-    if recipe_user and recipe_slug and rating:
-        recipe = Recipe.objects.get(user=recipe_user, slug=recipe_slug)
-        no_of_ratings = recipe.rate(request.user, rating)
-        if no_of_ratings:
-            None
-
-    return no_of_ratings
-            
-        
-
-            
 
 #-HOME-SECTION----------------------------------------------------------
 
@@ -340,12 +331,19 @@ def newestrecipes(request):
     context_dict['recipes'] = recipes
     return render(request, 'cookbook/newest_recipes.html', context_dict)
 
-# search and search results
+# search only for article names
 def search(request):
-    #recipes = SearchQuerySet().autocomplete(content_auto=request.POST.get('search_text', ''))
-    #context_dict['recipes'] = recipes
-    #return render(request, 'search/search.html', context_dict)
-    return HttpResponse('search')
+    context_dict = {}
+    if request.method == "POST":
+        search_text = request.POST['search_text']
+    else:
+        return render(request, 'search/search.html', context_dict)
+    if search_text == "":
+        return render(request, 'search/search.html', context_dict)	
+    recipes = Recipe.objects.filter(name__contains=search_text)
+    context_dict['recipes'] = recipes
+    return render(request, 'search/search.html', context_dict)
+    #return HttpResponse('search')
 
 #-HELP-SECTION------------------------------------------------------------
 
