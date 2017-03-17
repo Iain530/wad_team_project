@@ -21,9 +21,13 @@
 		<h2>{{ author }}'s Recipes</h2>
 		
 		<div class="recipe_list">
-		{% for recipe in recipes %}
-			{% include 'cookbook/include/recipe_detail.html' %}
-		{% endfor %}
+		{% if recipes %}
+			{% for recipe in recipes %}
+				{% include 'cookbook/include/recipe_detail.html' %}
+			{% endfor %}
+		{% else %}
+			This user has not uploaded any recipes.
+		{% endif %}
 		</div>
 	{% else %}
 		This user does not exist!
