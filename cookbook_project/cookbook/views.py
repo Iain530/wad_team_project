@@ -26,6 +26,8 @@ def username_check(request):
                 available = False
             else:
                 available = True
+
+    return HttpResponse(available)
     
 
 

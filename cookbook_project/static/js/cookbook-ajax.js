@@ -1,19 +1,22 @@
 // Check if username is available
 $('#id_username').keyup(function(event){
-	var username = $(this).attr('value');
+	var username = $(this).val();
 	if (username.length > 0) {
 		$.get('/cookbook/username_check/', {username: username}, function(data){
 			if (data === 'True') {
-				$('#username_check').html('Username is available');
+				$('#username_check').html('&#10004;');
 				$('#username_check').css('color', 'green')
+				$('#register_button').prop('disabled', false);
 			} else {
-				$('#username_check').html('Username is not available')
+				$('#username_check').html('&#10006;')
 				$('#username_check').css('color', 'red')
+				$('#register_button').prop('disabled', true);
 			}
 		});
 	} else {
-		$('#username_check').html('Enter a username')
+		$('#username_check').html('')
 		$('#username_check').css('color', '#f2f2f2')
+		$('#register_button').prop('disabled', true);
 	}
 });
 
