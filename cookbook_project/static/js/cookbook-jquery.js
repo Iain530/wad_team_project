@@ -1,5 +1,4 @@
 $(document).ready(function() {
-	
 	$(function() {
 		var rating = $('.stars').attr('data-initial');
 		$("#star-" + rating).prop("checked",true)

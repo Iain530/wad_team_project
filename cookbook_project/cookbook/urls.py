@@ -30,4 +30,5 @@ urlpatterns = [
     url(r'^delete_comment/$', views.delete_comment, name='delete_comment'),
     url(r'^delete_recipe/$', views.delete_recipe, name='delete_recipe'),
     url(r'^rate_recipe/$', views.rate_recipe, name='rate_recipe'),
+    url(r'^username_check/$', views.username_check, name='username_check'),
 ]

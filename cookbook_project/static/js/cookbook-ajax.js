@@ -1,3 +1,22 @@
+// Check if username is available
+$('#id_username').keyup(function(event){
+	var username = $(this).attr('value');
+	if (username.length > 0) {
+		$.get('/cookbook/username_check/', {username: username}, function(data){
+			if (data === 'True') {
+				$('#username_check').html('Username is available');
+				$('#username_check').css('color', 'green')
+			} else {
+				$('#username_check').html('Username is not available')
+				$('#username_check').css('color', 'red')
+			}
+		});
+	} else {
+		$('#username_check').html('Enter a username')
+		$('#username_check').css('color', '#f2f2f2')
+	}
+});
+
 // Rate a recipe
 $('input.star').click(function(event){
 	var recipe_id;

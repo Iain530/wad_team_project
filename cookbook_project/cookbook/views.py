@@ -14,6 +14,21 @@ from cookbook.forms import UserForm, IngredientForm, RecipeForm, CommentForm
 
 #-HELPER-FUNCTIONS------------------------------------------------------
 
+def username_check(request):
+    username = None
+    available = None
+    if request.method == 'GET':
+        username = request.GET['username']
+
+        if username:
+            users = User.objects.filter(username=username)
+            if len(users) > 0:
+                available = False
+            else:
+                available = True
+    
+
+
 @login_required
 def rate_recipe(request):
     recipe_id = None
@@ -218,7 +233,7 @@ def uploadrecipe(request):
         else:
             print(form.errors)
 
-    context_dict['form'] = RecipeForm()
+    context_dict['recipe_form'] = RecipeForm()
     return render(request, 'cookbook/upload-recipe.html', context_dict)
 
 # view for a user profile

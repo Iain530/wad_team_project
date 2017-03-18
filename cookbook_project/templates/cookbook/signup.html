@@ -13,6 +13,7 @@
 				{% csrf_token %}
 				<!-- Display each form -->
 				<label class="form_label" >Username: </label>{{ user_form.username }}</br>
+				<p id="username_check"></p>
 				<label class="form_label">Email: </label>{{ user_form.email }}</br>
 				<label class="form_label">Password: </label>{{ user_form.password }}</br>
 				<!-- Provide a button to click to submit the form. -->
