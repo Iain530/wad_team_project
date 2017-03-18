@@ -65,10 +65,11 @@ class Recipe(models.Model):
     slug = models.SlugField() # name as slug
     description = models.CharField(max_length=MAX_DESC_LENGTH)
     instructions = models.TextField()             # Change field type
-    spice = models.PositiveSmallIntegerField(default=0)
+    ingredients = models.TextField(default="")
+    spice = models.IntegerField(default=0)
     serves = models.PositiveSmallIntegerField()
     cooking_time = models.PositiveIntegerField(default=0)
-    picture = models.ImageField(upload_to=recipe_file_name, blank="True")
+    picture = models.FileField(upload_to='media/recipe_images/instance.user.username', blank=True)
     
     is_vegetarian = models.BooleanField(default=False)
     is_vegan = models.BooleanField(default=False)

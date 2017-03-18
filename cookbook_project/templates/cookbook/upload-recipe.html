@@ -6,7 +6,7 @@
 
 {% block body_block %}
 	<h1>Upload a New Recipe</h1>
-	<form id="recipe_form" method="post" action="{% url 'cookbook:upload-recipe' %}">
+	<form enctype="multipart/form-data" id="recipe_form" method="post" action="{% url 'cookbook:upload-recipe' %}">
 			{% csrf_token %}
                 {% for field in form.visible_fields %}
                     {{ field.errors }}

@@ -210,25 +210,23 @@ def uploadrecipe(request):
     if request.method == 'POST':
         # check if form is valid
         form = RecipeForm(request.POST, request.FILES)
-        
         if form.is_valid():
-            # create
             recipe = form.save(commit=False)
             recipe.user = request.user
-            
+            if 'picture' in request.FILES:
+                recipe.picture = request.FILES['picture']
             if recipe.is_vegan or (recipe.is_vegetarian and recipe.is_dairy_free):
                 recipe.is_vegan = True
                 recipe.is_vegetarian = True
                 recipe.is_dairy_free = True
-            
             recipe.save()
-            return view_recipe(request, request.user.username, recipe.name)
-        
+            return HttpResponseRedirect(reverse('cookbook:view_recipe', args=[recipe.user, recipe.slug]))
         else:
             print(form.errors)
-
-    context_dict['form'] = RecipeForm()
-    return render(request, 'cookbook/upload-recipe.html', context_dict)
+    else:
+        print(form.errors)
+        context_dict['form'] = RecipeForm()
+        return render(request, 'cookbook/upload-recipe.html', context_dict)
 
 # view for a user profile
 def view_user(request, user):

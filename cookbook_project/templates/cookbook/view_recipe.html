@@ -71,10 +71,8 @@
 		</div>
 		
 		<h3>Ingredients</h3>
-		{% if ingredients %}
-			{% for ingredient in ingredients %}
-				{{ ingredient.quantity }} {{ ingredient.name}}</br>
-			{% endfor %}
+		{% if recipe.ingredients %}
+			{{ recipe.ingredients }}
 		{% else %}
 			No ingredients!
 		{% endif %}
