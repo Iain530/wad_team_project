@@ -37,6 +37,7 @@ def resizePicture(picture, side):
         image = ImageOps.fit(image, trim, Image.ANTIALIAS)
         image.save(picture.path)
 
+# file name for recipe images
 def recipe_file_name(instance, filename):
     return os.path.join('recipe_images', instance.user.username, filename)
     
@@ -64,12 +65,12 @@ class Recipe(models.Model):
     name = models.CharField(max_length=MAX_NAME_LENGTH)
     slug = models.SlugField() # name as slug
     description = models.CharField(max_length=MAX_DESC_LENGTH)
-    instructions = models.TextField()             # Change field type
+    instructions = models.TextField(blank=True)             # Change field type
     ingredients = models.TextField(default="")
     spice = models.IntegerField(default=0)
     serves = models.PositiveSmallIntegerField()
     cooking_time = models.PositiveIntegerField(default=0)
-    picture = models.FileField(upload_to='media/recipe_images/instance.user.username', blank=True)
+    picture = models.ImageField(upload_to=recipe_file_name, blank=True)
     
     is_vegetarian = models.BooleanField(default=False)
     is_vegan = models.BooleanField(default=False)

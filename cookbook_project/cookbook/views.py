@@ -217,9 +217,6 @@ def uploadrecipe(request):
     recipe_form = RecipeForm()
     if request.method == 'POST':
         # check if form is valid
-        form = RecipeForm(request.POST, request.FILES)
-        if form.is_valid():
-            recipe = form.save(commit=False)
         recipe_form = RecipeForm(request.POST, request.FILES)
         
         if recipe_form.is_valid():
@@ -236,13 +233,8 @@ def uploadrecipe(request):
             return HttpResponseRedirect(reverse('cookbook:view_recipe', args=[recipe.user, recipe.slug]))
         else:
             print(form.errors)
-    else:
-        print(form.errors)
-        context_dict['form'] = RecipeForm()
-        return render(request, 'cookbook/upload-recipe.html', context_dict)
-            print(recipe_form.errors)
 
-    context_dict['recipe_form'] = RecipeForm()
+    context_dict['recipe_form'] = recipe_form
     return render(request, 'cookbook/upload-recipe.html', context_dict)
 
 

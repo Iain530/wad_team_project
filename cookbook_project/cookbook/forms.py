@@ -10,8 +10,8 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'password',)
-        
 
+        
 class RecipeForm(forms.ModelForm):
     name = forms.CharField(max_length=Recipe.MAX_NAME_LENGTH,help_text="Recipe Name")
     description=forms.CharField(max_length=Recipe.MAX_DESC_LENGTH,
@@ -31,10 +31,17 @@ class RecipeForm(forms.ModelForm):
     is_vegan = forms.BooleanField(required=False, help_text="Vegan")
     is_gluten_free = forms.BooleanField(required=False, help_text="Gluten Free")
     is_dairy_free = forms.BooleanField(required=False,help_text="Dairy Free")
+
+    SPICE_SET = [(0, 'Not Spicy'),
+                 (1, 'Mild'),
+                 (2, 'Hot'),
+                 (3, 'Super Spicy') ]
+    spice = forms.ChoiceField(choices=SPICE_SET, required=True, help_text="Spice")
     
     class Meta:
         model = Recipe
-        fields = ('name', 'picture', 'category', 'instructions','ingredients', 'serves','spice', 'cooking_time','description', 'is_vegetarian', 'is_vegan', 'is_gluten_free','is_dairy_free',)
+        fields = ('name', 'picture', 'category', 'instructions','ingredients', 'serves', 'spice', 'cooking_time',
+                  'description', 'spice', 'is_vegetarian', 'is_vegan', 'is_gluten_free','is_dairy_free',)
         
 
 
