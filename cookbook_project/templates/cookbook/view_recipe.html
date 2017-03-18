@@ -17,7 +17,7 @@
 		{{ recipe.name }} -
 		<small> 
 		{% if user == recipe.user %}
-		(edit)
+		<a href="{% url 'cookbook:edit_recipe' recipe.user recipe.slug %}">edit</a>
 		</small>
 		{% else %}
 		by <a href="{% url 'cookbook:view_user' recipe.user.username %}">{{ recipe.user.username }}</a>

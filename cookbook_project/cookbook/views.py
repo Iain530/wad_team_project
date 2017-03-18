@@ -238,6 +238,15 @@ def uploadrecipe(request):
     return render(request, 'cookbook/upload-recipe.html', context_dict)
 
 
+@login_required
+def edit_recipe(request, user, recipe_slug):
+    context_dict = {}
+    recipe = Recipe.objects.get(user=user, slug=recipe_slug)
+    return HttpResponse('edit')
+    
+    
+
+
 # view for a user profile
 def view_user(request, user):
     context_dict = {}

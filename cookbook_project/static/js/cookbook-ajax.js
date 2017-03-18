@@ -104,24 +104,3 @@ $('.delete_comment_button').click(function(event) {
 		});
 	}
 });
-
-
-// Posting comments (unfinished)
-
-// $('#post_comment').click(function() {
-	// var user;
-	// var slug;
-	// var comment;
-	
-	// slug = $(this).attr("data-slug");
-	// user = $(this).attr("data-user");
-	// comment = $(#'comment_text').val()
-	
-	// if (val != '') {
-		// $.get('/cookbook/post_comment', {user: user, slug: slug, text: comment}, function(data){
-			
-			
-		// });
-		
-	// }
-// });
