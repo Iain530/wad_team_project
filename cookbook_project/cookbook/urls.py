@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^user/(?P<user>[\w\-]+)/$', views.view_user, name='view_user'),
     url(r'^user/(?P<user>[\w\-]+)/(?P<recipe_slug>[\w\-]+)/$', views.view_recipe, name='view_recipe'),
     url(r'^best-rated/$', views.bestrated, name='best-rated'),
+	url(r'^newest-recipes/$', views.newestrecipes, name='newest-recipes'),
     url(r'^search/$', views.search, name='search'),
     url(r'^categories/$', views.categories, name='categories'),
     url(r'^categories/(?P<category_name>[\w\-]+)/', views.view_category, name='view_category'),
@@ -28,4 +29,6 @@ urlpatterns = [
     url(r'^save_recipe/$', views.save_recipe, name='save_recipe'),
     url(r'^delete_comment/$', views.delete_comment, name='delete_comment'),
     url(r'^delete_recipe/$', views.delete_recipe, name='delete_recipe'),
+    url(r'^rate_recipe/$', views.rate_recipe, name='rate_recipe'),
+    url(r'^username_check/$', views.username_check, name='username_check'),
 ]

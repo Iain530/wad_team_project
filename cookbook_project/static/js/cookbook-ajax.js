@@ -1,3 +1,40 @@
+// Check if username is available
+$('#id_username').keyup(function(event){
+	var username = $(this).val();
+	if (username.length > 0) {
+		$.get('/cookbook/username_check/', {username: username}, function(data){
+			if (data === 'True') {
+				$('#username_check').html('&#10004;');
+				$('#username_check').css('color', 'green')
+				$('#register_button').prop('disabled', false);
+			} else {
+				$('#username_check').html('&#10006;')
+				$('#username_check').css('color', 'red')
+				$('#register_button').prop('disabled', true);
+			}
+		});
+	} else {
+		$('#username_check').html('')
+		$('#username_check').css('color', '#f2f2f2')
+		$('#register_button').prop('disabled', true);
+	}
+});
+
+// Rate a recipe
+$('input.star').click(function(event){
+	var recipe_id;
+	var value;
+	recipe_id = $(this).attr("data-recipe_id");
+	value = parseInt($(this).attr("data-value"));
+	$.get('/cookbook/rate_recipe/', {recipe_id: recipe_id, value: value}, function(data){
+		var rating = parseInt(data);
+		if (rating != value) {
+			$("#star-" + data).prop("checked",true)
+			alert('Error posting rating');
+		}
+	});
+});
+
 
 // Save/Unsave a recipe
 $('#save_button').click(function(event){
@@ -67,6 +104,7 @@ $('.delete_comment_button').click(function(event) {
 		});
 	}
 });
+
 
 // Posting comments (unfinished)
 

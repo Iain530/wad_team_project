@@ -40,22 +40,25 @@
 		{% endif %}
 		</div>
 		
-		<div id="starRating_holder">
-			Rate this recipe:
-			<span class="starRating">
-				<input id="rating5" type="radio" name="rating" value="5">
-				<label for="rating5">5</label>
-				<input id="rating4" type="radio" name="rating" value="4">
-				<label for="rating4">4</label>
-				<input id="rating3" type="radio" name="rating" value="3">
-				<label for="rating3">3</label>
-				<input id="rating2" type="radio" name="rating" value="2">
-				<label for="rating2">2</label>
-				<input id="rating1" type="radio" name="rating" value="1">
-				<label for="rating1">1</label>
-			</span>
-			({{ recipe.no_of_ratings }})
+		{% if user.is_authenticated and user != recipe.user %}
+		<div id="star_rating_holder">
+			<p id="rate_this">Rate this recipe:</p>
+			<div class="stars" data-initial="{{ rating }}">
+			  <form action="">
+				<input data-recipe_id="{{ recipe.id }}" data-value="5" class="star star-5" id="star-5" type="radio" name="star"/>
+				<label class="star star-5" for="star-5"></label>
+				<input data-recipe_id="{{ recipe.id }}" data-value="4" class="star star-4" id="star-4" type="radio" name="star"/>
+				<label class="star star-4" for="star-4"></label>
+				<input data-recipe_id="{{ recipe.id }}" data-value="3" class="star star-3" id="star-3" type="radio" name="star"/>
+				<label class="star star-3" for="star-3"></label>
+				<input data-recipe_id="{{ recipe.id }}" data-value="2" class="star star-2" id="star-2" type="radio" name="star"/>
+				<label class="star star-2" for="star-2"></label>
+				<input data-recipe_id="{{ recipe.id }}" data-value="1" class="star star-1" id="star-1" type="radio" name="star"/>
+				<label class="star star-1" for="star-1"></label>
+			  </form>
+			</div>
 		</div>
+		{% endif %}
 		
 		</h1>
 	

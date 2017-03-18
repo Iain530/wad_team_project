@@ -4,11 +4,14 @@
 - Search
 {% endblock %}
 {% block body_block %}
-	{% if recipes.count > 0 %}
-	{% for recipe in recipes %}
-		<li><a href="{{ recipe.object.get_absolute_url }}">{{ recipe.object.name }}</a></li>
-	{% endfor %}
+	{% if recipes %}
+		{% for recipe in recipes %}
+			{% include 'cookbook/include/recipe_detail.html' %}
+		{% endfor %}
 	{% else %}
-		<li> No recipes matched your search!</li>
+	<p style="text-align:center">
+	<img src="{% static 'cookbook/images/sad.png' %}" height="100" width="100"></br>
+	Either because your search entry was too short or because no recipes matched it, your search returned no results.
+	</p>
 	{% endif %}
 {% endblock %}

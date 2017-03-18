@@ -11,7 +11,41 @@ from cookbook.forms import UserForm, IngredientForm, RecipeForm, CommentForm
 # HAYSTACK IMPORTS
 #from haystack.query import SearchQuerySet
 
+
 #-HELPER-FUNCTIONS------------------------------------------------------
+
+def username_check(request):
+    username = None
+    available = None
+    if request.method == 'GET':
+        username = request.GET['username']
+
+        if username:
+            users = User.objects.filter(username=username)
+            if len(users) > 0:
+                available = False
+            else:
+                available = True
+
+    return HttpResponse(available)
+    
+
+
+@login_required
+def rate_recipe(request):
+    recipe_id = None
+    value = None
+    rating  = None
+    if request.method == 'GET':
+        recipe_id = request.GET['recipe_id']
+        recipe = Recipe.objects.get(id=recipe_id)
+        value = request.GET['value']
+
+        if recipe and value:
+            rating = recipe.rate(request.user, int(value))
+
+    return HttpResponse(rating)
+
 
 @login_required
 def delete_recipe(request):
@@ -68,34 +102,8 @@ def save_recipe(request):
                 else:
                     recipe.user_unsave(request.user)
                     saved = False
-    return HttpResponse(saved)
+    return HttpResponse(saved)        
 
-# not finished
-@login_required
-def rate_recipe(request):
-    recipe_user = None
-    recipe_slug = None
-    rating = None
-    no_of_ratings = None
-    done = False
-    
-    if request.method == 'GET':
-        # get the recipe author and recipe slug
-        recipe_user = User.objects.get(username=request.GET['user'])
-        recipe_slug = request.GET['slug']
-        rating = request.GET['rating']
-
-    if recipe_user and recipe_slug and rating:
-        recipe = Recipe.objects.get(user=recipe_user, slug=recipe_slug)
-        no_of_ratings = recipe.rate(request.user, rating)
-        if no_of_ratings:
-            None
-
-    return no_of_ratings
-            
-        
-
-            
 
 #-HOME-SECTION----------------------------------------------------------
 
@@ -206,12 +214,17 @@ def savedrecipes(request):
 @login_required
 def uploadrecipe(request):
     context_dict = {}
-    form = RecipeForm()
+    recipe_form = RecipeForm()
     if request.method == 'POST':
         # check if form is valid
         form = RecipeForm(request.POST, request.FILES)
         if form.is_valid():
             recipe = form.save(commit=False)
+        recipe_form = RecipeForm(request.POST, request.FILES)
+        
+        if recipe_form.is_valid():
+            # create
+            recipe = recipe_form.save(commit=False)
             recipe.user = request.user
             if 'picture' in request.FILES:
                 recipe.picture = request.FILES['picture']
@@ -227,6 +240,11 @@ def uploadrecipe(request):
         print(form.errors)
         context_dict['form'] = RecipeForm()
         return render(request, 'cookbook/upload-recipe.html', context_dict)
+            print(recipe_form.errors)
+
+    context_dict['recipe_form'] = RecipeForm()
+    return render(request, 'cookbook/upload-recipe.html', context_dict)
+
 
 # view for a user profile
 def view_user(request, user):
@@ -279,16 +297,26 @@ def view_recipe(request, user, recipe_slug):
             # get the recipes comments
             comments = Comment.objects.filter(recipe=recipe).order_by('-upload_date')
 
-            try:
+            if request.user.is_authenticated():
                 saved = recipe in Recipe.objects.filter(saved_by=request.user)
-            except (TypeError):
+                if request.user != recipe.user:
+                    my_rating = Rating.objects.filter(user=request.user, recipe=recipe)
+                    if len(my_rating) > 0:
+                        rating = my_rating[0].value
+                    else:
+                        rating = None
+                else:
+                    rating = None
+            else:
                 saved = None
+                rating = None
             
             context_dict['recipe'] = recipe
             context_dict['ingredients'] = ingredients
             context_dict['comments'] = comments
             context_dict['saved'] = saved
             context_dict['commentForm'] = CommentForm()
+            context_dict['rating'] = rating
 
         except (User.DoesNotExist, Recipe.DoesNotExist):
             context_dict['recipe'] = None
@@ -296,6 +324,7 @@ def view_recipe(request, user, recipe_slug):
             context_dict['comments'] = None
             context_dict['saved'] = None
             context_dict['commentForm'] = None
+            context_dict['rating'] = None
 
              
         return render(request, 'cookbook/view_recipe.html', context_dict)
@@ -331,13 +360,26 @@ def bestrated(request):
     recipes = Recipe.objects.order_by('-total_rating')
     context_dict['recipes'] = recipes
     return render(request, 'cookbook/best_rated.html', context_dict)
+	
+def newestrecipes(request):
+    context_dict = {}
+    recipes = Recipe.objects.order_by('-upload_date')
+    context_dict['recipes'] = recipes
+    return render(request, 'cookbook/newest_recipes.html', context_dict)
 
-# search and search results
+# search only for article names
 def search(request):
-    #recipes = SearchQuerySet().autocomplete(content_auto=request.POST.get('search_text', ''))
-    #context_dict['recipes'] = recipes
-    #return render(request, 'search/search.html', context_dict)
-    return HttpResponse('search')
+    context_dict = {}
+    if request.method == "GET":
+        search_text = request.GET.get('search_box', None)
+    else:
+        return render(request, 'search/search.html', context_dict)
+    if search_text == "":
+        return render(request, 'search/search.html', context_dict)	
+    recipes = Recipe.objects.filter(name__contains=search_text)
+    context_dict['recipes'] = recipes
+    return render(request, 'search/search.html', context_dict)
+    #return HttpResponse('search')
 
 #-HELP-SECTION------------------------------------------------------------
 
@@ -345,13 +387,13 @@ def about(request):
     return render(request, 'cookbook/help.html')
 
 def faq(request):
-    return HttpResponse("FAQ page")
+    return render(request, 'cookbook/faq.html')
 
 def conversioncharts(request):
     return render(request, "cookbook/conversion-charts.html")
 
 def recipeguide(request):
-    return HttpResponse("how to write a recipe")
+    return render(request, 'cookbook/recipeguide.html')
 
 def commentingrules(request):
-    return HttpResponse("commenting and website rules")
+    return render(request, 'cookbook/commenting-rules.html')

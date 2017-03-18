@@ -9,51 +9,17 @@
 {% block body_block %}
 	{% if category %}
 		<h1>{{ category.name }}</h1>	
-		
 		{% if recipes %}
 			{% for recipe in recipes %}
-			<div class="recipe_detail">
-				
-				<div class="recipe_name">
-				<a href="{% url 'cookbook:view_recipe' recipe.user.username recipe.slug %}">
-				<img class="list_image" src="{{ MEDIA_URL }}{{ recipe.picture }}" height="200" width="200">
-				<big>{{ recipe.name }}</big></a>
-				<small>by <a href="{% url 'cookbook:view_user' recipe.user.username %}">{{ recipe.user.username }}</a></small>
-				</div>
-				
-				<div class="recipe_rating">
-				{{ recipe.total_rating }}
-				</div>
-				
-				<div class="recipe_desc">
-				<i>"{{ recipe.description }}"</i>
-				</div>
-				
-				<div class="recipe_info">
-				Serves: {{ recipe.serves }} - Cooking time: {{ recipe.cooking_time }} minutes
-				</div>
-				
-				<div class="dietary_info">
-				{% if recipe.is_gluten_free %}
-				<img class="dietary_image" src="{% static 'cookbook/images/gluten-free.png' %}" height="60" width="55">
-				{% endif %}
-				{% if recipe.is_vegan %}
-				<img class="dietary_image" src="{% static 'cookbook/images/vegan.png' %}" height="48" width="60">
-				{% else %}
-					{% if recipe.is_vegetarian %}
-					<img class="dietary_image" src="{% static 'cookbook/images/vegetarian.png' %}" height="55" width="55">
-					{% endif %}
-					{% if recipe.is_dairy_free %}
-					<img class="dietary_image" src="{% static 'cookbook/images/dairy-free.png' %}" height="50" width="56">
-					{% endif %}
-				{% endif %}
-				</div>
-			
-			</div>
+				{% include 'cookbook/include/recipe_detail.html' %}
 			{% endfor %}
 		{% else %}
 			<strong>There are currently no {{ category.name }} on Cookbook!</strong><br>
-			Help us by adding some of your own.
+			{% if user.is_authenticated%}
+				Click <a href="{% url 'cookbook:upload-recipe' %}">here</a> to add your own.
+			{% else %}
+				Login <a href="{% url 'cookbook:user_login' %}">here</a> to add some of your own!
+			{% endif %}
 		{% endif %}
 	{% else %}
 		This category doesn't exist!
