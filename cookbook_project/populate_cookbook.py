@@ -60,7 +60,7 @@ def populate():
                         clove of garlic,
                         1/4 pint of coconut milk,
                         2 tbsp curry powder""",
-         'instructions': """1. Heat oil in a large skillet over medium-high heat. Add tofu cubes, 
+         'method': """1. Heat oil in a large skillet over medium-high heat. Add tofu cubes, 
                          season with seasoned salt and fry until golden on all sides, stirring occasionally
                          , about 15 minutes. Remove to paper towels, and set aside 
                          2. Melt butter or margarine in the same skillet over medium heat. Add the onion and garlic; 
@@ -83,7 +83,7 @@ def populate():
          'ingredients': """14oz beef,
                         mixed vegetables,
                         100g gravy granules""",
-         'instructions': """Drizzle the beef with oil and season well with sea salt 
+         'method': """Drizzle the beef with oil and season well with sea salt 
                          and black pepper, then rub all over the meat. Place the beef on top of
                          the vegetables. Place the tray in the oven, then turn the heat down
                          immediately to 200 degrees C and cook for 1 hour for medium beef.""",
@@ -106,7 +106,7 @@ def populate():
                         a pinch of cinnamon,
                         a handful of spinach,
                         1 tbsp almond butter""",
-         'instructions': """Pour the milk into a high-speed blender then add the ground 
+         'method': """Pour the milk into a high-speed blender then add the ground 
                          flaxseed and the cinnamon. Add the remaining ingredients then 
                          blitz until smooth. Pour into glasses and serve.""",
          'serves': 1,
@@ -129,7 +129,7 @@ def populate():
                         1 large vegetable stock,
                         100ml creme fraiche,
                         2 garlic cloves""",
-         'instructions': """Heat oven to 220C and put sweet potato and carrots into large
+         'method': """Heat oven to 220C and put sweet potato and carrots into large
                          roasting tin with seasoning and oil. Roast the veg for 25 mins til
                          tender. Fry the onion in a saucepan until soft and then add garlic.
                          Fry for 1 minute and then add stock. Simmer until onions very soft.
@@ -155,7 +155,7 @@ def populate():
                         225g butter,
                         2 eggs,
                         350g flour (for pastry)""",
-         'instructions': """Slice apples and lay on a large baking sheet. Beat butter and sugar
+         'method': """Slice apples and lay on a large baking sheet. Beat butter and sugar
                          into a large bowl. Break in a whole egg and a yolk (keep the white).
                          Beat this mix until it looks like scrambled egg. Work in flour for
                          pastry one third at a time until it begins to clump. Gently work this
@@ -184,7 +184,7 @@ def populate():
                         1 ounce peach schnapps,
                         2 ounces cranberry juice,
                         lime wedge for garnish""",   
-         'instructions': """Place all ingredients into a cocktail shaker with ice. Shake well
+         'method': """Place all ingredients into a cocktail shaker with ice. Shake well
                          and strain into a chilled glass with fresh ice. Garnish with a lime wedge.""",
          'serves': 1,
          'spice': 0,
@@ -204,7 +204,7 @@ def populate():
                         30g Cheddar cheese,
                         1 slice of ham, chopped,
                         salt and black pepper""",
-         'instructions': """Gently beat eggs together in a bowl and season with salt and pepper.
+         'method': """Gently beat eggs together in a bowl and season with salt and pepper.
                          Heat the butter in a frying pan until foaming. Pour in eggs and cook for
                          a few seconds until the bottom of the omelette is lightly set. Push the
                          set parts of the omelette to the uncooked centre and cook again. Repeat
@@ -232,7 +232,7 @@ def populate():
                         4 slices cheddar cheese,
                         4 slices mozzarella cheese,
                         8 slices bread""",   
-         'instructions': """Heat grill for 5 minutes. Grill bacon until browned, drain on
+         'method': """Heat grill for 5 minutes. Grill bacon until browned, drain on
                          papertowels and cut in half crosswise. Grill onion until tender.
                          Take bread and layer Cheddar cheese, bacon, onion, and mozzarella
                          cheese. Grill sandwiches until bread is toasted and cheese has
@@ -266,7 +266,7 @@ def populate():
                         3 tbsp corriander,
                         shortcrust pasrty (enough to cover pie),
                         1 tbsp milk""",
-         'instructions': """Heat oven to 200C. Heat oil in large pan and cook onion, garlic
+         'method': """Heat oven to 200C. Heat oil in large pan and cook onion, garlic
                          and chilli until tender. Stir in garam masala, tumeric and cumin,
                          and cook for 2-3 mins. Add carrots, parsnip, cauliflower and courgette
                          to pan with 300ml water. Bring to boil and simmer until vegetables are
@@ -298,7 +298,7 @@ def populate():
                         dash of lemonjuice,
                         soda water,
                         1 lemon wheel""",
-         'instructions': """Fill a cocktail shaker with ice. Add blood orange vodka, Aperol,
+         'method': """Fill a cocktail shaker with ice. Add blood orange vodka, Aperol,
                          and lemon juice. Shake until cold. Strain into an ice-filled glass
                          and top off with soda. Garnish with lemon wheel and serve.""",
          'serves': 1,
@@ -323,7 +323,7 @@ def populate():
                         450g skinless white fish fillets,
                         175g peeled king prawns,
                         200g mussles""",
-         'instructions': """Heat oil in a pan with a lid. Add onion and cook until softened. Stir
+         'method': """Heat oil in a pan with a lid. Add onion and cook until softened. Stir
                          in garlic and paprika, cook for 2 mins, then pour in tomatoes and stock.
                          Season, bring to boil, and reduce to a simmer for 10 mins. Add fish and
                          continue to cook for 2 mins. And prawns and mussels, then cover and cook
@@ -347,7 +347,7 @@ def populate():
                         1 tsp olive oil,
                         1 slice of cooked ham,
                         sprig of fresh thyme""",
-         'instructions': """Beat egg yolks together with cheese and season with salt and pepper.
+         'method': """Beat egg yolks together with cheese and season with salt and pepper.
                          Whisk egg whites until just stiff and fold into the egg yolk mixture. Heat
                          the oil in a small non-stick pan and add the omelette mix. Cook until
                          golden underneath, and scatter with chopped ham. Place pan under a
@@ -576,7 +576,7 @@ def populate():
 
     for rec in recipes:
         add_recipe(rec['user'], rec['category'],rec['name'], rec['picture'],
-                   rec['description'], rec['ingredients'], rec['instructions'],
+                   rec['description'], rec['ingredients'], rec['method'],
                    rec['serves'], rec['spice'], rec['cooking_time'],
                    rec['is_vegetarian'],
                    rec['is_vegan'], rec['is_gluten_free'], rec['is_dairy_free'])
@@ -611,7 +611,7 @@ def add_category(name, picture):
     return c
 
 def add_recipe(username, category, name, picture, description, ingredients,
-               instructions, serves, spice, cooking_time,
+               method, serves, spice, cooking_time,
                is_vegetarian, is_vegan, is_gluten_free, is_dairy_free):
     
     user = User.objects.get(username=username)
@@ -620,7 +620,7 @@ def add_recipe(username, category, name, picture, description, ingredients,
     r = Recipe.objects.get_or_create(user=user, category=cat, name=name,
                                      picture=picture, description=description,
                                      ingredients=ingredients,
-                                     instructions=instructions, serves=serves,
+                                     method=method, serves=serves,
                                      spice=spice, cooking_time=cooking_time,
                                      is_vegetarian=is_vegetarian,
                                      is_vegan=is_vegan, is_gluten_free=is_gluten_free,

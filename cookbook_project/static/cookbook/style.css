@@ -262,7 +262,7 @@ p.widget_title {
 	width: 80%;
 }
 
-#instructions_section, #comment_section {
+#method_section, #comment_section {
 	border-style: solid none none none;
 	border-color: #4a4a4a;
 	border-width: 1px;

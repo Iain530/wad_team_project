@@ -66,7 +66,7 @@ class Recipe(models.Model):
     name = models.CharField(max_length=MAX_NAME_LENGTH)
     slug = models.SlugField() # name as slug
     description = models.CharField(max_length=MAX_DESC_LENGTH)
-    instructions = models.TextField(blank=True)             # Change field type
+    method = models.TextField(blank=True)             # Change field type
     ingredients = models.TextField(default="")
     spice = models.IntegerField(default=0)
     serves = models.PositiveSmallIntegerField()

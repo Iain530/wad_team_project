@@ -6,7 +6,7 @@
 {% endblock %}
 {% block body_block %}
 	<div class="recipe_list">
-	<h1><a class="link_no_underline" href="{% url 'cookbook:best-rated' %}">Best Rated</a></h1>
+	<h1><a href="{% url 'cookbook:best-rated' %}">Best Rated</a></h1>
 	{% if best_rated %}
 		{% for recipe in best_rated %}
 			{% include 'cookbook/include/recipe_detail.html' %}
@@ -17,7 +17,7 @@
 	</div>
 	
 	<div class="recipe_list">
-	<h1><a class="link_no_underline" href="{% url 'cookbook:newest-recipes' %}">New Recipes</a></h1>
+	<h1><a href="{% url 'cookbook:newest-recipes' %}">Newest Recipes</a></h1>
 	{% if new_recipes %}
 		{% for recipe in new_recipes %}
 			{% include 'cookbook/include/recipe_detail.html' %}

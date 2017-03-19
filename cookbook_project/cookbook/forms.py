@@ -16,8 +16,8 @@ class RecipeForm(forms.ModelForm):
     name = forms.CharField(max_length=Recipe.MAX_NAME_LENGTH,help_text="Recipe Name")
     description=forms.CharField(max_length=Recipe.MAX_DESC_LENGTH,
                                 help_text="Description", widget=forms.Textarea(attrs={'rows': 3, 'cols': 60}))
-    instructions = forms.CharField(max_length=Recipe.MAX_INS_LENGTH, 
-                                   help_text="Instructions",widget=forms.Textarea(attrs={'rows':15, 'cols': 60}))
+    method = forms.CharField(max_length=Recipe.MAX_INS_LENGTH, 
+                                   help_text="Method",widget=forms.Textarea(attrs={'rows':15, 'cols': 60}))
     serves = forms.IntegerField(min_value=1, max_value=999,
                                 help_text="Serves")
     picture = forms.FileField(label='Picture', required = False)
@@ -42,7 +42,7 @@ class RecipeForm(forms.ModelForm):
     
     class Meta:
         model = Recipe
-        fields = ('name', 'picture', 'category', 'description', 'ingredients', 'serves', 'cooking_time', 'spice', 'instructions', 
+        fields = ('name', 'picture', 'category', 'description', 'ingredients', 'serves', 'cooking_time', 'spice', 'method', 
                    'is_vegetarian', 'is_vegan', 'is_gluten_free','is_dairy_free',)
         
 
