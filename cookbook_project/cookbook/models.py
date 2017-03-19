@@ -108,12 +108,16 @@ class Recipe(models.Model):
 
                 # WEIGHTED RATING USED FOR BEST RATED
                 # Weighted rating will be > 0 if total rating is > 3.5
-                # and number of ratings is > 3. (will be increased when
+                # and number of ratings is > 3. (can be increased when
                 # database size increases)
-                if self.total_rating > 3.5 and self.no_of_ratings >= 3:
-                    self.weighted_rating = ((self.total_rating - 2.5)**2)*(self.no_of_ratings-2)
-                    print self.weighted_rating
-                    
+
+                # minimum rating to be included in best rated (between 0 and 5)
+                min_r = 3.5
+                # minimum number of ratings needed to be included in best rated
+                min_no = 3
+                
+                if self.total_rating > min_r and self.no_of_ratings >= min_no:
+                    self.weighted_rating = ((self.total_rating - min_r + 1)**2)*(self.no_of_ratings - min_no + 1)
                 else:
                     self.weighted_rating = 0
                 
