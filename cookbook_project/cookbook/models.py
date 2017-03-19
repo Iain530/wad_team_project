@@ -53,6 +53,7 @@ class Recipe(models.Model):
     views = models.PositiveIntegerField(default=0)
     total_rating = models.FloatField(default=0)
     no_of_ratings = models.PositiveIntegerField(default=0)
+    weighted_rating = models.FloatField(default=0)
     
     upload_date = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(null=True)
@@ -99,11 +100,27 @@ class Recipe(models.Model):
             self.no_of_ratings = len(all_ratings)
             if self.no_of_ratings > 0:
                 tot = 0.0
+                # find total
                 for r in all_ratings:
                     tot += r.value
+                # use total to get average rating
                 self.total_rating = tot / self.no_of_ratings
 
-                # TODO weighted rating here
+                # WEIGHTED RATING USED FOR BEST RATED
+                # Weighted rating will be > 0 if total rating is > 3.5
+                # and number of ratings is > 3. (can be increased when
+                # database size increases)
+
+                # minimum rating to be included in best rated (between 0 and 5)
+                min_r = 3.5
+                # minimum number of ratings needed to be included in best rated
+                min_no = 3
+                
+                if self.total_rating > min_r and self.no_of_ratings >= min_no:
+                    self.weighted_rating = ((self.total_rating - min_r + 1)**2)*(self.no_of_ratings - min_no + 1)
+                else:
+                    self.weighted_rating = 0
+                
             self.save()
             return rating.value
         else:

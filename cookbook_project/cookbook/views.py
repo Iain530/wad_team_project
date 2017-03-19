@@ -9,8 +9,6 @@ from django.contrib.auth.models import User
 from cookbook.models import Category, Recipe, Comment, Ingredient, Rating
 from cookbook.forms import UserForm, IngredientForm, RecipeForm, CommentForm
 from django.forms.models import model_to_dict
-# HAYSTACK IMPORTS
-#from haystack.query import SearchQuerySet
 
 
 #-HELPER-FUNCTIONS------------------------------------------------------
@@ -23,10 +21,7 @@ def username_check(request):
 
         if username:
             users = User.objects.filter(username=username)
-            if len(users) > 0:
-                available = False
-            else:
-                available = True
+            available = len(users) == 0
 
     return HttpResponse(available)
     
@@ -110,7 +105,7 @@ def save_recipe(request):
 
 def home(request):
     context_dict = {}
-    best_rated = Recipe.objects.order_by('-total_rating')[:5]
+    best_rated = Recipe.objects.filter(weighted_rating__gt=0).order_by('-weighted_rating')[:5]
     new_recipes = Recipe.objects.order_by('-upload_date')[:5]
     context_dict['best_rated'] = best_rated
     context_dict['new_recipes'] = new_recipes
@@ -248,19 +243,15 @@ def editrecipe(request, user, recipe_slug):
     if request.method == 'POST':
         None
     
-##    try:
-    print recipe
-    recipe = Recipe.objects.get(user=User.objects.get(username=user), slug=recipe_slug)
-    print recipe
-    print request.user
-    if request.user == recipe.user:
-        form = RecipeForm(initial=model_to_dict(recipe))
-        
-    else:
+    try:
+        recipe = Recipe.objects.get(user=User.objects.get(username=user), slug=recipe_slug)
+        if request.user == recipe.user:
+            form = RecipeForm(initial=model_to_dict(recipe))
+            
+        else:
+            recipe = None
+    except:
         recipe = None
-##    except:
-##        print 'error'
-##        recipe = None
 
     context_dict['recipe'] = recipe
     context_dict['recipe_form'] = form
@@ -380,7 +371,7 @@ def view_category(request, category_name):
 
 def bestrated(request):
     context_dict = {}
-    recipes = Recipe.objects.order_by('-total_rating')
+    recipes = Recipe.objects.filter(weighted_rating__gt=0).order_by('-total_rating')
     context_dict['recipes'] = recipes
     return render(request, 'cookbook/best_rated.html', context_dict)
 	
