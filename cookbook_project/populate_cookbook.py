@@ -4,7 +4,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cookbook_project.settings')
 
 import django
 django.setup()
-from cookbook.models import Recipe, Ingredient, Comment, Category, Rating
+from cookbook.models import Recipe, Comment, Category, Rating
 from django.contrib.auth.models import User
 
 
@@ -47,16 +47,24 @@ def populate():
     ]
 
     recipes = [
+        # TOFU CURRY
         {'user': 'HummusLover123',
          'category': 'Mains',
          'name': 'Tofu Curry',
          'picture': os.path.join('recipe_images', 'HummusLover123', 'tofu-curry.jpg'),
          'description': "Curried tofu made with coconut milk.",
+         'ingredients': """500g tofu,
+                        pinch of salt,
+                        20g butter,
+                        2 onions,
+                        clove of garlic,
+                        1/4 pint of coconut milk,
+                        2 tbsp curry powder""",
          'instructions': """1. Heat oil in a large skillet over medium-high heat. Add tofu cubes, 
                          season with seasoned salt and fry until golden on all sides, stirring occasionally
                          , about 15 minutes. Remove to paper towels, and set aside 
                          2. Melt butter or margarine in the same skillet over medium heat. Add the onion and garlic; 
-                         cook and stir until tender.Stir in coconut milk, curry powder, salt, 
+                         cook and stir until tender. Stir in coconut milk, curry powder, salt, 
                          pepper and cilantro. Return the tofu to the skillet. Simmer over low 
                          heat for 15 minutes, stirring occasionally.""",
          'serves': 4,
@@ -66,11 +74,15 @@ def populate():
          'is_vegan': True,
          'is_gluten_free': False,
          'is_dairy_free': True},
+        # ROAST BEEF
         {'user': 'HealthyDad',
          'category': 'Snacks',
          'name': 'Roast Beef',
          'picture': os.path.join('recipe_images', 'HealthyDad', 'roast-beef.jpg'),
          'description': "A simple way to roast topside of beef to ensure it's super succulent, every time.",
+         'ingredients': """14oz beef,
+                        mixed vegetables,
+                        100g gravy granules""",
          'instructions': """Drizzle the beef with oil and season well with sea salt 
                          and black pepper, then rub all over the meat. Place the beef on top of
                          the vegetables. Place the tray in the oven, then turn the heat down
@@ -82,11 +94,18 @@ def populate():
          'is_vegan': False,
          'is_gluten_free': True,
          'is_dairy_free': True},
+        # GREEN SMOOTHIE
         {'user': 'HummusLover123',
          'category': 'Drinks',
          'name': 'Green Smoothie',
          'picture': os.path.join('recipe_images', 'HummusLover123', 'green-smoothie.jpg'),
          'description': "A sweet smoothie with nutricious ingredients.",
+         'ingredients': """250ml almond milk,
+                        small banana,
+                        1 tbsp ground flaxseed,
+                        a pinch of cinnamon,
+                        a handful of spinach,
+                        1 tbsp almond butter""",
          'instructions': """Pour the milk into a high-speed blender then add the ground 
                          flaxseed and the cinnamon. Add the remaining ingredients then 
                          blitz until smooth. Pour into glasses and serve.""",
@@ -97,11 +116,19 @@ def populate():
          'is_vegan': True,
          'is_gluten_free': False,
          'is_dairy_free': True},
+        # SWEET POTATO AND CARROT SOUP
         {'user': 'MaggiesMeals',
          'category': 'Starters',
          'name': 'Sweet Potato and Carrot Soup',
          'picture': os.path.join('recipe_images', 'MaggiesMeals', 'sweet-potato-and-carrot-soup.jpg'),
          'description': "Silky smooth soup, perfect for a dinner party.",
+         'ingredients': """500g sweet potato,
+                        300g carrot,
+                        3 tbsp olive oil,
+                        2 onions,
+                        1 large vegetable stock,
+                        100ml creme fraiche,
+                        2 garlic cloves""",
          'instructions': """Heat oven to 220C and put sweet potato and carrots into large
                          roasting tin with seasoning and oil. Roast the veg for 25 mins til
                          tender. Fry the onion in a saucepan until soft and then add garlic.
@@ -115,11 +142,19 @@ def populate():
          'is_vegan': False,
          'is_gluten_free': True,
          'is_dairy_free': False},
+        # WONDERFUL APPLE PIE
         {'user': 'CookingGranny',
          'category': 'Desserts',
          'name': 'Wonderful Apple Pie',
          'picture': os.path.join('recipe_images', 'CookingGranny', 'wonderful-apple-pie.jpg'),
          'description': "A traditional apple pie that the whole family is sure to love.",
+         'ingredients': """1kg cooking apples,
+                        140g caster sugar,
+                        1/2 tbsp cinnamon,
+                        3 tbsp flour (for filling),
+                        225g butter,
+                        2 eggs,
+                        350g flour (for pastry)""",
          'instructions': """Slice apples and lay on a large baking sheet. Beat butter and sugar
                          into a large bowl. Break in a whole egg and a yolk (keep the white).
                          Beat this mix until it looks like scrambled egg. Work in flour for
@@ -139,11 +174,17 @@ def populate():
          'is_vegan': False,
          'is_gluten_free': False,
          'is_dairy_free': False},
+        # CHEESE AND BACON SANDWICH
         {'user': 'BaconIsBest',
          'category': 'Lunches',
          'name': 'Cheese and Bacon Sandwich',
          'picture': os.path.join('recipe_images', 'BaconIsBest', 'cheese-and-bacon-sandwich.jpg'),
          'description': "Fantastic cheese and bacon sandwich. Truly the best!",
+         'ingredients': """8 slices bacon,
+                        1 onion,
+                        4 slices cheddar cheese,
+                        4 slices mozzarella cheese,
+                        8 slices bread""",   
          'instructions': """Heat grill for 5 minutes. Grill bacon until browned, drain on
                          papertowels and cut in half crosswise. Grill onion until tender.
                          Take bread and layer Cheddar cheese, bacon, onion, and mozzarella
@@ -156,11 +197,28 @@ def populate():
          'is_vegan': False,
          'is_gluten_free': False,
          'is_dairy_free': False},
+        # CURRIED VEGETABLE PIE
         {'user': 'HealthyDad',
          'category': 'Mains',
          'name': 'Curried Vegetable Pie',
          'picture': os.path.join('recipe_images', 'HealthyDad', 'curried-vegetable-pie.jpg'),
          'description': "A tasty vegetable pie with a spicy kick.",
+         'ingredients': """2 tbsp sunflower oil,
+                        1 onion,
+                        2 garlic cloves,
+                        1 green chilli,
+                        1 tbsp garam masala,
+                        1 tsp ground cumin,
+                        2 carrots,
+                        1 parsnip,
+                        225g courgette,
+                        75g peas,
+                        25g butter,
+                        25g plain flour,
+                        4 tbsp Greek-style yoghurt,
+                        3 tbsp corriander,
+                        shortcrust pasrty (enough to cover pie),
+                        1 tbsp milk""",
          'instructions': """Heat oven to 200C. Heat oil in large pan and cook onion, garlic
                          and chilli until tender. Stir in garam masala, tumeric and cumin,
                          and cook for 2-3 mins. Add carrots, parsnip, cauliflower and courgette
@@ -181,11 +239,18 @@ def populate():
          'is_vegan': False,
          'is_gluten_free': False,
          'is_dairy_free': False},
+        # HUMBLE PIE
         {'user': 'BaconIsBest',
          'category': 'Drinks',
          'name': 'Humble Pie',
          'picture': os.path.join('recipe_images', 'BaconIsBest', 'humble-pie.jpg'),
          'description': "A refreshing orange cocktail.",
+         'ingredients': """lots of ice,
+                        40ml blood orange vodka,
+                        20ml Aperol,
+                        dash of lemonjuice,
+                        soda water,
+                        1 lemon wheel""",
          'instructions': """Fill a cocktail shaker with ice. Add blood orange vodka, Aperol,
                          and lemon juice. Shake until cold. Strain into an ice-filled glass
                          and top off with soda. Garnish with lemon wheel and serve.""",
@@ -196,11 +261,21 @@ def populate():
          'is_vegan': True,
          'is_gluten_free': True,
          'is_dairy_free': True},
+        # SEAFOOD STEW
         {'user': 'MrFish',
          'category': 'Mains',
          'name': 'Seafood Stew',
          'picture': os.path.join('recipe_images', 'MrFish', 'seafood-stew.jpg'),
          'description': "All of your favourite fish in one fantastic dish.",
+         'ingredients': """1 tbsp olive oil,
+                        1 onion,
+                        1 garlic clove,
+                        1 1/2 tbsp paprika,
+                        400g tinned chopped tomatoes,
+                        600ml chicken stock,
+                        450g skinless white fish fillets,
+                        175g peeled king prawns,
+                        200g mussles""",
          'instructions': """Heat oil in a pan with a lid. Add onion and cook until softened. Stir
                          in garlic and paprika, cook for 2 mins, then pour in tomatoes and stock.
                          Season, bring to boil, and reduce to a simmer for 10 mins. Add fish and
@@ -213,291 +288,27 @@ def populate():
          'is_vegan': False,
          'is_gluten_free': True,
          'is_dairy_free': True},
-        {'user': 'MaggiesMeals',
-         'category': 'Lunches',
-         'name': 'Cheese and Ham Omelette',
-         'picture': os.path.join('recipe_images', 'MaggiesMeals', 'cheese-and-ham-omelette.jpg'),
-         'description': "A simple omelette that makes for a quick, cheap lunch.",
-         'instructions': """Beat egg yolks together with cheese and season with salt and pepper.
-                         Whisk egg whites until just stiff and fold into the egg yolk mixture. Heat
-                         the oil in a small non-stick pan and add the omelette mix. Cook until
-                         golden underneath, and scatter with chopped ham. Place pan under a
-                         pre-heated grill until the omelette starts to rise and is set. Slide onto
-                         a plate, fold in half and serve.""",
-         'serves': 1,
-         'spice': 0,
-         'cooking_time': 10,
-         'is_vegetarian': False,
-         'is_vegan': False,
-         'is_gluten_free': True,
-         'is_dairy_free': False},
-    ]
-
-    ingredients = [
-        {'recipe_name': 'Tofu Curry',
-         'recipe_author': 'HummusLover123',
-         'name': 'tofu',
-         'quantity': '500g'},
-        {'recipe_name': 'Tofu Curry',
-         'recipe_author': 'HummusLover123',
-         'name': 'salt',
-         'quantity': 'pinch of'},
-        {'recipe_name': 'Tofu Curry',
-         'recipe_author': 'HummusLover123',
-         'name': 'curry powder',
-         'quantity': '2 tablespoons'},
-        {'recipe_name': 'Tofu Curry',
-         'recipe_author': 'HummusLover123',
-         'name': 'chickpeas',
-         'quantity': '200g'},
-        {'recipe_name': 'Roast Beef',
-         'recipe_author': 'HealthyDad',
-         'name': 'beef',
-         'quantity': '16oz'},
-        {'recipe_name': 'Roast Beef',
-         'recipe_author': 'HealthyDad',
-         'name': 'salt',
-         'quantity': 'big pinch'},
-        {'recipe_name': 'Green Smoothie',
-         'recipe_author': 'HummusLover123',
-         'name': 'almond milk',
-         'quantity': '250ml'},
-        {'recipe_name': 'Green Smoothie',
-         'recipe_author': 'HummusLover123',
-         'name': 'banana',
-         'quantity': 'a small one'},
-        {'recipe_name': 'Green Smoothie',
-         'recipe_author': 'HummusLover123',
-         'name': 'ground flaxseed',
-         'quantity': '1 tbsp'},
-        {'recipe_name': 'Green Smoothie',
-         'recipe_author': 'HummusLover123',
-         'name': 'cinnamon',
-         'quantity': 'a pinch'},
-        {'recipe_name': 'Green Smoothie',
-         'recipe_author': 'HummusLover123',
-         'name': 'spinach',
-         'quantity': 'a handful'},
-        {'recipe_name': 'Green Smoothie',
-         'recipe_author': 'HummusLover123',
-         'name': 'almond butter',
-         'quantity': '1 tbsp'},
-        {'recipe_name': 'Sweet Potato and Carrot Soup',
-         'recipe_author': 'MaggiesMeals',
-         'name': 'sweet potato',
-         'quantity': '500g'},
-        {'recipe_name': 'Sweet Potato and Carrot Soup',
-         'recipe_author': 'MaggiesMeals',
-         'name': 'carrot',
-         'quantity': '300g'},
-        {'recipe_name': 'Sweet Potato and Carrot Soup',
-         'recipe_author': 'MaggiesMeals',
-         'name': 'olive oil',
-         'quantity': '3 tbsp'},
-        {'recipe_name': 'Sweet Potato and Carrot Soup',
-         'recipe_author': 'MaggiesMeals',
-         'name': 'onion',
-         'quantity': '2'},
-        {'recipe_name': 'Sweet Potato and Carrot Soup',
-         'recipe_author': 'MaggiesMeals',
-         'name': 'vegetable stock',
-         'quantity': '1 large'},
-        {'recipe_name': 'Sweet Potato and Carrot Soup',
-         'recipe_author': 'MaggiesMeals',
-         'name': 'creme fraiche',
-         'quantity': '100ml'},
-        {'recipe_name': 'Sweet Potato and Carrot Soup',
-         'recipe_author': 'MaggiesMeals',
-         'name': 'garlic cloves',
-         'quantity': '2'},
-        {'recipe_name': 'Wonderful Apple Pie',
-         'recipe_author': 'CookingGranny',
-         'name': 'cooking apples',
-         'quantity': '1kg'},
-        {'recipe_name': 'Wonderful Apple Pie',
-         'recipe_author': 'CookingGranny',
-         'name': 'caster sugar',
-         'quantity': '140g'},
-        {'recipe_name': 'Wonderful Apple Pie',
-         'recipe_author': 'CookingGranny',
-         'name': 'cinnamon',
-         'quantity': '1/2 tsp'},
-        {'recipe_name': 'Wonderful Apple Pie',
-         'recipe_author': 'CookingGranny',
-         'name': 'flour (for filling)',
-         'quantity': '3 tbsp'},
-        {'recipe_name': 'Wonderful Apple Pie',
-         'recipe_author': 'CookingGranny',
-         'name': 'butter',
-         'quantity': '225g'},
-        {'recipe_name': 'Wonderful Apple Pie',
-         'recipe_author': 'CookingGranny',
-         'name': 'egg',
-         'quantity': '2'},
-        {'recipe_name': 'Wonderful Apple Pie',
-         'recipe_author': 'CookingGranny',
-         'name': 'flour (for pastry)',
-         'quantity': '350g'},
-        {'recipe_name': 'Cheese and Bacon Sandwich',
-         'recipe_author': 'BaconIsBest',
-         'name': 'bacon',
-         'quantity': '8 slices'},
-        {'recipe_name': 'Cheese and Bacon Sandwich',
-         'recipe_author': 'BaconIsBest',
-         'name': 'bacon',
-         'quantity': '8 slices'},
-        {'recipe_name': 'Cheese and Bacon Sandwich',
-         'recipe_author': 'BaconIsBest',
-         'name': 'onion',
-         'quantity': '1'},
-        {'recipe_name': 'Cheese and Bacon Sandwich',
-         'recipe_author': 'BaconIsBest',
-         'name': 'Cheddar cheese',
-         'quantity': '4 slices'},
-        {'recipe_name': 'Cheese and Bacon Sandwich',
-         'recipe_author': 'BaconIsBest',
-         'name': 'mozzarella',
-         'quantity': '4 slices'},
-        {'recipe_name': 'Cheese and Bacon Sandwich',
-         'recipe_author': 'BaconIsBest',
-         'name': 'bread',
-         'quantity': '8 slices'},
-        {'recipe_name': 'Curried Vegetable Pie',
-         'recipe_author': 'HealthyDad',
-         'name': 'sunflower oil',
-         'quantity': '2 tbsp'},
-        {'recipe_name': 'Curried Vegetable Pie',
-         'recipe_author': 'HealthyDad',
-         'name': 'onion',
-         'quantity': '1'},
-        {'recipe_name': 'Curried Vegetable Pie',
-         'recipe_author': 'HealthyDad',
-         'name': 'garlic clove',
-         'quantity': '2'},
-        {'recipe_name': 'Curried Vegetable Pie',
-         'recipe_author': 'HealthyDad',
-         'name': 'green chili',
-         'quantity': '1'},
-        {'recipe_name': 'Curried Vegetable Pie',
-         'recipe_author': 'HealthyDad',
-         'name': 'garam masala',
-         'quantity': '1 tbsp'},
-        {'recipe_name': 'Curried Vegetable Pie',
-         'recipe_author': 'HealthyDad',
-         'name': 'tumeric',
-         'quantity': '1 tsp'},
-        {'recipe_name': 'Curried Vegetable Pie',
-         'recipe_author': 'HealthyDad',
-         'name': 'ground cumin',
-         'quantity': '1 tsp'},
-        {'recipe_name': 'Curried Vegetable Pie',
-         'recipe_author': 'HealthyDad',
-         'name': 'carrot',
-         'quantity': '2'},
-        {'recipe_name': 'Curried Vegetable Pie',
-         'recipe_author': 'HealthyDad',
-         'name': 'parsnip',
-         'quantity': '1'},
-        {'recipe_name': 'Curried Vegetable Pie',
-         'recipe_author': 'HealthyDad',
-         'name': 'cauliflower floret',
-         'quantity': '225g'},
-        {'recipe_name': 'Curried Vegetable Pie',
-         'recipe_author': 'HealthyDad',
-         'name': 'courgette',
-         'quantity': '1'},
-        {'recipe_name': 'Curried Vegetable Pie',
-         'recipe_author': 'HealthyDad',
-         'name': 'peas',
-         'quantity': '75g'},
-        {'recipe_name': 'Curried Vegetable Pie',
-         'recipe_author': 'HealthyDad',
-         'name': 'butter',
-         'quantity': '25g'},
-        {'recipe_name': 'Curried Vegetable Pie',
-         'recipe_author': 'HealthyDad',
-         'name': 'plain flour',
-         'quantity': '25g'},
-        {'recipe_name': 'Curried Vegetable Pie',
-         'recipe_author': 'HealthyDad',
-         'name': 'Greek-style yoghurt',
-         'quantity': '4 tbsp'},
-        {'recipe_name': 'Curried Vegetable Pie',
-         'recipe_author': 'HealthyDad',
-         'name': 'coriander',
-         'quantity': '3 tbsp'},
-        {'recipe_name': 'Curried Vegetable Pie',
-         'recipe_author': 'HealthyDad',
-         'name': 'shortcrust pastry',
-         'quantity': 'enough to cover pie'},
-        {'recipe_name': 'Curried Vegetable Pie',
-         'recipe_author': 'HealthyDad',
-         'name': 'milk',
-         'quantity': '1 tbsp'},
-        {'recipe_name': 'Humble Pie',
-         'recipe_author': 'BaconIsBest',
-         'name': 'ice',
-         'quantity': 'lots'},
-        {'recipe_name': 'Humble Pie',
-         'recipe_author': 'BaconIsBest',
-         'name': 'blood orange vodka',
-         'quantity': '1 ounce'},
-        {'recipe_name': 'Humble Pie',
-         'recipe_author': 'BaconIsBest',
-         'name': 'Aperol',
-         'quantity': '1 once'},
-        {'recipe_name': 'Humble Pie',
-         'recipe_author': 'BaconIsBest',
-         'name': 'lemon juice',
-         'quantity': '1/4 once'},
-        {'recipe_name': 'Humble Pie',
-         'recipe_author': 'BaconIsBest',
-         'name': 'soda water',
-         'quantity': 'enough to top off glass'},
-        {'recipe_name': 'Humble Pie',
-         'recipe_author': 'BaconIsBest',
-         'name': 'lemon wheel',
-         'quantity': '1'},
-        {'recipe_name': 'Seafood Stew',
-         'recipe_author': 'MrFish',
-         'name': 'olive oil',
-         'quantity': '1 tbsp'},
-        {'recipe_name': 'Seafood Stew',
-         'recipe_author': 'MrFish',
-         'name': 'onion',
-         'quantity': '1'},
-        {'recipe_name': 'Seafood Stew',
-         'recipe_author': 'MrFish',
-         'name': 'garlic clove',
-         'quantity': '1'},
-        {'recipe_name': 'Seafood Stew',
-         'recipe_author': 'MrFish',
-         'name': 'paprika',
-         'quantity': '1 1/2 tsp'},
-        {'recipe_name': 'Seafood Stew',
-         'recipe_author': 'MrFish',
-         'name': 'tinned chopped tomatoes',
-         'quantity': '400g'},
-        {'recipe_name': 'Seafood Stew',
-         'recipe_author': 'MrFish',
-         'name': 'chicken stock',
-         'quantity': '600ml'},
-        {'recipe_name': 'Seafood Stew',
-         'recipe_author': 'MrFish',
-         'name': 'skinless white fish fillets',
-         'quantity': '450g'},
-        {'recipe_name': 'Seafood Stew',
-         'recipe_author': 'MrFish',
-         'name': 'peeled king prawns',
-         'quantity': '175g'},
-        {'recipe_name': 'Seafood Stew',
-         'recipe_author': 'MrFish',
-         'name': 'mussles',
-         'quantity': '200g'},
-        {'recipe_name': 'Cheese and Ham Omelette',
-         'recipe_author': 'MaggiesMeals',
-         'name': 'egg',
-         'quantity': '2'},
+        # CHEESE AND HAM OMELETTE
+##        {'user': 'MaggiesMeals',
+##         'category': 'Lunches',
+##         'name': 'Cheese and Ham Omelette',
+##         'picture': os.path.join('recipe_images', 'MaggiesMeals', 'cheese-and-ham-omelette.jpg'),
+##         'description': "A simple omelette that makes for a quick, cheap lunch.",
+##         'ingredients': """2 eggs,
+##                        """,
+##         'instructions': """Beat egg yolks together with cheese and season with salt and pepper.
+##                         Whisk egg whites until just stiff and fold into the egg yolk mixture. Heat
+##                         the oil in a small non-stick pan and add the omelette mix. Cook until
+##                         golden underneath, and scatter with chopped ham. Place pan under a
+##                         pre-heated grill until the omelette starts to rise and is set. Slide onto
+##                         a plate, fold in half and serve.""",
+##         'serves': 1,
+##         'spice': 0,
+##         'cooking_time': 10,
+##         'is_vegetarian': False,
+##         'is_vegan': False,
+##         'is_gluten_free': True,
+##         'is_dairy_free': False},
     ]
 
     comments = [
@@ -550,14 +361,10 @@ def populate():
 
     for rec in recipes:
         add_recipe(rec['user'], rec['category'],rec['name'], rec['picture'],
-                   rec['description'], rec['instructions'],
+                   rec['description'], rec['ingredients'], rec['instructions'],
                    rec['serves'], rec['spice'], rec['cooking_time'],
                    rec['is_vegetarian'],
                    rec['is_vegan'], rec['is_gluten_free'], rec['is_dairy_free'])
-
-    for ing in ingredients:
-        add_ingredient(ing['recipe_name'], ing['recipe_author'], ing['name'],
-                       ing['quantity'])
 
     for com in comments:
         add_comment(com['username'], com['recipe_name'], com['recipe_author'],
@@ -574,7 +381,7 @@ def populate():
     # print users and their recipes
     for u in User.objects.all():
         for r in Recipe.objects.filter(user=u):
-            print("- {0} - {1}".format(str(u), str(r)))
+            print("- {0} - {1} - {2} ({3}) - {4} comments".format(str(u), str(r), r.total_rating, r.no_of_ratings, len(Comment.objects.filter(recipe=r))))
 
 def add_user(username, email, password):
     if not User.objects.filter(username=username):
@@ -588,8 +395,8 @@ def add_category(name, picture):
     c.save()
     return c
 
-def add_recipe(username, category, name, picture, description, instructions, serves,
-               spice, cooking_time,
+def add_recipe(username, category, name, picture, description, ingredients,
+               instructions, serves, spice, cooking_time,
                is_vegetarian, is_vegan, is_gluten_free, is_dairy_free):
     
     user = User.objects.get(username=username)
@@ -597,6 +404,7 @@ def add_recipe(username, category, name, picture, description, instructions, ser
         
     r = Recipe.objects.get_or_create(user=user, category=cat, name=name,
                                      picture=picture, description=description,
+                                     ingredients=ingredients,
                                      instructions=instructions, serves=serves,
                                      spice=spice, cooking_time=cooking_time,
                                      is_vegetarian=is_vegetarian,
@@ -606,13 +414,6 @@ def add_recipe(username, category, name, picture, description, instructions, ser
     r.save()
     return r
 
-def add_ingredient(recipe_name, recipe_author, name, quantity):
-    user = User.objects.get(username=recipe_author)
-    recipe = Recipe.objects.get(user=user, name=recipe_name)
-
-    i = Ingredient.objects.get_or_create(recipe=recipe, name=name, quantity=quantity)[0]
-    i.save()
-    return i
 
 def add_comment(username, recipe_name, recipe_author, text):
     user = User.objects.get(username=username)

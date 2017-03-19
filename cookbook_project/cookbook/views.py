@@ -6,8 +6,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 # COOKBOOK IMPORTS
-from cookbook.models import Category, Recipe, Comment, Ingredient, Rating
-from cookbook.forms import UserForm, IngredientForm, RecipeForm, CommentForm
+from cookbook.models import Category, Recipe, Comment, Rating
+from cookbook.forms import UserForm, RecipeForm, CommentForm
 from django.forms.models import model_to_dict
 
 
@@ -305,9 +305,6 @@ def view_recipe(request, user, recipe_slug):
                 recipe.views += 1
                 recipe.save()
 
-            # get the recipes ingredients
-            ingredients = Ingredient.objects.filter(recipe=recipe)
-
             # get the recipes comments
             comments = Comment.objects.filter(recipe=recipe).order_by('-upload_date')
 
@@ -326,7 +323,6 @@ def view_recipe(request, user, recipe_slug):
                 rating = None
             
             context_dict['recipe'] = recipe
-            context_dict['ingredients'] = ingredients
             context_dict['comments'] = comments
             context_dict['saved'] = saved
             context_dict['commentForm'] = CommentForm()
@@ -334,7 +330,6 @@ def view_recipe(request, user, recipe_slug):
 
         except (User.DoesNotExist, Recipe.DoesNotExist):
             context_dict['recipe'] = None
-            context_dict['ingredients'] = None
             context_dict['comments'] = None
             context_dict['saved'] = None
             context_dict['commentForm'] = None

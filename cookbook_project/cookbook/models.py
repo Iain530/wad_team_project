@@ -153,17 +153,6 @@ class Recipe(models.Model):
 
     class Meta:
         unique_together = ('user', 'slug')
-
-class Ingredient(models.Model):
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-
-    name = models.CharField(max_length=64)
-    quantity = models.CharField(max_length=64)
-
-    def __str__(self):
-        return self.name
-    def __unicode__(self):
-        return self.name
 	
 class Comment(models.Model):
     MAX_COMMENT_LENGTH = 512

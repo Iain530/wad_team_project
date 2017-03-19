@@ -74,12 +74,14 @@
 		cooking time: {{ recipe.cooking_time }} minutes</br>
 		</div>
 		
+		<div id="ingredients">
 		<h3>Ingredients</h3>
 		{% if recipe.ingredients %}
 			{{ recipe.ingredients }}
 		{% else %}
 			No ingredients!
 		{% endif %}
+		</div>
 		
 		<div class="dietary_info">
 			{% if recipe.is_gluten_free %}

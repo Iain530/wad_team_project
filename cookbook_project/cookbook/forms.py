@@ -1,5 +1,5 @@
 from django import forms
-from cookbook.models import Category, Recipe, Ingredient, Comment
+from cookbook.models import Category, Recipe, Comment
 from django.contrib.auth.models import User
 
 
@@ -46,12 +46,6 @@ class RecipeForm(forms.ModelForm):
                   'description', 'spice', 'is_vegetarian', 'is_vegan', 'is_gluten_free','is_dairy_free',)
         
 
-
-class IngredientForm(forms.ModelForm):
-
-    class Meta:
-        model = Ingredient
-        fields = ('quantity', 'name',)
 
 
 class CommentForm(forms.ModelForm):
