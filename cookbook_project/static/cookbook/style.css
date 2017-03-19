@@ -227,7 +227,9 @@ button:hover, input[type=button]:hover, input[type=submit]:hover {
 /* VIEW RECIPE ------------------------ */
 
 #save_button_holder {
-	float: right;
+	position: absolute;
+	top: 40px;
+	right: 40px;
 	margin: 0 20px;
 }
 
@@ -330,7 +332,7 @@ button:hover, input[type=button]:hover, input[type=submit]:hover {
 /* UPLOAD RECIPE---------------------------------- */
 
 #recipe_form_holder {
-	width: 60%;
+	width: 80%;
 	margin: 0 auto;
 	overflow: auto;
 	background: #4a4a4a;
@@ -338,18 +340,32 @@ button:hover, input[type=button]:hover, input[type=submit]:hover {
 	border:1px solid #f2f2f2;
 }
 
-#recipe_form > input:not([type=submit]) {
-	display: inline-block;
+#recipe_form input:not([type=submit]),
+#recipe_form select,
+#recipe_form textarea {
 	float: left;
+	clear: right;
+	text-align: left;
+}
+
+#recipe_form label {
+	margin-right:40px;
+	width: 15%;
+	float: left;
+	clear: left;
+    text-align: right;
+}
+
+#recipe_form p {
+	overflow: auto;
+}
+
+#recipe_form span {
+	display: none;
 }
 
 .recipe_label {
-	margin-right:15px;
-	display: inline-block;
-    float: left;
-    clear: left;
-	width: 20%;
-    text-align: right;
+
 }
 
 
@@ -390,7 +406,9 @@ button:hover, input[type=button]:hover, input[type=submit]:hover {
 }
 
 #star_rating_holder {
-	display: inline-block;
+	position: absolute;
+	top: 30px;
+	right: 150px;
 	font-size:15px;
 	float: right;
 }

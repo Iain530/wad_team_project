@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 # COOKBOOK IMPORTS
 from cookbook.models import Category, Recipe, Comment, Ingredient, Rating
 from cookbook.forms import UserForm, IngredientForm, RecipeForm, CommentForm
+from django.forms.models import model_to_dict
 # HAYSTACK IMPORTS
 #from haystack.query import SearchQuerySet
 
@@ -235,15 +236,36 @@ def uploadrecipe(request):
             print(form.errors)
 
     context_dict['recipe_form'] = recipe_form
-    return render(request, 'cookbook/upload-recipe.html', context_dict)
+    return render(request, 'cookbook/uploadrecipe.html', context_dict)
 
 
 @login_required
-def edit_recipe(request, user, recipe_slug):
+def editrecipe(request, user, recipe_slug):
     context_dict = {}
-    recipe = Recipe.objects.get(user=user, slug=recipe_slug)
-    return HttpResponse('edit')
+    recipe = None
+    form = None
+
+    if request.method == 'POST':
+        None
     
+##    try:
+    print recipe
+    recipe = Recipe.objects.get(user=User.objects.get(username=user), slug=recipe_slug)
+    print recipe
+    print request.user
+    if request.user == recipe.user:
+        form = RecipeForm(initial=model_to_dict(recipe))
+        
+    else:
+        recipe = None
+##    except:
+##        print 'error'
+##        recipe = None
+
+    context_dict['recipe'] = recipe
+    context_dict['recipe_form'] = form
+    
+    return render(request, 'cookbook/editrecipe.html', context_dict)
     
 
 

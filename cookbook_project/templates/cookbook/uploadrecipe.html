@@ -1,0 +1,19 @@
+{% extends 'cookbook/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+- Upload a Recipe
+{% endblock %}
+
+{% block body_block %}
+	<h1>Upload a New Recipe</h1>
+	<div id="recipe_form_holder">
+		<form enctype="multipart/form-data" id="recipe_form" method="post" action="{% url 'cookbook:upload-recipe' %}">
+			{% csrf_token %}
+			{{ recipe_form.as_p }}
+			<div class="button_wrapper">
+				<input type="submit" value="Upload" />
+			</div>
+		</form>
+	</div>
+	
+{% endblock %}

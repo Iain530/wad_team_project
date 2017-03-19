@@ -15,22 +15,24 @@ class UserForm(forms.ModelForm):
 class RecipeForm(forms.ModelForm):
     name = forms.CharField(max_length=Recipe.MAX_NAME_LENGTH,help_text="Recipe Name")
     description=forms.CharField(max_length=Recipe.MAX_DESC_LENGTH,
-    						 help_text="Description", widget=forms.Textarea(attrs={'rows': 3}))
+                                help_text="Description", widget=forms.Textarea(attrs={'rows': 3}))
     instructions = forms.CharField(max_length=Recipe.MAX_INS_LENGTH, 
-    					   help_text="Instructions",widget=forms.Textarea)
+                                   help_text="Instructions",widget=forms.Textarea)
     serves = forms.IntegerField(min_value=1, max_value=32767,
                                 help_text="Serves")
-    picture = forms.FileField(label='Select a file', required = False)
+    picture = forms.FileField(label='Picture', required = False)
     spice = forms.IntegerField(min_value=0, max_value=5, help_text="Spice")
     cooking_time = forms.IntegerField(min_value=1,
-                                      help_text="Cooking time (minutes)")
+                                      help_text="Cooking time (minutes)",
+                                      label="Cooking time (minutes)")
     ingredients = forms.CharField(max_length=Recipe.MAX_INS_LENGTH,
-                                      help_text="Ingredients", widget=forms.Textarea)
+                                  help_text="Ingredients", widget=forms.Textarea)
     category = forms.ModelChoiceField(queryset= Category.objects.all(), required=True, help_text="Category")
-    is_vegetarian = forms.BooleanField(required=False,help_text="Vegetarian" )
-    is_vegan = forms.BooleanField(required=False, help_text="Vegan")
-    is_gluten_free = forms.BooleanField(required=False, help_text="Gluten Free")
-    is_dairy_free = forms.BooleanField(required=False,help_text="Dairy Free")
+    
+    is_vegetarian = forms.BooleanField(required=False,label="Vegetarian" )
+    is_vegan = forms.BooleanField(required=False, label="Vegan")
+    is_gluten_free = forms.BooleanField(required=False, label="Gluten Free")
+    is_dairy_free = forms.BooleanField(required=False, label="Dairy Free")
 
     SPICE_SET = [(0, 'Not Spicy'),
                  (1, 'Mild'),
