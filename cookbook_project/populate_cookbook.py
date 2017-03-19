@@ -213,6 +213,24 @@ def populate():
          'is_vegan': False,
          'is_gluten_free': True,
          'is_dairy_free': True},
+        {'user': 'MaggiesMeals',
+         'category': 'Lunches',
+         'name': 'Cheese and Ham Omelette',
+         'picture': os.path.join('recipe_images', 'MaggiesMeals', 'cheese-and-ham-omelette.jpg'),
+         'description': "A simple omelette that makes for a quick, cheap lunch.",
+         'instructions': """Beat egg yolks together with cheese and season with salt and pepper.
+                         Whisk egg whites until just stiff and fold into the egg yolk mixture. Heat
+                         the oil in a small non-stick pan and add the omelette mix. Cook until
+                         golden underneath, and scatter with chopped ham. Place pan under a
+                         pre-heated grill until the omelette starts to rise and is set. Slide onto
+                         a plate, fold in half and serve.""",
+         'serves': 1,
+         'spice': 0,
+         'cooking_time': 10,
+         'is_vegetarian': False,
+         'is_vegan': False,
+         'is_gluten_free': True,
+         'is_dairy_free': False},
     ]
 
     ingredients = [
@@ -476,6 +494,10 @@ def populate():
          'recipe_author': 'MrFish',
          'name': 'mussles',
          'quantity': '200g'},
+        {'recipe_name': 'Cheese and Ham Omelette',
+         'recipe_author': 'MaggiesMeals',
+         'name': 'egg',
+         'quantity': '2'},
     ]
 
     comments = [
