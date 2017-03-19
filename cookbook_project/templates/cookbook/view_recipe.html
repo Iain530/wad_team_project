@@ -30,6 +30,7 @@
 		
 		<div id="save_button_holder">
 		{% if user.is_authenticated %}
+		<p class="widget_title"></p>
 		<button id="save_button" data-slug="{{ recipe.slug }}" data-user="{{ recipe.user }}"
 		class="btn btn-primary btn-sm" type="button">
 		{% if saved %}
@@ -43,7 +44,7 @@
 		
 		{% if user.is_authenticated and user != recipe.user %}
 		<div id="star_rating_holder">
-			<p id="rate_this">Rate this recipe:</p>
+			<p class="widget_title">Rate this recipe:</p>
 			<div class="stars" data-initial="{{ rating }}">
 			  <form action="">
 				<input data-recipe_id="{{ recipe.id }}" data-value="5" class="star star-5" id="star-5" type="radio" name="star"/>
@@ -60,10 +61,6 @@
 			</div>
 		</div>
 		{% endif %}
-		
-		
-	
-
 
 		<div id="view_recipe_desc">
 		<img src="{{ MEDIA_URL }}{{ recipe.picture }}" id="view_recipe_image" height="200" width="200">
@@ -72,6 +69,16 @@
 		<i>"{{ recipe.description }}"</i></br></br>
 		serves: {{ recipe.serves }}</br>
 		cooking time: {{ recipe.cooking_time }} minutes</br>
+		{% if recipe.spice > 0 %}
+		<div class="recipe_spicy">
+		Spice:&nbsp;
+		{% with ''|center:recipe.spice as range %}
+		{% for _ in range %}
+			<img class="spicy" src="{% static 'cookbook/images/spicy.png' %}" height="14" width="15">			
+		{% endfor %}
+		{% endwith %}
+		</div>
+		{% endif %}
 		</div>
 		
 		<div id="ingredients">

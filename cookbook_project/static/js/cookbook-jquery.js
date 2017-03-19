@@ -1,10 +1,25 @@
 $(document).ready(function() {
+	
+	$('#discard_changes').click( function(event) {
+		if (confirm('Are you sure you want to stop editing? (Any unsaved changes will be lost)')) {
+			alert(window.location.href);
+			alert(window.location.pathname);
+			
+		
+		}
+	});
+	
+	// Stars for users to press to rate recipes
 	$(function() {
+		// Get the users previous rating
 		var rating = $('.stars').attr('data-initial');
+		// Display the users previous rating
 		$("#star-" + rating).prop("checked",true)
 	});
 	
-	// Display star rating on page
+	
+	// Stars for displaying the recipe rating in the list
+	// Displays star rating on recipe detail
 	$(function() {
 		$('span.stars').stars();
 	});

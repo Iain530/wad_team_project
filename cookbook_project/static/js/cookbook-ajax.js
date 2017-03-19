@@ -5,11 +5,11 @@ $('#id_username').keyup(function(event){
 		$.get('/cookbook/username_check/', {username: username}, function(data){
 			if (data === 'True') {
 				$('#username_check').html('&#10004;');
-				$('#username_check').css('color', 'green')
+				$('#username_check').css('color', 'lightgreen')
 				$('#register_button').prop('disabled', false);
 			} else {
 				$('#username_check').html('&#10006;')
-				$('#username_check').css('color', 'red')
+				$('#username_check').css('color', 'lightred')
 				$('#register_button').prop('disabled', true);
 			}
 		});

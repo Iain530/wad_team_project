@@ -221,14 +221,8 @@ def uploadrecipe(request):
             recipe.user = request.user
             if 'picture' in request.FILES:
                 recipe.picture = request.FILES['picture']
-            if recipe.is_vegan or (recipe.is_vegetarian and recipe.is_dairy_free):
-                recipe.is_vegan = True
-                recipe.is_vegetarian = True
-                recipe.is_dairy_free = True
             recipe.save()
             return HttpResponseRedirect(reverse('cookbook:view_recipe', args=[recipe.user, recipe.slug]))
-        else:
-            print(form.errors)
 
     context_dict['recipe_form'] = recipe_form
     return render(request, 'cookbook/uploadrecipe.html', context_dict)
@@ -240,22 +234,39 @@ def editrecipe(request, user, recipe_slug):
     recipe = None
     form = None
 
-    if request.method == 'POST':
-        None
-    
-    try:
-        recipe = Recipe.objects.get(user=User.objects.get(username=user), slug=recipe_slug)
-        if request.user == recipe.user:
-            form = RecipeForm(initial=model_to_dict(recipe))
-            
-        else:
-            recipe = None
-    except:
-        recipe = None
+##    try:
+    recipe = Recipe.objects.get(user=User.objects.get(username=user), slug=recipe_slug)
+    if request.user != recipe.user:
+        raise Exception
 
+    # Submitting changes
+    if request.method == 'POST':
+        form = RecipeForm(request.POST, request.FILES, instance=recipe)
+        print 'made form'
+        if form.is_valid():
+            print 'valid form'
+            recipe = form.save(commit=False)
+            recipe.user = request.user
+            print 'form save'
+            if 'picture' in request.FILES:
+                print 'picture'
+                recipe.picture = request.FILES['picture']
+                print 'picture done'
+            recipe.save()
+            print 'recipe saved'
+            return HttpResponseRedirect(reverse('cookbook:view_recipe', args=[recipe.user, recipe.slug]))                
+        
+    # Start editing
+    else:
+        form = RecipeForm(initial=model_to_dict(recipe))
+
+##    except:      
+##        recipe = None
+##        form = None
+        
     context_dict['recipe'] = recipe
     context_dict['recipe_form'] = form
-    
+        
     return render(request, 'cookbook/editrecipe.html', context_dict)
     
 

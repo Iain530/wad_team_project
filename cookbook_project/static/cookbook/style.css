@@ -126,9 +126,6 @@ ul.topnav li a:hover:not(#search) {background-color: #555;}
 
 /* VIEWING RECIPE LISTS--------------------------- */
 
-.recipe_list {
-	
-}
 
 .recipe_detail {
 	padding: 10px 10px;
@@ -226,11 +223,22 @@ button:hover, input[type=button]:hover, input[type=submit]:hover {
 
 /* VIEW RECIPE ------------------------ */
 
+p.widget_title {
+	margin: 0;
+	text-align: center;
+}
+
 #save_button_holder {
 	position: absolute;
-	top: 40px;
-	right: 40px;
+	top: 30px;
+	right: 25px;
 	margin: 0 20px;
+	text-align: center;
+	font-size:15px;
+}
+
+#save_button {
+	margin: 10px;
 }
 
 
@@ -337,16 +345,19 @@ button:hover, input[type=button]:hover, input[type=submit]:hover {
 	border:1px solid #f2f2f2;
 }
 
-#recipe_form input:not([type=submit]),
+#recipe_form input:not([type=submit,file]):not([name=id_picture]),
 #recipe_form select,
 #recipe_form textarea {
-	float: left;
-	clear: right;
 	text-align: left;
 }
 
-#recipe_form label {
-	margin-right:40px;
+#recipe_form br {
+	position: relative;
+	left: 20%;
+}
+
+#recipe_form label:not([for=picture-clear_id]) {
+	margin-right:5%;
 	width: 15%;
 	float: left;
 	clear: left;
@@ -359,10 +370,6 @@ button:hover, input[type=button]:hover, input[type=submit]:hover {
 
 #recipe_form span {
 	display: none;
-}
-
-.recipe_label {
-
 }
 
 
@@ -397,15 +404,10 @@ button:hover, input[type=button]:hover, input[type=submit]:hover {
 
 /* STAR RATINGS */
 
-#rate_this {
-	margin: 0;
-	text-align: center;
-}
-
 #star_rating_holder {
 	position: absolute;
 	top: 30px;
-	right: 150px;
+	right: 175px;
 	font-size:15px;
 	float: right;
 }
