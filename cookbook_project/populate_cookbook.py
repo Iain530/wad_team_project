@@ -288,27 +288,59 @@ def populate():
          'is_vegan': False,
          'is_gluten_free': True,
          'is_dairy_free': True},
-        # CHEESE AND HAM OMELETTE
-##        {'user': 'MaggiesMeals',
-##         'category': 'Lunches',
-##         'name': 'Cheese and Ham Omelette',
-##         'picture': os.path.join('recipe_images', 'MaggiesMeals', 'cheese-and-ham-omelette.jpg'),
-##         'description': "A simple omelette that makes for a quick, cheap lunch.",
-##         'ingredients': """2 eggs,
-##                        """,
-##         'instructions': """Beat egg yolks together with cheese and season with salt and pepper.
-##                         Whisk egg whites until just stiff and fold into the egg yolk mixture. Heat
-##                         the oil in a small non-stick pan and add the omelette mix. Cook until
-##                         golden underneath, and scatter with chopped ham. Place pan under a
-##                         pre-heated grill until the omelette starts to rise and is set. Slide onto
-##                         a plate, fold in half and serve.""",
-##         'serves': 1,
-##         'spice': 0,
-##         'cooking_time': 10,
-##         'is_vegetarian': False,
-##         'is_vegan': False,
-##         'is_gluten_free': True,
-##         'is_dairy_free': False},
+        # CHEESE AND HAM OMELETTE (MaggiesMeals)
+        {'user': 'MaggiesMeals',
+         'category': 'Lunches',
+         'name': 'Cheese and Ham Omelette',
+         'picture': os.path.join('recipe_images', 'MaggiesMeals', 'cheese-and-ham-omelette.jpg'),
+         'description': "A simple omelette that makes for a quick, cheap lunch.",
+         'ingredients': """2 eggs,
+                        25g Cheddar cheese,
+                        salt and ground pepper,
+                        1 tsp olive oil,
+                        1 slice of cooked ham,
+                        sprig of fresh thyme""",
+         'instructions': """Beat egg yolks together with cheese and season with salt and pepper.
+                         Whisk egg whites until just stiff and fold into the egg yolk mixture. Heat
+                         the oil in a small non-stick pan and add the omelette mix. Cook until
+                         golden underneath, and scatter with chopped ham. Place pan under a
+                         pre-heated grill until the omelette starts to rise and is set. Slide onto
+                         a plate, fold in half and serve with thyme.""",
+         'serves': 1,
+         'spice': 0,
+         'cooking_time': 10,
+         'is_vegetarian': False,
+         'is_vegan': False,
+         'is_gluten_free': True,
+         'is_dairy_free': False},
+		# CHEESE AND HAM OMELETTE (CookingGranny)
+        {'user': 'CookingGranny',
+         'category': 'Lunches',
+         'name': 'Cheese and Ham Omelette',
+         'picture': os.path.join('recipe_images', 'CookingGranny', 'cheese-and-ham-omelette.jpg'),
+         'description': "A classic omelette recipe for one. Quick, easy, and super tasty!",
+         'ingredients': """3 eggs,
+                        10g unsalted butter,
+                        30g Cheddar cheese,
+                        1 slice of ham, chopped,
+                        salt and black pepper""",
+         'instructions': """Gently beat eggs together in a bowl and season with salt and pepper.
+                         Heat the butter in a frying pan until foaming. Pour in eggs and cook for
+                         a few seconds until the bottom of the omelette is lightly set. Push the
+                         set parts of the omelette to the uncooked centre and cook again. Repeat
+                         this process until the eggs have set but the omelette is still soft in
+                         the centre. Put the cheese and three-quarters of the ham in the center
+                         of the omelette and cook until the cheese melts. Increase the heat to high
+                         and cook for 30 seconds, or until brown on the bottom. Fold the omelette
+                         in half and then remove the pan from the heat. Put the omelette onto a
+                         plate and sprinkle with the remaining ham.""",
+         'serves': 1,
+         'spice': 0,
+         'cooking_time': 10,
+         'is_vegetarian': False,
+         'is_vegan': False,
+         'is_gluten_free': True,
+         'is_dairy_free': False},
     ]
 
     comments = [
