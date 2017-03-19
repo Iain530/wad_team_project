@@ -174,6 +174,53 @@ def populate():
          'is_vegan': False,
          'is_gluten_free': False,
          'is_dairy_free': False},
+        # WOO WOO
+        {'user': 'MaggiesMeals',
+         'category': 'Drinks',
+         'name': 'Woo Woo',
+         'picture': os.path.join('recipe_images', 'MaggiesMeals', 'woo-woo.jpg'),
+         'description': "Fun and fruity!",
+         'ingredients': """1 ounce vodka,
+                        1 ounce peach schnapps,
+                        2 ounces cranberry juice,
+                        lime wedge for garnish""",   
+         'instructions': """Place all ingredients into a cocktail shaker with ice. Shake well
+                         and strain into a chilled glass with fresh ice. Garnish with a lime wedge.""",
+         'serves': 1,
+         'spice': 0,
+         'cooking_time': 3,
+         'is_vegetarian': True,
+         'is_vegan': True,
+         'is_gluten_free': True,
+         'is_dairy_free': True},
+        # CHEESE AND HAM OMELETTE (CookingGranny)
+        {'user': 'CookingGranny',
+         'category': 'Lunches',
+         'name': 'Cheese and Ham Omelette',
+         'picture': os.path.join('recipe_images', 'CookingGranny', 'cheese-and-ham-omelette.jpg'),
+         'description': "A classic omelette recipe for one. Quick, easy, and super tasty!",
+         'ingredients': """3 eggs,
+                        10g unsalted butter,
+                        30g Cheddar cheese,
+                        1 slice of ham, chopped,
+                        salt and black pepper""",
+         'instructions': """Gently beat eggs together in a bowl and season with salt and pepper.
+                         Heat the butter in a frying pan until foaming. Pour in eggs and cook for
+                         a few seconds until the bottom of the omelette is lightly set. Push the
+                         set parts of the omelette to the uncooked centre and cook again. Repeat
+                         this process until the eggs have set but the omelette is still soft in
+                         the centre. Put the cheese and three-quarters of the ham in the center
+                         of the omelette and cook until the cheese melts. Increase the heat to high
+                         and cook for 30 seconds, or until brown on the bottom. Fold the omelette
+                         in half and then remove the pan from the heat. Put the omelette onto a
+                         plate and sprinkle with the remaining ham.""",
+         'serves': 1,
+         'spice': 0,
+         'cooking_time': 10,
+         'is_vegetarian': False,
+         'is_vegan': False,
+         'is_gluten_free': True,
+         'is_dairy_free': False},
         # CHEESE AND BACON SANDWICH
         {'user': 'BaconIsBest',
          'category': 'Lunches',
@@ -313,34 +360,6 @@ def populate():
          'is_vegan': False,
          'is_gluten_free': True,
          'is_dairy_free': False},
-		# CHEESE AND HAM OMELETTE (CookingGranny)
-        {'user': 'CookingGranny',
-         'category': 'Lunches',
-         'name': 'Cheese and Ham Omelette',
-         'picture': os.path.join('recipe_images', 'CookingGranny', 'cheese-and-ham-omelette.jpg'),
-         'description': "A classic omelette recipe for one. Quick, easy, and super tasty!",
-         'ingredients': """3 eggs,
-                        10g unsalted butter,
-                        30g Cheddar cheese,
-                        1 slice of ham, chopped,
-                        salt and black pepper""",
-         'instructions': """Gently beat eggs together in a bowl and season with salt and pepper.
-                         Heat the butter in a frying pan until foaming. Pour in eggs and cook for
-                         a few seconds until the bottom of the omelette is lightly set. Push the
-                         set parts of the omelette to the uncooked centre and cook again. Repeat
-                         this process until the eggs have set but the omelette is still soft in
-                         the centre. Put the cheese and three-quarters of the ham in the center
-                         of the omelette and cook until the cheese melts. Increase the heat to high
-                         and cook for 30 seconds, or until brown on the bottom. Fold the omelette
-                         in half and then remove the pan from the heat. Put the omelette onto a
-                         plate and sprinkle with the remaining ham.""",
-         'serves': 1,
-         'spice': 0,
-         'cooking_time': 10,
-         'is_vegetarian': False,
-         'is_vegan': False,
-         'is_gluten_free': True,
-         'is_dairy_free': False},
     ]
 
     comments = [
@@ -376,6 +395,20 @@ def populate():
          'recipe_author': 'MaggiesMeals',
          'recipe_name': 'Sweet Potato and Carrot Soup',
          'text': 'I made this without the creme fraiche and it was simply divine!'},
+        # WONDERFUL APPLE PIE
+        {'username': 'HealthyDad',
+         'recipe_author': 'CookingGranny',
+         'recipe_name': 'Wonderful Apple Pie',
+         'text': 'Superb!'},
+        {'username': 'MaggiesMeals',
+         'recipe_author': 'CookingGranny',
+         'recipe_name': 'Wonderful Apple Pie',
+         'text': 'Absolutely fantastic!'},
+        # CHEESE AND BACON SANDWICH
+        {'username': 'HealthyDad',
+         'recipe_author': 'BaconIsBest',
+         'recipe_name': 'Cheese and Bacon Sandwich',
+         'text': 'My girls love them!'},
         # CURRIED VEGETABLE PIE
         {'username': 'CookingGranny',
          'recipe_author': 'HealthyDad',
@@ -422,7 +455,7 @@ def populate():
 		 {'username': 'CookingGranny',
          'recipe_slug': 'tofu-curry',
          'recipe_author': 'HummusLover123',
-         'value': 3},
+         'value': 4},
         # ROAST BEEF
         {'username': 'HummusLover123',
          'recipe_slug': 'roast-beef',
@@ -458,6 +491,32 @@ def populate():
          'recipe_slug': 'sweet-potato-and-carrot-soup',
          'recipe_author': 'MaggiesMeals',
          'value': 4},
+        # WONDERFUL APPLE PIE
+        {'username': 'HealthyDad',
+         'recipe_slug': 'wonderful-apple-pie',
+         'recipe_author': 'CookingGranny',
+         'value': 5},
+        {'username': 'MrFish',
+         'recipe_slug': 'wonderful-apple-pie',
+         'recipe_author': 'CookingGranny',
+         'value': 5},
+        {'username': 'MaggiesMeals',
+         'recipe_slug': 'wonderful-apple-pie',
+         'recipe_author': 'CookingGranny',
+         'value': 5},
+        {'username': 'BaconIsBest',
+         'recipe_slug': 'wonderful-apple-pie',
+         'recipe_author': 'CookingGranny',
+         'value': 5},
+        # CHEESE AND BACON SANDWICH
+        {'username': 'HealthyDad',
+         'recipe_slug': 'cheese-and-bacon-sandwich',
+         'recipe_author': 'BaconIsBest',
+         'value': 4},
+        {'username': 'MaggiesMeals',
+         'recipe_slug': 'cheese-and-bacon-sandwich',
+         'recipe_author': 'BaconIsBest',
+         'value': 3},
         # CURRIED VEGETABLE PIE
         {'username': 'CookingGranny',
          'recipe_slug': 'curried-vegetable-pie',
@@ -466,7 +525,7 @@ def populate():
 		{'username': 'BaconIsBest',
          'recipe_slug': 'curried-vegetable-pie',
          'recipe_author': 'HealthyDad',
-         'value': 3},
+         'value': 2},
         {'username': 'MaggiesMeals',
          'recipe_slug': 'curried-vegetable-pie',
          'recipe_author': 'HealthyDad',
@@ -474,13 +533,9 @@ def populate():
         {'username': 'MrFish',
          'recipe_slug': 'curried-vegetable-pie',
          'recipe_author': 'HealthyDad',
-         'value': 4},
+         'value': 3},
         # HUMBLE PIE
         {'username': 'MaggiesMeals',
-         'recipe_slug': 'humble-pie',
-         'recipe_author': 'BaconIsBest',
-         'value': 5},
-        {'username': 'CookingGranny',
          'recipe_slug': 'humble-pie',
          'recipe_author': 'BaconIsBest',
          'value': 5},
@@ -498,6 +553,19 @@ def populate():
          'recipe_slug': 'cheese-and-ham-omelette',
          'recipe_author': 'CookingGranny',
          'value': 4},
+        # WOO WOO
+        {'username': 'BaconIsBest',
+         'recipe_slug': 'woo-woo',
+         'recipe_author': 'MaggiesMeals',
+         'value': 5},
+        {'username': 'CookingGranny',
+         'recipe_slug': 'woo-woo',
+         'recipe_author': 'MaggiesMeals',
+         'value': 3},
+        {'username': 'MrFish',
+         'recipe_slug': 'woo-woo',
+         'recipe_author': 'MaggiesMeals',
+         'value': 3},
     ]
 
     for user in users:
