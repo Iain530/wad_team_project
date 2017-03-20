@@ -2,7 +2,6 @@ from django import forms
 from cookbook.models import Category, Recipe, Comment
 from django.contrib.auth.models import User
 
-
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
     username = forms.CharField(help_text='')
@@ -12,7 +11,7 @@ class UserForm(forms.ModelForm):
         fields = ('username', 'email', 'password',)
 
         
-class RecipeForm(forms.ModelForm):
+class RecipeForm(forms.ModelForm): 
     name = forms.CharField(max_length=Recipe.MAX_NAME_LENGTH,help_text="Recipe Name")
     description=forms.CharField(max_length=Recipe.MAX_DESC_LENGTH,
                                 help_text="Description", widget=forms.Textarea(attrs={'rows': 3, 'cols': 60}))

@@ -15,11 +15,16 @@
 		<div id="recipe_form_holder">
 			<form enctype="multipart/form-data" id="recipe_form" method="post" action="{% url 'cookbook:editrecipe' recipe.user recipe.slug %}">
 				{% csrf_token %}
+				<ul>
+				{% for error in errors %}
+					<li>{{ error }}</li>
+				{% endfor %}
+				</ul>
 				{{ form.errors }}
 				{{ recipe_form.as_p }}
 				<div class="button_wrapper">
 					<input type="submit" value="Save changes" />
-					<input type="button" id="discard_changes" data-recipe_user="{{ recipe.user }}" data-recipe_slug="{{ recipe.slug }}" value="Cancel" />
+					<input type="button" id="discard_changes" value="Cancel" />
 				</div>
 			</form>
 		</div>

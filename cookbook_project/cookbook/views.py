@@ -5,6 +5,8 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.utils import timezone
+from django.db import IntegrityError
 # COOKBOOK IMPORTS
 from cookbook.models import Category, Recipe, Comment, Rating
 from cookbook.forms import UserForm, RecipeForm, CommentForm
@@ -233,6 +235,7 @@ def editrecipe(request, user, recipe_slug):
     context_dict = {}
     recipe = None
     form = None
+    errors = []
 
     try:
         recipe = Recipe.objects.get(user=User.objects.get(username=user), slug=recipe_slug)
@@ -242,30 +245,29 @@ def editrecipe(request, user, recipe_slug):
         # Submitting changes
         if request.method == 'POST':
             form = RecipeForm(request.POST, request.FILES, instance=recipe)
-            print 'made form'
             if form.is_valid():
-                print 'valid form'
                 recipe = form.save(commit=False)
                 recipe.user = request.user
-                print 'form save'
+                recipe.last_modified = timezone.now()
                 if 'picture' in request.FILES:
-                    print 'picture'
                     recipe.picture = request.FILES['picture']
-                    print 'picture done'
                 recipe.save()
-                print 'recipe saved'
                 return HttpResponseRedirect(reverse('cookbook:view_recipe', args=[recipe.user, recipe.slug]))                
             
         # Start editing
         else:
             form = RecipeForm(initial=model_to_dict(recipe))
 
-    except:      
+    except (Recipe.DoesNotExist):      
         recipe = None
         form = None
+
+    except (IntegrityError):
+        errors += ['You already have a recipe with that name']
         
     context_dict['recipe'] = recipe
     context_dict['recipe_form'] = form
+    context_dict['errors'] = errors
         
     return render(request, 'cookbook/editrecipe.html', context_dict)
     

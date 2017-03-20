@@ -5,7 +5,7 @@
 {% endblock %}
 {% block body_block %}
 	<h1>My Profile - {{ user.username }}</h1>
-	<a class="active" href="{% url 'cookbook:saved-recipes' %}">Saved Recipes</a>
+	
 	<div id="recent_comments">
 	<h2>Recent comments</h2>
 	{% if recent_comments %}
@@ -27,7 +27,10 @@
 	</div>
 	
 	<div class="recipe_list" id="my_recipe_list">
-	<h2>My Recipes <small>- <a class="active" href="{% url 'cookbook:upload-recipe' %}">Add Recipe</a></small></h2>
+	<h2>
+	My Recipes
+	 | <a class="active" href="{% url 'cookbook:upload-recipe' %}">Add Recipe</a> | <a class="active" href="{% url 'cookbook:saved-recipes' %}">Saved Recipes</a>
+	</h2>
 	{% if recipes %}
 		<div class="recipe_list">
 		{% for recipe in recipes %}
@@ -44,11 +47,11 @@
 					{% if recipe.last_modified %}
 						last modified: {{ recipe.last_modified }}
 					{% endif %}
-					</div>
+				</div>
 					
-					<div class="recipe_desc">
-						<i>"{{ recipe.description }}"</i>
-					</div>
+				<div class="recipe_desc">
+					<i>"{{ recipe.description }}"</i>
+				</div>
 				
 				<div class="recipe_info">
 					
@@ -59,9 +62,7 @@
 					<div class="recipe_rating">
 					| <span class="stars">{{ recipe.total_rating }}</span> ({{ recipe.no_of_ratings }})
 					</div>
-					
-					| views: {{ recipe.views }}
-					
+
 					{% if recipe.spice > 0 %}
 					<div class="recipe_spicy">
 					|
@@ -73,7 +74,7 @@
 					</div>
 					{% endif %}
 					
-					
+					| views: {{ recipe.views }}
 	
 				</div>
 				
