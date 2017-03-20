@@ -9,7 +9,7 @@ a.no_u {
 body {
 	margin:0;
 	font-family: 'Slabo 27px', serif;
-	background-repeat:no-repeat;
+	background-repeat: repeat;
 	background-position: center center;
 }
 
