@@ -5,6 +5,10 @@
 - Home
 {% endblock %}
 {% block body_block %}
+	<p id="welcome">
+	<h1>Welcome to Cookbook!</h1>
+	<!--add stuff-->
+	</p>
 	<div class="recipe_list">
 	<h1><a class="no_u" href="{% url 'cookbook:best-rated' %}">Best Rated</a></h1>
 	{% if best_rated %}
