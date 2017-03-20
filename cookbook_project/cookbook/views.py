@@ -234,35 +234,35 @@ def editrecipe(request, user, recipe_slug):
     recipe = None
     form = None
 
-##    try:
-    recipe = Recipe.objects.get(user=User.objects.get(username=user), slug=recipe_slug)
-    if request.user != recipe.user:
-        raise Exception
+    try:
+        recipe = Recipe.objects.get(user=User.objects.get(username=user), slug=recipe_slug)
+        if request.user != recipe.user:
+            raise Exception
 
-    # Submitting changes
-    if request.method == 'POST':
-        form = RecipeForm(request.POST, request.FILES, instance=recipe)
-        print 'made form'
-        if form.is_valid():
-            print 'valid form'
-            recipe = form.save(commit=False)
-            recipe.user = request.user
-            print 'form save'
-            if 'picture' in request.FILES:
-                print 'picture'
-                recipe.picture = request.FILES['picture']
-                print 'picture done'
-            recipe.save()
-            print 'recipe saved'
-            return HttpResponseRedirect(reverse('cookbook:view_recipe', args=[recipe.user, recipe.slug]))                
-        
-    # Start editing
-    else:
-        form = RecipeForm(initial=model_to_dict(recipe))
+        # Submitting changes
+        if request.method == 'POST':
+            form = RecipeForm(request.POST, request.FILES, instance=recipe)
+            print 'made form'
+            if form.is_valid():
+                print 'valid form'
+                recipe = form.save(commit=False)
+                recipe.user = request.user
+                print 'form save'
+                if 'picture' in request.FILES:
+                    print 'picture'
+                    recipe.picture = request.FILES['picture']
+                    print 'picture done'
+                recipe.save()
+                print 'recipe saved'
+                return HttpResponseRedirect(reverse('cookbook:view_recipe', args=[recipe.user, recipe.slug]))                
+            
+        # Start editing
+        else:
+            form = RecipeForm(initial=model_to_dict(recipe))
 
-##    except:      
-##        recipe = None
-##        form = None
+    except:      
+        recipe = None
+        form = None
         
     context_dict['recipe'] = recipe
     context_dict['recipe_form'] = form
@@ -399,7 +399,6 @@ def search(request):
     recipes = Recipe.objects.filter(name__contains=search_text)
     context_dict['recipes'] = recipes
     return render(request, 'search/search.html', context_dict)
-    #return HttpResponse('search')
 
 #-HELP-SECTION------------------------------------------------------------
 

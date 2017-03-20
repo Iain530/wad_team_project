@@ -19,7 +19,7 @@
 				{{ recipe_form.as_p }}
 				<div class="button_wrapper">
 					<input type="submit" value="Save changes" />
-					<input type="button" id="discard_changes" value="Cancel" />
+					<input type="button" id="discard_changes" data-recipe_user="{{ recipe.user }}" data-recipe_slug="{{ recipe.slug }}" value="Cancel" />
 				</div>
 			</form>
 		</div>

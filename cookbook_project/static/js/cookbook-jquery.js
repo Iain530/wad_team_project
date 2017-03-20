@@ -2,10 +2,9 @@ $(document).ready(function() {
 	
 	$('#discard_changes').click( function(event) {
 		if (confirm('Are you sure you want to stop editing? (Any unsaved changes will be lost)')) {
-			alert(window.location.href);
-			alert(window.location.pathname);
-			
-		
+			var url = (window.location.href).toString();
+			url = url.substring(0, url.length-5);
+			$( location ).attr("href", url);
 		}
 	});
 	
