@@ -14,6 +14,8 @@ from django.forms.models import model_to_dict
 # DATETIME IMPORTS
 from datetime import datetime, timedelta
 
+from itertools import chain
+
 
 #-HELPER-FUNCTIONS------------------------------------------------------
 
@@ -402,7 +404,14 @@ def search(request):
         return render(request, 'search/search.html', context_dict)
     if search_text == "":
         return render(request, 'search/search.html', context_dict)	
-    recipes = Recipe.objects.filter(name__contains=search_text)
+    if len(search_text) < 3:
+          return render(request, 'search/search.html', context_dict)	
+    recipes_name = Recipe.objects.filter(name__contains=search_text)
+    users = User.objects.filter(username__contains=search_text)
+    recipes_user = Recipe.objects.filter(user__in=users)
+    recipes_description = Recipe.objects.filter(description__contains=search_text)
+    recipes = list(chain(recipes_user,recipes_name,recipes_description))
+    recipes = set(recipes)
     context_dict['recipes'] = recipes
     return render(request, 'search/search.html', context_dict)
 
