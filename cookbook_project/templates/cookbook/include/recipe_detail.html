@@ -6,18 +6,18 @@
 		<a href="{% url 'cookbook:view_recipe' recipe.user.username recipe.slug %}">
 		<img class="list_image" src="{{ MEDIA_URL }}{{ recipe.picture }}" height="125" width="125">
 		<big>{{ recipe.name }}</big></a>
-		<small>by <a class="user_link" href="{% url 'cookbook:view_user' recipe.user.username %}">{{ recipe.user.username }}</a></small>
+		<small></br>by <a class="user_link" href="{% url 'cookbook:view_user' recipe.user.username %}">{{ recipe.user.username }}</a></small>
 	</div>
 	
 	<div class="recipe_date">
-		uploaded: {{ recipe.upload_date }}<br>
+		uploaded: {{ recipe.upload_date }}</br>
 		{% if recipe.last_modified %}
 			last modified: {{ recipe.last_modified }}
 		{% endif %}
 		</div>
 		
 		<div class="recipe_desc">
-			<i>"{{ recipe.description }}"</i>
+			</br><i>"{{ recipe.description }}"</i>
 		</div>
 	
 	<div class="recipe_info">
