@@ -11,6 +11,8 @@ from django.db import IntegrityError
 from cookbook.models import Category, Recipe, Comment, Rating
 from cookbook.forms import UserForm, RecipeForm, CommentForm
 from django.forms.models import model_to_dict
+# DATETIME IMPORTS
+from datetime import datetime, timedelta
 
 
 #-HELPER-FUNCTIONS------------------------------------------------------
@@ -107,7 +109,7 @@ def save_recipe(request):
 
 def home(request):
     context_dict = {}
-    best_rated = Recipe.objects.filter(weighted_rating__gt=0).order_by('-weighted_rating')[:5]
+    best_rated = Recipe.objects.filter(weighted_rating__gt=0).filter(upload_date__gte=datetime.now()-timedelta(days=7)).order_by('-weighted_rating')[:5]
     new_recipes = Recipe.objects.order_by('-upload_date')[:5]
     context_dict['best_rated'] = best_rated
     context_dict['new_recipes'] = new_recipes
@@ -379,8 +381,10 @@ def view_category(request, category_name):
 
 def bestrated(request):
     context_dict = {}
-    recipes = Recipe.objects.filter(weighted_rating__gt=0).order_by('-total_rating')
-    context_dict['recipes'] = recipes
+    weekly = Recipe.objects.filter(weighted_rating__gt=0).filter(upload_date__gte=datetime.now()-timedelta(days=7)).order_by('-weighted_rating')[:5]
+    alltime = Recipe.objects.filter(weighted_rating__gt=0).order_by('-total_rating')
+    context_dict['weekly'] = weekly
+    context_dict['alltime'] = alltime
     return render(request, 'cookbook/best_rated.html', context_dict)
 	
 def newestrecipes(request):
