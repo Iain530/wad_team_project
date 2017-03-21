@@ -396,7 +396,6 @@ def newestrecipes(request):
 # search only for article names
 def search(request):
     
-    
     context_dict = {}
     if request.method == "GET":
         search_text = request.GET.get('search_box', None)
