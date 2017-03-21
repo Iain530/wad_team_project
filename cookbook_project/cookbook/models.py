@@ -63,9 +63,9 @@ class Recipe(models.Model):
 
 	
     # Fields input by user
-    MAX_NAME_LENGTH = 128
-    MAX_DESC_LENGTH = 400
-    MAX_INS_LENGTH = 2000
+    MAX_NAME_LENGTH = 50
+    MAX_DESC_LENGTH = 100
+    MAX_INS_LENGTH = 32767
     name = models.CharField(max_length=MAX_NAME_LENGTH)
     slug = models.SlugField() # name as slug
     description = models.CharField(max_length=MAX_DESC_LENGTH)

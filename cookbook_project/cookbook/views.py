@@ -396,16 +396,15 @@ def newestrecipes(request):
 # search only for article names
 def search(request):
     
-    
     context_dict = {}
     if request.method == "GET":
         search_text = request.GET.get('search_box', None)
     else:
-        return render(request, 'search/search.html', context_dict)
+        return render(request, 'cookbook/search.html', context_dict)
     if search_text == "":
-        return render(request, 'search/search.html', context_dict)	
+        return render(request, 'cookbook/search.html', context_dict)	
     if len(search_text) < 3:
-          return render(request, 'search/search.html', context_dict)
+          return render(request, 'cookbook/search.html', context_dict)
 
     # search by recipe name
     recipes_name = Recipe.objects.filter(name__contains=search_text)
