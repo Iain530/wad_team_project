@@ -36,7 +36,7 @@ class RecipeForm(forms.ModelForm):
     SPICE_SET = [(0, 'Not Spicy'),
                  (1, 'Mild'),
                  (2, 'Hot'),
-                 (3, 'Super Spicy') ]
+                 (3, 'Super spicy') ]
     spice = forms.ChoiceField(choices=SPICE_SET, required=True, help_text="Spice")
     
     class Meta:
