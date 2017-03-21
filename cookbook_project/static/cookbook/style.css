@@ -60,7 +60,7 @@ h1, h2, h3, h4, h5 {
     background-color: #333;
 	padding: 10px 25px;
     position: relative;
-	font-size: 1.8vh;
+	font-size: 2vh;
 	color: #f2f2f2;
     top: 170px;
     left: 15%;
@@ -74,11 +74,11 @@ position:absolute;
 right:20px;
 }
 
-@media screen and (max-width:1000px) {
-	.box{width: 700px}
+@media screen and (max-width:145vh) {
+	.box{width: 101.5vh}
 }
 
-@media screen and (max-width:1230px) {
+@media screen and (max-width:145vh) {
   ul.topnav li:not(:first-child) {display: none;}
   ul.topnav li.icon {
     float: right;
@@ -86,26 +86,26 @@ right:20px;
   }
 }
 
-@media screen and (max-width:1230px) {
+@media screen and (max-width:145vh) {
   ul.topnav.responsive {position: fixed;}
   ul.topnav.responsive li.icon {
-    position: absolute;
+	position:absolute;
     right: 0;
     top: 0;
   }
-  ul.topnav.responsive li {
+  ul.topnav.responsive li:not(.icon) {
     float: none;
     display: inline;
   }
-  ul.topnav.responsive li a {
+  ul.topnav.responsive li:not(.icon) a {
     display: block;
     text-align: left;
 	font-size: 2.2vh;
-	padding: 20px;
+	padding: 1.7vh;
   }
   #search {
 	  position: relative;
-	  padding-left: 50px;
+	  padding-left: 5vh;
   }
 }
 
@@ -175,7 +175,7 @@ right:20px;
 }
 
 .recipe_name {
-	font-size: 2.2vh;
+	font-size: 2.5vh;
 	margin: 0 5px 5px 0;
 }
 
@@ -190,7 +190,7 @@ right:20px;
 	position: absolute;
 	top: 15px;
 	right: 15px;
-	font-size: 1.6vh;
+	font-size: 2vh;
 	text-align: right;
 }
 
@@ -323,7 +323,7 @@ p.widget_title {
 }
 
 .comment_user {
-	font-size: 1.6vh;
+	font-size: 2vh;
 	margin: 0;
 }
 
