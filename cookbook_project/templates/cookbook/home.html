@@ -7,7 +7,33 @@
 {% block body_block %}
 	<p id="welcome">
 	<h1>Welcome to Cookbook!</h1>
-	<!--add stuff-->
+	Vegetarian <img class="dietary_image_key" src="{% static 'cookbook/images/vegetarian.png' %}" height="30" width="30"> 
+	| Vegan <img class="dietary_image_key" src="{% static 'cookbook/images/vegan.png' %}" height="30" width="30">
+	| Dairy-free <img class="dietary_image_key" src="{% static 'cookbook/images/dairy-free.png' %}" height="30" width="30">
+	| Gluten-free <img class="dietary_image_key" src="{% static 'cookbook/images/gluten-free.png' %}" height="30" width="30">
+	
+	<div class="recipe_spicy">
+		| Mild <img class="spicy" src="{% static 'cookbook/images/spicy.png' %}" height="14" width="15">
+	</div>
+	
+	<div class="recipe_spicy">
+		| Hot 
+		{% with ''|center:2 as range %}
+		{% for _ in range %}
+			<img class="spicy" src="{% static 'cookbook/images/spicy.png' %}" height="14" width="15">			
+		{% endfor %}
+		{% endwith %}
+	</div>
+	
+	<div class="recipe_spicy">
+		| Super spicy
+		{% with ''|center:3 as range %}
+		{% for _ in range %}
+			<img class="spicy" src="{% static 'cookbook/images/spicy.png' %}" height="14" width="15">			
+		{% endfor %}
+		{% endwith %}
+	</div>
+	
 	</p>	
 	<div class="recipe_list">
 	<h1><a class="no_u" href="{% url 'cookbook:newest-recipes' %}">Newest Recipes</a></h1>
