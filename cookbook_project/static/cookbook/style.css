@@ -421,6 +421,21 @@ p.widget_title {
 
 /* SEARCH PAGE */
 
+#search_header {
+	display:inline-block;
+	width:15%;
+	
+}
+
+#filter_results {
+	display:inline-block;
+	width:80%;
+	text-align: right;
+}
+
+input.filter {
+	
+}
 
 
 /* VIEWING CATEGORY LISTS--------------------------- */

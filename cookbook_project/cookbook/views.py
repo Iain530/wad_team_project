@@ -382,7 +382,7 @@ def view_category(request, category_name):
 def bestrated(request):
     context_dict = {}
     weekly = Recipe.objects.filter(weighted_rating__gt=0).filter(upload_date__gte=datetime.now()-timedelta(days=7)).order_by('-weighted_rating')[:5]
-    alltime = Recipe.objects.filter(weighted_rating__gt=0).order_by('-total_rating')
+    alltime = Recipe.objects.filter(weighted_rating__gt=0).order_by('-weighted_rating')
     context_dict['weekly'] = weekly
     context_dict['alltime'] = alltime
     return render(request, 'cookbook/best_rated.html', context_dict)
