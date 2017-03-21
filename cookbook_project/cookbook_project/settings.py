@@ -28,9 +28,9 @@ WHOOSH_INDEX = os.path.join(BASE_DIR, 'whoosh')
 SECRET_KEY = '7(olc*@nkxpj003ckd))6ahcy(#tfrta67=x0$e=bq6t&vmy*s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['2200049m.pythonanywhere.com']
 
 
 # Application definition
@@ -142,7 +142,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR, ]
 
-MEDIA_ROOT = MEDIA_DIR
+MEDIA_ROOT = '/home/2200049m/wad_team_project/cookbook_project/media'
 MEDIA_URL = '/media/'
 
 # Haystack
