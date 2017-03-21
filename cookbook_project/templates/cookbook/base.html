@@ -30,7 +30,7 @@ Cookbook
   {% endif %}
   <li><a href="{% url 'cookbook:help' %}">Help</a></li>
   <li><a id="search">
-  <form type="get" action="{% url 'cookbook:search' %}" style="margin: 0; position:absolute; right:20px">
+  <form type="get" action="{% url 'cookbook:search' %}">
     <input  id="search_box" type="text" name="search_box"  placeholder="Search for recipes..." size="30">
     <button id="search_submit" type="submit" >Search</button>
   </form>

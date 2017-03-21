@@ -54,6 +54,12 @@ ul.topnav li a:hover:not(#search) {background-color: #555;}
 	font-family: Arial serif;
 }
 
+#search {
+margin: 0; 
+position:absolute; 
+right:20px;
+}
+
 @media screen and (max-width:1000px) {
 	.box{width: 700px}
 }
@@ -67,7 +73,7 @@ ul.topnav li a:hover:not(#search) {background-color: #555;}
 }
 
 @media screen and (max-width:1230px) {
-  ul.topnav.responsive {position: relative;}
+  ul.topnav.responsive {position: fixed;}
   ul.topnav.responsive li.icon {
     position: absolute;
     right: 0;
@@ -80,6 +86,12 @@ ul.topnav li a:hover:not(#search) {background-color: #555;}
   ul.topnav.responsive li a {
     display: block;
     text-align: left;
+	font-size: 20px;
+	padding: 20px;
+  }
+  #search {
+	  position: relative;
+	  padding-left: 50px;
   }
 }
 
