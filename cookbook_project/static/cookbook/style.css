@@ -51,7 +51,7 @@ h1, h2, h3, h4, h5 {
     background-color: #333;
 	padding: 10px 25px;
     position: relative;
-	font-size: 17px;
+	font-size: 18px;
 	color: #f2f2f2;
     top: 170px;
     left: 15%;
@@ -222,7 +222,8 @@ right:20px;
 /* BUTTONS */
 
 button, input[type=button], input[type=submit] {
-  font-family: arial;
+  font-family: 'Poiret One', cursive;
+  font-weight: bold;
   color: #F2F2F2 !important;
   font-size: 17px;
   text-shadow: 1px 1px 1px #4A4A4A;
@@ -253,6 +254,14 @@ button:hover, input[type=button]:hover, input[type=submit]:hover {
 
 /* VIEW RECIPE ------------------------ */
 
+/* #header { */
+	/* position: relative; */
+/* } */
+
+#recipe_header {
+	display: inline-block;
+}
+
 p.widget_title {
 	margin: 0;
 	text-align: center;
@@ -260,8 +269,8 @@ p.widget_title {
 
 #save_button_holder {
 	position: absolute;
-	top: 30px;
-	right: 25px;
+	top: 10px;
+	right: -10px;
 	margin: 0 20px;
 	text-align: center;
 	font-size:15px;
@@ -278,7 +287,6 @@ p.widget_title {
 	border-style: solid none none none;
 	border-color: #4a4a4a;
 	border-width: 1px;
-	margin: 35px 0 0 0;
 	padding: 20px 0 0 0;
 }
 
@@ -436,9 +444,8 @@ p.widget_title {
 
 #star_rating_holder {
 	position: absolute;
-	top: 30px;
-	right: 175px;
-	font-size:15px;
+	top: 40px;
+	right: 150px;
 	float: right;
 }
 

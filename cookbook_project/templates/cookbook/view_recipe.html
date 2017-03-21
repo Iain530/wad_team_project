@@ -12,55 +12,57 @@
 
 {% block body_block %}
 	{% if recipe %}
-		<h1>
-		
-		{{ recipe.name }}<br>
-		<small> 
-		{% if user == recipe.user %}
-		<a href="{% url 'cookbook:editrecipe' recipe.user recipe.slug %}">edit</a>
-		</small>
-		{% else %}
-		by <a href="{% url 'cookbook:view_user' recipe.user.username %}">{{ recipe.user.username }}</a>
-		</small>
-		
-		{% endif %}
-		</h1>
-		
+		<div id="header">
+			<h1 id="recipe_header">
+			
+			{{ recipe.name }}<br>
+			<small> 
+			{% if user == recipe.user %}
+			<a href="{% url 'cookbook:editrecipe' recipe.user recipe.slug %}">edit</a>
+			</small>
+			{% else %}
+			by <a href="{% url 'cookbook:view_user' recipe.user.username %}">{{ recipe.user.username }}</a>
+			</small>
+			
+			{% endif %}
+			</h1>
+			
 
-		
-		<div id="save_button_holder">
-		{% if user.is_authenticated %}
-		<p class="widget_title"></p>
-		<button id="save_button" data-slug="{{ recipe.slug }}" data-user="{{ recipe.user }}"
-		class="btn btn-primary btn-sm" type="button">
-		{% if saved %}
-			Remove
-		{% else %}
-			Save
-		{% endif %}
-		</button>
-		{% endif %}
-		</div>
-		
-		{% if user.is_authenticated and user != recipe.user %}
-		<div id="star_rating_holder">
-			<p class="widget_title">Rate this recipe:</p>
-			<div class="stars" data-initial="{{ rating }}">
-			  <form action="">
-				<input data-recipe_id="{{ recipe.id }}" data-value="5" class="star star-5" id="star-5" type="radio" name="star"/>
-				<label class="star star-5" for="star-5"></label>
-				<input data-recipe_id="{{ recipe.id }}" data-value="4" class="star star-4" id="star-4" type="radio" name="star"/>
-				<label class="star star-4" for="star-4"></label>
-				<input data-recipe_id="{{ recipe.id }}" data-value="3" class="star star-3" id="star-3" type="radio" name="star"/>
-				<label class="star star-3" for="star-3"></label>
-				<input data-recipe_id="{{ recipe.id }}" data-value="2" class="star star-2" id="star-2" type="radio" name="star"/>
-				<label class="star star-2" for="star-2"></label>
-				<input data-recipe_id="{{ recipe.id }}" data-value="1" class="star star-1" id="star-1" type="radio" name="star"/>
-				<label class="star star-1" for="star-1"></label>
-			  </form>
+			
+			<div id="save_button_holder">
+			{% if user.is_authenticated %}
+			<p class="widget_title"></p>
+			<button id="save_button" data-slug="{{ recipe.slug }}" data-user="{{ recipe.user }}"
+			class="btn btn-primary btn-sm" type="button">
+			{% if saved %}
+				Remove
+			{% else %}
+				Save
+			{% endif %}
+			</button>
+			{% endif %}
 			</div>
+			
+			{% if user.is_authenticated and user != recipe.user %}
+			<div id="star_rating_holder">
+				<p class="widget_title">Rate this recipe:</p>
+				<div class="stars" data-initial="{{ rating }}">
+				  <form action="">
+					<input data-recipe_id="{{ recipe.id }}" data-value="5" class="star star-5" id="star-5" type="radio" name="star"/>
+					<label class="star star-5" for="star-5"></label>
+					<input data-recipe_id="{{ recipe.id }}" data-value="4" class="star star-4" id="star-4" type="radio" name="star"/>
+					<label class="star star-4" for="star-4"></label>
+					<input data-recipe_id="{{ recipe.id }}" data-value="3" class="star star-3" id="star-3" type="radio" name="star"/>
+					<label class="star star-3" for="star-3"></label>
+					<input data-recipe_id="{{ recipe.id }}" data-value="2" class="star star-2" id="star-2" type="radio" name="star"/>
+					<label class="star star-2" for="star-2"></label>
+					<input data-recipe_id="{{ recipe.id }}" data-value="1" class="star star-1" id="star-1" type="radio" name="star"/>
+					<label class="star star-1" for="star-1"></label>
+				  </form>
+				</div>
+			</div>
+			{% endif %}
 		</div>
-		{% endif %}
 
 		<div id="view_recipe_desc">
 		<img src="{{ MEDIA_URL }}{{ recipe.picture }}" id="view_recipe_image" height="200" width="200">
