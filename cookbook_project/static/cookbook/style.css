@@ -24,7 +24,7 @@ ul.topnav {
   z-index:999;
 }
 
-
+ul.topnav li {float: left;}
 
 ul.topnav li.icon {display: none;}
 
