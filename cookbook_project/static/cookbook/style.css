@@ -31,11 +31,11 @@ ul.topnav li a {
   display: inline-block;
   color: #f2f2f2;
   text-align: center;
-  padding: 38px 38px;
+  padding: 4vh 4vh;
   text-decoration: none;
   font-weight: bold;
   transition: 0.3s;
-  font-size: 26px;
+  font-size: 3vh;
   font-family: 'Poiret One', cursive;
 }
 
@@ -44,6 +44,11 @@ ul.topnav li a:hover:not(#search) {background-color: #555;}
 h1, h2, h3, h4, h5 {
 	font-family: 'Poiret One', cursive;
 	font-weight: bold;
+}
+
+#logo {
+	width: 10.5vh;
+	height: 10.5vh;
 }
 
 .box {
