@@ -8,7 +8,7 @@
 
 {% block body_block %}
 	{% if category %}
-		<h1>{{ category.name }}</h1>	
+		<h2>{{ category.name }}</h2>	
 		{% if recipes %}
 			{% for recipe in recipes %}
 				{% include 'cookbook/include/recipe_detail.html' %}

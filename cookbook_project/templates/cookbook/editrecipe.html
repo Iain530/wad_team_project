@@ -11,7 +11,7 @@
 
 {% block body_block %}
 	{% if recipe %}
-		<h1>Edit {{ recipe.name }}</h1>
+		<h2>Edit {{ recipe.name }}</h2>
 		<div id="recipe_form_holder">
 			<form enctype="multipart/form-data" id="recipe_form" method="post" action="{% url 'cookbook:editrecipe' recipe.user recipe.slug %}">
 				{% csrf_token %}
