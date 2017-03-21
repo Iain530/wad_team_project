@@ -1,9 +1,18 @@
 SUGGESTIONS----------------------------------
 prep time,
 conversion calculator,
+upload recipe option on home page
+align drop down nav bar to right
+view total rating when viewing recipe
+make 'saved recipe' page more similar to 'my recipes' page
 
 NEED TO FIX----------------------------------
 formatting in the recipe method,
+add <!DOCTYPE html> to html files
+text on empty search
+admin page
+ -'categorys'
+ -'django administration'
 
 BUGS-----------------------------------------
 
