@@ -18,7 +18,7 @@ Cookbook
 <body id="background_image" background="{% static "cookbook/images/background.jpg" %}">
 
 <ul class="topnav" id="myTopnav">
-  <li><a id="logo" href="{% url 'cookbook:home' %}" style="padding:0"> <img src="{% static "cookbook/images/logo.png" %}"></a><li>
+  <li><a id="logo" href="{% url 'cookbook:home' %}" style="padding:0px; background-color: transparent;"> <img src="{% static "cookbook/images/logo.png" %}"></a><li>
   <li><a class="active" href="{% url 'cookbook:home' %}">Home</a></li>
   <li><a href="{% url 'cookbook:categories' %}">Categories</a></li>
   {% if user.is_authenticated %}

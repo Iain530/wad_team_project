@@ -8,7 +8,7 @@ a.no_u {
 
 body {
 	margin:0;
-	font-family: 'Slabo 27px', serif;
+	font-family: 'Arial 27px';
 	background-repeat: repeat;
 	background-position: center center;
 }
@@ -32,10 +32,11 @@ ul.topnav li a {
   display: inline-block;
   color: #f2f2f2;
   text-align: center;
-  padding: 6vh 8vh;
+  padding: 40px 50px;
   text-decoration: none;
   transition: 0.3s;
   font-size: 24px;
+  font-family: Georgia;
 }
 
 ul.topnav li a:hover:not(#search) {background-color: #555;}
