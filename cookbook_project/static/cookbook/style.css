@@ -446,6 +446,11 @@ input.filter {
 	
 }
 
+#no_results {
+	display: none;
+	text-align: center;
+}
+
 
 /* VIEWING CATEGORY LISTS--------------------------- */
 

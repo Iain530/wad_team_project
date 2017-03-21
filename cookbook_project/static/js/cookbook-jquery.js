@@ -23,9 +23,15 @@ $(document).ready(function() {
 				$('.recipe_detail[data-dairyfree!=' + s_dairyfree + ']').hide();
 			}
 		}
-		
+	
 		if (glutenfree) {
 			$('.recipe_detail[data-glutenfree!=' + s_glutenfree + ']').hide();
+		}
+		
+		if ($('.recipe_detail:visible').length == 0) {
+			$('#no_results').show();
+		} else {
+			$('#no_results').hide();
 		}
 	});
 	

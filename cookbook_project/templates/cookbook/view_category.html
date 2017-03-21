@@ -16,6 +16,9 @@
 			{% for recipe in recipes %}
 				{% include 'cookbook/include/recipe_detail.html' %}
 			{% endfor %}
+			<p id="no_results">
+				Oh dear, it seems there's no recipes here!
+			</p>
 		{% else %}
 			<strong>There are currently no {{ category.name }} on Cookbook!</strong><br>
 			{% if user.is_authenticated%}
