@@ -86,9 +86,12 @@ right:20px;
   ul.topnav.responsive li a {
     display: block;
     text-align: left;
+	font-size: 20px;
+	padding: 20px;
   }
   #search {
 	  position: relative;
+	  padding-left: 50px;
   }
 }
 
