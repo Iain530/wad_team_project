@@ -26,16 +26,19 @@ class Category(models.Model):
 
 # resizes a picture to a square of with sides of length (size)px 
 def resizePicture(picture, side):
-    image = Image.open(picture)
+    try:
+        image = Image.open(picture)
 
-    if image.size != (side, side):
-        (width, height) = image.size
-        scale = min(width, height)/ (side*1.0)
-        size = ( int(width/scale), int(height/scale) )
-        image = image.resize(size, Image.ANTIALIAS)
-        trim = ( side, side )
-        image = ImageOps.fit(image, trim, Image.ANTIALIAS)
-        image.save(picture.path)
+        if image.size != (side, side):
+            (width, height) = image.size
+            scale = min(width, height)/ (side*1.0)
+            size = ( int(width/scale), int(height/scale) )
+            image = image.resize(size, Image.ANTIALIAS)
+            trim = ( side, side )
+            image = ImageOps.fit(image, trim, Image.ANTIALIAS)
+            image.save(picture.path)
+    except:
+        pass
 
 # file name for recipe images
 def recipe_file_name(instance, filename):
@@ -144,7 +147,6 @@ class Recipe(models.Model):
             self.is_vegan = True
             self.is_vegetarian = True
             self.is_dairy_free = True
-        
         super(Recipe, self).save(*args, **kwargs)
 
         # resize recipe picture
