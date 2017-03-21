@@ -395,6 +395,8 @@ def newestrecipes(request):
 
 # search only for article names
 def search(request):
+    
+    
     context_dict = {}
     if request.method == "GET":
         search_text = request.GET.get('search_box', None)
@@ -404,13 +406,15 @@ def search(request):
         return render(request, 'search/search.html', context_dict)	
     if len(search_text) < 3:
           return render(request, 'search/search.html', context_dict)
-        
+
+    # search by recipe name
     recipes_name = Recipe.objects.filter(name__contains=search_text)
-    users = User.objects.filter(username__contains=search_text)
-    recipes_user = Recipe.objects.filter(user__in=users)
+    # search by username
+    recipes_user = Recipe.objects.filter(user__in=User.objects.filter(username__contains=search_text))
+    # search by description
     recipes_description = Recipe.objects.filter(description__contains=search_text)
-    recipes = list(chain(recipes_user,recipes_name,recipes_description))
-    recipes = set(recipes)
+    
+    recipes = set(list(sorted(chain(recipes_user,recipes_name,recipes_description), key=lambda instance: instance.views)))
     context_dict['recipes'] = recipes
     return render(request, 'cookbook/search.html', context_dict)
 

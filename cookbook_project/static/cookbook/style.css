@@ -8,7 +8,6 @@ a.no_u {
 
 body {
 	margin:0;
-	font-family: 'Arial 27px';
 	background-repeat: repeat;
 	background-position: center center;
 }
@@ -34,24 +33,30 @@ ul.topnav li a {
   text-align: center;
   padding: 38px 38px;
   text-decoration: none;
+  font-weight: bold;
   transition: 0.3s;
   font-size: 26px;
-  font-family: Arial serif;
+  font-family: 'Poiret One', cursive;
 }
 
 ul.topnav li a:hover:not(#search) {background-color: #555;}
+
+h1, h2, h3, h4, h5 {
+	font-family: 'Poiret One', cursive;
+	font-weight: bold;
+}
 
 .box {
     width: 70%;
     background-color: #333;
 	padding: 10px 25px;
     position: relative;
-	font-size: 17px;
+	font-size: 18px;
 	color: #f2f2f2;
     top: 170px;
     left: 15%;
 	overflow: auto;
-	font-family: Arial serif;
+	font-family: 'Josefin Sans', sans-serif;
 }
 
 #search {
@@ -217,7 +222,8 @@ right:20px;
 /* BUTTONS */
 
 button, input[type=button], input[type=submit] {
-  font-family: arial;
+  font-family: 'Poiret One', cursive;
+  font-weight: bold;
   color: #F2F2F2 !important;
   font-size: 17px;
   text-shadow: 1px 1px 1px #4A4A4A;
@@ -248,6 +254,14 @@ button:hover, input[type=button]:hover, input[type=submit]:hover {
 
 /* VIEW RECIPE ------------------------ */
 
+/* #header { */
+	/* position: relative; */
+/* } */
+
+#recipe_header {
+	display: inline-block;
+}
+
 p.widget_title {
 	margin: 0;
 	text-align: center;
@@ -255,8 +269,8 @@ p.widget_title {
 
 #save_button_holder {
 	position: absolute;
-	top: 30px;
-	right: 25px;
+	top: 10px;
+	right: -10px;
 	margin: 0 20px;
 	text-align: center;
 	font-size:15px;
@@ -273,7 +287,6 @@ p.widget_title {
 	border-style: solid none none none;
 	border-color: #4a4a4a;
 	border-width: 1px;
-	margin: 35px 0 0 0;
 	padding: 20px 0 0 0;
 }
 
@@ -431,9 +444,8 @@ p.widget_title {
 
 #star_rating_holder {
 	position: absolute;
-	top: 30px;
-	right: 175px;
-	font-size:15px;
+	top: 40px;
+	right: 150px;
 	float: right;
 }
 
