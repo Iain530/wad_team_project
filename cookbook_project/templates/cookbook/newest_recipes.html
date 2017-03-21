@@ -55,16 +55,16 @@
 				
 				<div class="dietary_info">
 					{% if recipe.is_gluten_free %}
-					<img class="dietary_image" src="{% static 'cookbook/images/gluten-free.png' %}" height="54" width="49">
+					<img class="dietary_image" src="{% static 'cookbook/images/gluten-free.png' %}" height="30" width="30">
 					{% endif %}
 					{% if recipe.is_vegan %}
-					<img class="dietary_image" src="{% static 'cookbook/images/vegan.png' %}" height="48" width="60">
+					<img class="dietary_image" src="{% static 'cookbook/images/vegan.png' %}" height="30" width="30">
 					{% else %}
 						{% if recipe.is_vegetarian %}
-						<img class="dietary_image" src="{% static 'cookbook/images/vegetarian.png' %}" height="55" width="55">
+						<img class="dietary_image" src="{% static 'cookbook/images/vegetarian.png' %}" height="30" width="30">
 						{% endif %}
 						{% if recipe.is_dairy_free %}
-						<img class="dietary_image" src="{% static 'cookbook/images/dairy-free.png' %}" height="50" width="56">
+						<img class="dietary_image" src="{% static 'cookbook/images/dairy-free.png' %}" height="30" width="30">
 						{% endif %}
 					{% endif %}
 				</div>
