@@ -4,12 +4,15 @@
 - Search
 {% endblock %}
 {% block body_block %}
-	<h2 id="seacrh_header">Search</h2>
-	
-	<input class="filter" type="checkbox" value="Vegetarian">Vegetarian
-	<input class="filter" type="checkbox" value="Vegan">Vegan
-	<input class="filter" type="checkbox" value="Gluten-free">Gluten-free
-	<input class="filter" type="checkbox" value="Dairy-free">Dairy-free
+	<div id="title_bar">
+		<h2 id="search_header">Search</h2>
+		<div id="filter_results">
+			<input class="filter" type="checkbox" id="vegetarian"><label for="vegetarian">Vegetarian</label>
+			<input class="filter" type="checkbox" id="vegan"><label for="vegan">Vegan</label>
+			<input class="filter" type="checkbox" id="gluten-free"><label for="gluten-free">Gluten-free</label>
+			<input class="filter" type="checkbox" id="dairy-free"><label for="dairy-free">Dairy-free</label>
+		</div>
+	</div>
 	{% if recipes %}
 		{% for recipe in recipes %}
 			{% include 'cookbook/include/recipe_detail.html' %}

@@ -1,5 +1,35 @@
 $(document).ready(function() {
 	
+	
+	$('.filter').change( function(event) {
+		var vegetarian = $('#vegetarian').is(":checked");
+		var vegan = $('#vegan').is(":checked");
+		var glutenfree = $('#gluten-free').is(":checked");
+		var dairyfree = $('#dairy-free').is(":checked");
+		var s_vegetarian = String(vegetarian).charAt(0).toUpperCase() + String(vegetarian).slice(1)
+		var s_vegan = String(vegan).charAt(0).toUpperCase() + String(vegan).slice(1)
+		var s_glutenfree = String(glutenfree).charAt(0).toUpperCase() + String(glutenfree).slice(1)
+		var s_dairyfree = String(dairyfree).charAt(0).toUpperCase() + String(dairyfree).slice(1)
+		
+		$('.recipe_detail').show();
+		if (vegan) {
+			$('.recipe_detail[data-vegan!=' + s_vegan + ']').hide();
+		
+		} else {
+			if (vegetarian){
+				$('.recipe_detail[data-vegetarian!=' + s_vegetarian + ']').hide();
+			}
+			if (dairyfree) {
+				$('.recipe_detail[data-dairyfree!=' + s_dairyfree + ']').hide();
+			}
+		}
+		
+		if (glutenfree) {
+			$('.recipe_detail[data-glutenfree!=' + s_glutenfree + ']').hide();
+		}
+	});
+	
+	
 	$('#discard_changes').click( function(event) {
 		if (confirm('Are you sure you want to stop editing? (Any unsaved changes will be lost)')) {
 			var url = (window.location.href).toString();

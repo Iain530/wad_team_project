@@ -406,6 +406,10 @@ def search(request):
     if len(search_text) < 3:
           return render(request, 'cookbook/search.html', context_dict)
 
+    if search_text == 'all':
+        return render(request, 'cookbook/search.html', {'recipes':Recipe.objects.all()})
+        
+
     # search by recipe name
     recipes_name = Recipe.objects.filter(name__contains=search_text)
     # search by username

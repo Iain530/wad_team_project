@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-<div class="recipe_detail">
+<div class="recipe_detail" data-vegetarian="{{ recipe.is_vegetarian }}" data-vegan="{{ recipe.is_vegan }}" data-glutenfree="{{ recipe.is_gluten_free }}" data-dairyfree="{{ recipe.is_dairy_free }}">
 	
 	<div class="recipe_name">
 		<a href="{% url 'cookbook:view_recipe' recipe.user.username recipe.slug %}">

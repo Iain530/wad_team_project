@@ -9,6 +9,7 @@ a.no_u {
 body {
 	margin:0;
 	background-repeat: repeat;
+	background-attachment:fixed;
 	background-position: center center;
 }
 
@@ -421,16 +422,21 @@ p.widget_title {
 
 /* SEARCH PAGE */
 
+#title_bar {
+	position: relative;
+}
+
 #search_header {
 	display:inline-block;
-	width:15%;
+	
 	
 }
 
 #filter_results {
 	display:inline-block;
-	width:80%;
-	text-align: right;
+	position: absolute;
+	top: 35%;
+	right: 0;
 }
 
 input.filter {
