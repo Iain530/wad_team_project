@@ -78,7 +78,7 @@ right:20px;
 	.box{width: 700px}
 }
 
-@media screen and (max-width:1310px) {
+@media screen and (max-width:1100px) {
   ul.topnav li:not(:first-child) {display: none;}
   ul.topnav li.icon {
     float: right;
@@ -86,7 +86,7 @@ right:20px;
   }
 }
 
-@media screen and (max-width:1310px) {
+@media screen and (max-width:1100px) {
   ul.topnav.responsive {position: fixed;}
   ul.topnav.responsive li.icon {
     position: absolute;

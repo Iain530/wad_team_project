@@ -4,7 +4,7 @@
 - Login
 {% endblock %}
 {% block body_block %}
-  	<h1>Login to CookBook</h1>
+  	<h2>Login to CookBook</h2>
 	<div id="login">
 		<form id="login_form" method="post" action="{% url 'cookbook:user_login' %}">
 			{% csrf_token %}

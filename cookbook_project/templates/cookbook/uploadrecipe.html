@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body_block %}
-	<h1>Upload a New Recipe</h1>
+	<h2>Upload a New Recipe</h2>
 	<div id="recipe_form_holder">
 		<form enctype="multipart/form-data" id="recipe_form" method="post" action="{% url 'cookbook:upload-recipe' %}">
 			{% csrf_token %}
