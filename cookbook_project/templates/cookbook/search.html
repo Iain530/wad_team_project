@@ -14,12 +14,12 @@
 			{% include 'cookbook/include/recipe_detail.html' %}
 		{% endfor %}
 		<p id="no_results">
-			Oh dear, it seems there's no recipes here!
+			Oh dear, it seems there're no recipes here!
 		</p>
 	{% else %}
 		<p style="text-align:center">
 			<img src="{% static 'cookbook/images/sad.png' %}" height="100" width="100"></br>
-			Either because your search entry was too short or because no recipes matched it, your search returned no results.
+			No results found! Either your search entry was too short or nothing matched.
 		</p>
 	{% endif %}
 {% endblock %}
