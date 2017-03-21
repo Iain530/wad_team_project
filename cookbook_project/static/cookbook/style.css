@@ -263,9 +263,6 @@ button:hover, input[type=button]:hover, input[type=submit]:hover {
 
 /* VIEW RECIPE ------------------------ */
 
-/* #header { */
-	/* position: relative; */
-/* } */
 
 #recipe_header {
 	display: inline-block;
@@ -425,7 +422,7 @@ p.widget_title {
 	position: relative;
 }
 
-#search_header {
+#filter_header {
 	display:inline-block;
 	
 	

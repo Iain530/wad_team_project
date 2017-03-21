@@ -8,7 +8,10 @@
 
 {% block body_block %}
 	{% if category %}
-		<h2>{{ category.name }}</h2>	
+		<div id="title_bar">
+			<h2 id="filter_header">{{ category.name }}</h2>	
+			{% include 'cookbook/include/filter_results.html' %}
+		</div>
 		{% if recipes %}
 			{% for recipe in recipes %}
 				{% include 'cookbook/include/recipe_detail.html' %}

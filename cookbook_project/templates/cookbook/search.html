@@ -5,13 +5,8 @@
 {% endblock %}
 {% block body_block %}
 	<div id="title_bar">
-		<h2 id="search_header">Search</h2>
-		<div id="filter_results">
-			<input class="filter" type="checkbox" id="vegetarian"><label for="vegetarian">Vegetarian</label>
-			<input class="filter" type="checkbox" id="vegan"><label for="vegan">Vegan</label>
-			<input class="filter" type="checkbox" id="gluten-free"><label for="gluten-free">Gluten-free</label>
-			<input class="filter" type="checkbox" id="dairy-free"><label for="dairy-free">Dairy-free</label>
-		</div>
+		<h2 id="filter_header">Search</h2>
+		{% include 'cookbook/include/filter_results.html' %}
 	</div>
 	{% if recipes %}
 		{% for recipe in recipes %}
