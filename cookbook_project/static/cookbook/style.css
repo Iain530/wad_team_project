@@ -198,6 +198,7 @@ ul.topnav li a:hover:not(#search) {background-color: #555;}
 
 .dietary_image {
 	float: right;
+	margin-left: 5px;
 }
 
 /* BUTTONS */
