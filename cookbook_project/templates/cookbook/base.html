@@ -18,7 +18,7 @@ Cookbook
 <body id="background_image" background="{% static "cookbook/images/background.jpg" %}">
 
 <ul class="topnav" id="myTopnav">
-  <li><a href="{% url 'cookbook:home' %}" style="padding:0px; background-color: transparent;"> <img id = "logo" src="{% static "cookbook/images/logo.png" %}"></a><li>
+  <li><a href="{% url 'cookbook:home' %}" style="padding:0px; background-color: transparent;"> <img id = "logo" src='{% static "cookbook/images/logo.png" %}'></a><li>
   <li><a class="active" href="{% url 'cookbook:home' %}">Home</a></li>
   <li><a href="{% url 'cookbook:categories' %}">Categories</a></li>
   {% if user.is_authenticated %}
@@ -36,7 +36,7 @@ Cookbook
   </form>
   </a></li>
     <li class="icon">
-    <a href="javascript:void(0);" onclick="myFunction()" style="font-size:2.65vh">☰</a></li>
+    <a href="javascript:void(0);" onclick="myFunction()" style="font-size:22px">☰</a></li>
   
 </ul>
 

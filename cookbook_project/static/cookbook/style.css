@@ -35,12 +35,17 @@ ul.topnav li a {
   display: inline-block;
   color: #f2f2f2;
   text-align: center;
-  padding: 4vh 4vh;
+  padding: 28px 28px;
   text-decoration: none;
   font-weight: bold;
   transition: 0.3s;
-  font-size: 3vh;
+  font-size: 21px;
   font-family: 'Poiret One', cursive;
+}
+
+#logo{
+	width:75px;
+	height:75px;
 }
 
 ul.topnav li a:hover:not(#search) {background-color: #555;}
@@ -50,17 +55,12 @@ h1, h2, h3, h4, h5 {
 	font-weight: bold;
 }
 
-#logo {
-	width: 10.5vh;
-	height: 10.5vh;
-}
-
 .box {
     width: 70%;
     background-color: #333;
 	padding: 10px 25px;
     position: relative;
-	font-size: 2vh;
+	font-size: 18px;
 	color: #f2f2f2;
     top: 170px;
     left: 15%;
@@ -74,11 +74,11 @@ position:absolute;
 right:20px;
 }
 
-@media screen and (max-width:145vh) {
-	.box{width: 101.5vh}
+@media screen and (max-width:1000px) {
+	.box{width: 700px}
 }
 
-@media screen and (max-width:145vh) {
+@media screen and (max-width:1310px) {
   ul.topnav li:not(:first-child) {display: none;}
   ul.topnav li.icon {
     float: right;
@@ -86,26 +86,26 @@ right:20px;
   }
 }
 
-@media screen and (max-width:145vh) {
+@media screen and (max-width:1310px) {
   ul.topnav.responsive {position: fixed;}
   ul.topnav.responsive li.icon {
-	position:absolute;
+    position: absolute;
     right: 0;
     top: 0;
   }
-  ul.topnav.responsive li:not(.icon) {
+  ul.topnav.responsive li {
     float: none;
     display: inline;
   }
-  ul.topnav.responsive li:not(.icon) a {
+  ul.topnav.responsive li a {
     display: block;
     text-align: left;
-	font-size: 2.2vh;
-	padding: 1.7vh;
+	font-size: 20px;
+	padding: 20px;
   }
   #search {
 	  position: relative;
-	  padding-left: 5vh;
+	  padding-left: 50px;
   }
 }
 
@@ -175,7 +175,7 @@ right:20px;
 }
 
 .recipe_name {
-	font-size: 2.5vh;
+	font-size: 20px;
 	margin: 0 5px 5px 0;
 }
 
@@ -190,7 +190,7 @@ right:20px;
 	position: absolute;
 	top: 15px;
 	right: 15px;
-	font-size: 2vh;
+	font-size: 15px;
 	text-align: right;
 }
 
@@ -215,6 +215,7 @@ right:20px;
 	display: inline-block;
 }
 
+
 .dietary_info {
 	margin: 5px;
 	position: absolute;
@@ -227,20 +228,13 @@ right:20px;
 	margin-left: 5px;
 }
 
-.dietary_image_key {
-	display: inline-block;
-	position: relative;
-	top: 8px;
-	margin-left: 5px;
-}
-
 /* BUTTONS */
 
 button, input[type=button], input[type=submit] {
   font-family: 'Poiret One', cursive;
   font-weight: bold;
   color: #F2F2F2 !important;
-  font-size: 2vh;
+  font-size: 17px;
   text-shadow: 1px 1px 1px #4A4A4A;
   padding: 3px 15px;
   -moz-border-radius: 5px;
@@ -288,6 +282,7 @@ p.widget_title {
 	right: -10px;
 	margin: 0 20px;
 	text-align: center;
+	font-size:15px;
 }
 
 #save_button {
@@ -330,7 +325,7 @@ p.widget_title {
 }
 
 .comment_user {
-	font-size: 2vh;
+	font-size: 15px;
 	margin: 0;
 }
 
@@ -436,7 +431,7 @@ p.widget_title {
 
 .category_name {
 	text-align: center;
-	font-size: 2vh;
+	font-size: 20px;
 	margin: 0 5px 5px 5px;
 }
 
@@ -475,7 +470,7 @@ input.star { display: none; }
 label.star {
   float: right;
   padding: 10px;
-  font-size: 3vh;
+  font-size: 25px;
   color: #444;
   transition: all .2s;
 }
@@ -532,4 +527,3 @@ table {
 	border: 1px solid #f2f2f2;
 	margin: 0 auto;
 }
-
