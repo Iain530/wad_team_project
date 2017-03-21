@@ -60,7 +60,7 @@ h1, h2, h3, h4, h5 {
     background-color: #333;
 	padding: 10px 25px;
     position: relative;
-	font-size: 18px;
+	font-size: 1.8vh;
 	color: #f2f2f2;
     top: 170px;
     left: 15%;
@@ -100,7 +100,7 @@ right:20px;
   ul.topnav.responsive li a {
     display: block;
     text-align: left;
-	font-size: 20px;
+	font-size: 2.2vh;
 	padding: 20px;
   }
   #search {
@@ -175,7 +175,7 @@ right:20px;
 }
 
 .recipe_name {
-	font-size: 20px;
+	font-size: 2.2vh;
 	margin: 0 5px 5px 0;
 }
 
@@ -190,7 +190,7 @@ right:20px;
 	position: absolute;
 	top: 15px;
 	right: 15px;
-	font-size: 15px;
+	font-size: 1.6vh;
 	text-align: right;
 }
 
@@ -214,7 +214,6 @@ right:20px;
 .recipe_rating, .recipe_spicy {
 	display: inline-block;
 }
-
 
 .dietary_info {
 	margin: 5px;
@@ -241,7 +240,7 @@ button, input[type=button], input[type=submit] {
   font-family: 'Poiret One', cursive;
   font-weight: bold;
   color: #F2F2F2 !important;
-  font-size: 17px;
+  font-size: 2vh;
   text-shadow: 1px 1px 1px #4A4A4A;
   padding: 3px 15px;
   -moz-border-radius: 5px;
@@ -289,7 +288,6 @@ p.widget_title {
 	right: -10px;
 	margin: 0 20px;
 	text-align: center;
-	font-size:15px;
 }
 
 #save_button {
@@ -332,7 +330,7 @@ p.widget_title {
 }
 
 .comment_user {
-	font-size: 15px;
+	font-size: 1.6vh;
 	margin: 0;
 }
 
@@ -435,7 +433,7 @@ p.widget_title {
 
 .category_name {
 	text-align: center;
-	font-size: 20px;
+	font-size: 2vh;
 	margin: 0 5px 5px 5px;
 }
 
@@ -474,7 +472,7 @@ input.star { display: none; }
 label.star {
   float: right;
   padding: 10px;
-  font-size: 25px;
+  font-size: 3vh;
   color: #444;
   transition: all .2s;
 }
