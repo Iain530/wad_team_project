@@ -1,3 +1,4 @@
 cookbook_project/cookbook/migrations/
 *.pyc
 cookbook_project/db.sqlite3
+cookbook_project/cookbook_project/settings.py
