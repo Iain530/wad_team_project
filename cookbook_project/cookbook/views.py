@@ -13,7 +13,6 @@ from cookbook.forms import UserForm, RecipeForm, CommentForm
 from django.forms.models import model_to_dict
 # DATETIME IMPORTS
 from datetime import datetime, timedelta
-
 from itertools import chain
 
 
@@ -31,7 +30,6 @@ def username_check(request):
 
     return HttpResponse(available)
     
-
 
 @login_required
 def rate_recipe(request):
@@ -405,7 +403,8 @@ def search(request):
     if search_text == "":
         return render(request, 'search/search.html', context_dict)	
     if len(search_text) < 3:
-          return render(request, 'search/search.html', context_dict)	
+          return render(request, 'search/search.html', context_dict)
+        
     recipes_name = Recipe.objects.filter(name__contains=search_text)
     users = User.objects.filter(username__contains=search_text)
     recipes_user = Recipe.objects.filter(user__in=users)
@@ -413,7 +412,7 @@ def search(request):
     recipes = list(chain(recipes_user,recipes_name,recipes_description))
     recipes = set(recipes)
     context_dict['recipes'] = recipes
-    return render(request, 'search/search.html', context_dict)
+    return render(request, 'cookbook/search.html', context_dict)
 
 #-HELP-SECTION------------------------------------------------------------
 
