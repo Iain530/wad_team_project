@@ -21,6 +21,10 @@ ul.topnav {
   overflow: hidden;
   background-color: #333;
   z-index:999;
+  border-style: none none solid none;
+  border-color: #555;
+  border-width: 1px;
+ 
 }
 
 ul.topnav li {float: left;}

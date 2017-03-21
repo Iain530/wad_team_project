@@ -28,7 +28,7 @@ WHOOSH_INDEX = os.path.join(BASE_DIR, 'whoosh')
 SECRET_KEY = '7(olc*@nkxpj003ckd))6ahcy(#tfrta67=x0$e=bq6t&vmy*s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['2200049m.pythonanywhere.com']
 
