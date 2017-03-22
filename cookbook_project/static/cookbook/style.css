@@ -114,6 +114,14 @@ h1, h2, h3, h4, h5 {
   }
 }
 
+/* HOME PAGE */
+.home_upload {
+	position: absolute;
+	text-align: right;
+	top: 32px;
+	right: 28px;
+}
+
 /* SIGN UP PAGE */
 
 #signup{
@@ -160,7 +168,12 @@ h1, h2, h3, h4, h5 {
 
 #login_form > input:not([type=submit]) {
 	float: right;
-} 
+}
+
+/* VIEW MY PROFILE-------------------------------- */
+.recipe_options {
+	text-align: center;
+}
 
 
 /* VIEWING RECIPE LISTS--------------------------- */

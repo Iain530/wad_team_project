@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body_block %}
-	<h2>Best Rated Recipes This Week</h2>
+	<h2>Best Rated - This Week</h2>
 	{% if weekly %}
 		{% for recipe in weekly %}
 			{% include 'cookbook/include/recipe_detail.html' %}
@@ -15,7 +15,7 @@
 	{% else %}
 		No top recipes yet!
 	{% endif %}
-	<h2>Best Rated Recipes Of All Time</h2>
+	<h2>Best Rated - All Time</h2>
 	{% if alltime %}
 		{% for recipe in alltime %}
 			{% include 'cookbook/include/recipe_detail.html' %}

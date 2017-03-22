@@ -5,32 +5,7 @@
 - Saved Recipes
 {% endblock %}
 {% block body_block %}
-	<h2>My Profile - {{ user.username }}</h2>
-	
-	<div id="recent_comments">
-	<h2>Recent comments</h2>
-	{% if recent_comments %}
-		{% for comment in recent_comments %}
-				<div class="comment_box">
-				<p class="comment_user">
-				<a href="{% url 'cookbook:view_user' comment.user.username %}">{{ comment.user }}</a>
-				on {{ comment.upload_date }} about
-				<a href="{% url 'cookbook:view_recipe' comment.recipe.user comment.recipe.slug %}">{{ comment.recipe.name }}</a>
-				</p>
-				<p class="comment_text">
-				{{ comment.text }}
-				</p>
-				</div>
-		{% endfor %}
-	{% else %}
-		No comments yet!
-	{% endif %}
-	</div>
-	
-	<div class="recipe_list">
-	<h2>
-	<a class="active" href="{% url 'cookbook:myprofile' %}">My Recipes</a> | Saved Recipes</a> | <a class="active" href="{% url 'cookbook:upload-recipe' %}">Add Recipe</a>
-	</h2>
+	<h2>Saved Recipes</h2>
 	{% if saved_recipes %}
 		{% for recipe in saved_recipes %}
 			{% include 'cookbook/include/recipe_detail.html' %}

@@ -7,6 +7,13 @@
 {% block body_block %}
 	<h2>My Profile - {{ user.username }}</h2>
 	
+	<div class="recipe_options">
+		<h2>
+			<a class="active" href="{% url 'cookbook:saved-recipes' %}">Saved Recipes</a> | 
+			<a class="active" href="{% url 'cookbook:upload-recipe' %}">Upload Recipe</a>
+		</h2>
+	</div>
+	
 	<div id="recent_comments">
 	<h2>Recent comments</h2>
 	{% if recent_comments %}
@@ -30,7 +37,6 @@
 	<div class="recipe_list" id="my_recipe_list">
 	<h2>
 	My Recipes
-	 | <a class="active" href="{% url 'cookbook:saved-recipes' %}">Saved Recipes</a> | <a class="active" href="{% url 'cookbook:upload-recipe' %}">Add Recipe</a>
 	</h2>
 	{% if recipes %}
 		<div class="recipe_list">
