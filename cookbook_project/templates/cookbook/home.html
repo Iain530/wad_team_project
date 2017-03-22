@@ -37,6 +37,13 @@
 	</p>	
 	<div class="recipe_list">
 	<h2><a class="no_u" href="{% url 'cookbook:newest-recipes' %}">Newest Recipes</a></h2>
+	
+	{% if user.is_authenticated %}
+		<div class="recipe_detail" id="add_recipe">
+			<a href="{% url 'cookbook:upload-recipe' %}">Add your own recipe</a>
+		</div>
+	{% endif %}
+	
 	{% if new_recipes %}
 		{% for recipe in new_recipes %}
 			{% include 'cookbook/include/recipe_detail.html' %}

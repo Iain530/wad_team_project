@@ -35,7 +35,7 @@ $(document).ready(function() {
 		}
 	});
 	
-	
+	// Discard changes when editing recipe and redirect back to recipe
 	$('#discard_changes').click( function(event) {
 		if (confirm('Are you sure you want to stop editing? (Any unsaved changes will be lost)')) {
 			var url = (window.location.href).toString();

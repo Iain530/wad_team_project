@@ -7,7 +7,6 @@ view total rating when viewing recipe,
 make 'saved recipe' page more similar to 'my recipes' page,
 
 NEED TO FIX----------------------------------
-formatting in the recipe method,
 
 BUGS-----------------------------------------
 

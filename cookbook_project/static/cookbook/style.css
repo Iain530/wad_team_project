@@ -70,9 +70,13 @@ h1, h2, h3, h4, h5 {
 }
 
 #search {
-margin: 0; 
-position:absolute; 
-right:20px;
+	margin: 0; 
+	position:absolute; 
+	right:20px;
+}
+
+#search_box, #search_submit{
+	vertical-align: middle;
 }
 
 @media screen and (max-width:1000px) {
@@ -163,6 +167,13 @@ right:20px;
 
 .recipe_list {
 
+}
+
+#add_recipe {
+	text-align: center;
+	margin: 0 auto;
+	width: 25%;
+	padding: 5px 0;
 }
 
 .recipe_detail {
@@ -294,7 +305,7 @@ p.widget_title {
 }
 
 
-#view_recipe_desc {
+#description_section {
 	position: relative;
 	overflow: auto;
 	border-style: solid none none none;
@@ -307,6 +318,10 @@ p.widget_title {
 	float: left;
 	margin: 5px 25px 10px 0;
 	border: 1px solid #f2f2f2;
+}
+
+#view_recipe_desc {
+	width:60%;
 }
 
 #method_section, #comment_section, #ingredients {
@@ -343,6 +358,12 @@ p.widget_title {
 
 #post_comment_button {
 	margin: 0 0 0 10px;
+	position: relative;
+	top: 2px;
+}
+
+input#id_text {
+	width: 65%;
 }
 
 
