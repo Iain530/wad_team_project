@@ -27,9 +27,9 @@ MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 SECRET_KEY = '7(olc*@nkxpj003ckd))6ahcy(#tfrta67=x0$e=bq6t&vmy*s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['2200049m.pythonanywhere']
 
 
 # Application definition
@@ -42,9 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cookbook',
-    #search app
-    'haystack',
-	'whoosh',
 	
 ]
 
@@ -144,11 +141,3 @@ STATICFILES_DIRS = [STATIC_DIR, ]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-# Haystack
-
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
-        'PATH': WHOOSH_INDEX,
-    },
-}

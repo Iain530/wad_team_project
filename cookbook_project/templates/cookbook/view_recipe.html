@@ -65,56 +65,61 @@
 		</div>
 
 		<div id="view_recipe_desc">
-		<img src="{{ MEDIA_URL }}{{ recipe.picture }}" id="view_recipe_image" height="200" width="200">
-		
-		<div>
-		<i>"{{ recipe.description }}"</i></br></br>
-		serves: {{ recipe.serves }}</br>
-		cooking time: {{ recipe.cooking_time }} minutes</br>
-		{% if recipe.spice > 0 %}
-		<div class="recipe_spicy">
-		Spice:&nbsp;
-		{% with ''|center:recipe.spice as range %}
-		{% for _ in range %}
-			<img class="spicy" src="{% static 'cookbook/images/spicy.png' %}" height="14" width="15">			
-		{% endfor %}
-		{% endwith %}
-		</div>
-		{% endif %}
-		</div>
-		
-		<div id="ingredients">
-		<h3>Ingredients</h3>
-		{% if recipe.ingredients %}
-			{{ recipe.ingredients }}
-		{% else %}
-			No ingredients!
-		{% endif %}
-		</div>
-		
-		<div class="dietary_info">
-			{% if recipe.is_gluten_free %}
-			<img class="dietary_image" src="{% static 'cookbook/images/gluten-free.png' %}" height="30" width="30">
-			{% endif %}
-			{% if recipe.is_vegan %}
-			<img class="dietary_image" src="{% static 'cookbook/images/vegan.png' %}" height="30" width="30">
-			{% else %}
-				{% if recipe.is_vegetarian %}
-				<img class="dietary_image" src="{% static 'cookbook/images/vegetarian.png' %}" height="30" width="30">
+			<img src="{{ MEDIA_URL }}{{ recipe.picture }}" id="view_recipe_image" height="200" width="200">
+					
+			<div>
+				<i>"{{ recipe.description }}"</i></br></br>
+				serves: {{ recipe.serves }}</br>
+				cooking time: {{ recipe.cooking_time }} minutes</br>
+				{% if recipe.spice > 0 %}
+				<div class="recipe_spicy">
+					Spice:&nbsp;
+					{% with ''|center:recipe.spice as range %}
+					{% for _ in range %}
+						<img class="spicy" src="{% static 'cookbook/images/spicy.png' %}" height="14" width="15">			
+					{% endfor %}
+					{% endwith %}
+				</div>
 				{% endif %}
-				{% if recipe.is_dairy_free %}
-				<img class="dietary_image" src="{% static 'cookbook/images/dairy-free.png' %}" height="30" width="30">
-				{% endif %}
-			{% endif %}
+			</div>
 			
+			<div class="recipe_date">
+				uploaded: {{ recipe.upload_date }}</br>
+				{% if recipe.last_modified %}
+					last modified: {{ recipe.last_modified }}
+				{% endif %}
+			</div>
+			
+			<div class="dietary_info">
+				{% if recipe.is_gluten_free %}
+				<img class="dietary_image" src="{% static 'cookbook/images/gluten-free.png' %}" height="30" width="30">
+				{% endif %}
+				{% if recipe.is_vegan %}
+				<img class="dietary_image" src="{% static 'cookbook/images/vegan.png' %}" height="30" width="30">
+				{% else %}
+					{% if recipe.is_vegetarian %}
+					<img class="dietary_image" src="{% static 'cookbook/images/vegetarian.png' %}" height="30" width="30">
+					{% endif %}
+					{% if recipe.is_dairy_free %}
+					<img class="dietary_image" src="{% static 'cookbook/images/dairy-free.png' %}" height="30" width="30">
+					{% endif %}
+				{% endif %}
+			</div>
+		
 		</div>
 		
-		
-		</div>
+		<p id="ingredients">
+			<h3>Ingredients</h3>
+			{% if recipe.ingredients %}
+				{{ recipe.ingredients|linebreaks }}
+			{% else %}
+				No ingredients!
+			{% endif %}
+		</p>
 		
 		<p id="method_section">
 		<h3>Method</h3>
-		{{ recipe.method }}</br>
+		{{ recipe.method|linebreaks }}</br>
 		</p>
 		
 		<div id="comment_section">
