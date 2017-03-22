@@ -110,6 +110,14 @@ right:20px;
   }
 }
 
+/* HOME PAGE */
+.home_upload {
+	position: absolute;
+	text-align: right;
+	top: 32px;
+	right: 28px;
+}
+
 /* SIGN UP PAGE */
 
 #signup{
