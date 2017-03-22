@@ -309,11 +309,7 @@ p.widget_title {
 	border: 1px solid #f2f2f2;
 }
 
-#ingredients {
-	width: 80%;
-}
-
-#method_section, #comment_section {
+#method_section, #comment_section, #ingredients {
 	border-style: solid none none none;
 	border-color: #4a4a4a;
 	border-width: 1px;
