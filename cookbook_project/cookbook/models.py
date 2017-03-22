@@ -60,6 +60,8 @@ class Recipe(models.Model):
     total_rating = models.FloatField(default=0)
     no_of_ratings = models.PositiveIntegerField(default=0)
     weighted_rating = models.FloatField(default=0)
+
+    no_of_comments = models.PositiveIntegerField(default=0)
     
     upload_date = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(null=True)

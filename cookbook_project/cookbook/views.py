@@ -329,8 +329,11 @@ def view_recipe(request, user, recipe_slug):
         if commentForm.is_valid():
             comment = commentForm.save(commit=False)
             comment.user = request.user
-            comment.recipe = Recipe.objects.get(user=User.objects.get(username=user), slug=recipe_slug)
+            recipe = Recipe.objects.get(user=User.objects.get(username=user), slug=recipe_slug)
+            comment.recipe = recipe
             comment.save()
+            recipe.no_of_comments += 1
+            recipe.save()
 
             return HttpResponseRedirect(reverse('cookbook:view_recipe', args=[user, recipe_slug]))
     
