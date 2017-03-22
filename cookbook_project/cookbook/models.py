@@ -11,6 +11,9 @@ class Category(models.Model):
     # Primary key
     name = models.CharField(max_length=128, primary_key=True)
     picture = models.ImageField(upload_to="category_images", blank=True)
+	
+    class Meta:
+        verbose_name_plural = 'Categories'	
 
     def __str__(self):
         return self.name

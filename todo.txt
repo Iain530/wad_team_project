@@ -8,9 +8,6 @@ make 'saved recipe' page more similar to 'my recipes' page,
 
 NEED TO FIX----------------------------------
 formatting in the recipe method,
-admin page,
- -'categorys',
- -'django administration',
 
 BUGS-----------------------------------------
 
