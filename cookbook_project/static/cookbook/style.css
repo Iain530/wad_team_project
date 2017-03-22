@@ -156,7 +156,12 @@ right:20px;
 
 #login_form > input:not([type=submit]) {
 	float: right;
-} 
+}
+
+/* VIEW MY PROFILE-------------------------------- */
+.recipe_options {
+	text-align: center;
+}
 
 
 /* VIEWING RECIPE LISTS--------------------------- */

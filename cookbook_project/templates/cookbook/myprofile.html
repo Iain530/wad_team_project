@@ -27,10 +27,16 @@
 	{% endif %}
 	</div>
 	
+	<div class="recipe_options">
+		<h2>
+			<a class="active" href="{% url 'cookbook:saved-recipes' %}">Saved Recipes</a> | 
+			<a class="active" href="{% url 'cookbook:upload-recipe' %}">Upload Recipe</a>
+		</h2>
+	</div>
+	
 	<div class="recipe_list" id="my_recipe_list">
 	<h2>
 	My Recipes
-	 | <a class="active" href="{% url 'cookbook:saved-recipes' %}">Saved Recipes</a> | <a class="active" href="{% url 'cookbook:upload-recipe' %}">Add Recipe</a>
 	</h2>
 	{% if recipes %}
 		<div class="recipe_list">

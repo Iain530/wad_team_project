@@ -36,7 +36,7 @@
 	
 	</p>	
 	<div class="recipe_list">
-	<h2><a class="no_u" href="{% url 'cookbook:newest-recipes' %}">Newest Recipes</a></h2>
+	<h2><a href="{% url 'cookbook:newest-recipes' %}">Newest Recipes</a></h2>
 	{% if new_recipes %}
 		{% for recipe in new_recipes %}
 			{% include 'cookbook/include/recipe_detail.html' %}
@@ -47,7 +47,7 @@
 	</div>
 	
 	<div class="recipe_list">
-	<h2><a class="no_u" href="{% url 'cookbook:best-rated' %}">Best Rated This Week</a></h2>
+	<h2><a href="{% url 'cookbook:best-rated' %}">Best Rated Recipes</a></h2>
 	{% if best_rated %}
 		{% for recipe in best_rated %}
 			{% include 'cookbook/include/recipe_detail.html' %}
