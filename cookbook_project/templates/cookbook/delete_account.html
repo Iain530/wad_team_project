@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% extends 'cookbook/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+	- Delete Account
+{% endblock %}
+
+{% block body_block %}
+	<h2>Delete Your Account</h2>
+	<div id="delete_account">
+		{% if deleted %}
+			Your account has been deleted. We're sorry to see you go. <img src="{% static 'cookbook/images/sad.png' %}" height="50" width="50">
+		{% else %}
+			<form id="form" method="post" action="{% url 'cookbook:delete_account' %}" enctype="multipart/form-data">
+				{% csrf_token %}
+				Please confirm that you really want to delete your Cookbook account. There is no way to undo this action. {{ form.as_p }}
+				<div class="button_wrapper">
+					<input id="delete_account_button" type="submit" name="submit" value="Delete your account" disabled="true"/>
+				</div>
+		
+		
+			</form>
+		{% endif %}
+	</div>
+{% endblock %}

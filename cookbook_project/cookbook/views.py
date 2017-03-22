@@ -9,7 +9,7 @@ from django.utils import timezone
 from django.db import IntegrityError
 # COOKBOOK IMPORTS
 from cookbook.models import Category, Recipe, Comment, Rating
-from cookbook.forms import UserForm, RecipeForm, CommentForm
+from cookbook.forms import UserForm, RecipeForm, CommentForm, DeleteUserForm
 from django.forms.models import model_to_dict
 # DATETIME IMPORTS
 from datetime import datetime, timedelta
@@ -196,6 +196,29 @@ def myprofile(request):
     context_dict['recipes'] = recipes
 
     return render(request, 'cookbook/myprofile.html', context_dict)
+
+@login_required
+def account_settings(request):
+    return render(request, 'cookbook/account_settings.html')
+
+def delete_account(request):
+    context_dict = {}
+    deleted = False
+    
+    if request.method == 'POST':
+        confirm = request.POST.get('confirm')
+        if confirm:
+            try:
+                request.user.delete()
+            except:
+                pass
+            deleted = True
+
+    context_dict['deleted'] = deleted
+    context_dict['form'] = DeleteUserForm()
+    
+    return render(request, 'cookbook/delete_account.html', context_dict)
+
 
 @login_required
 def savedrecipes(request):

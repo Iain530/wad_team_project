@@ -9,8 +9,12 @@
 	<h2>Welcome to Cookbook</h2>
 	
 	{% if user.is_authenticated %}
-	<h2><a class="home_upload" href="{% url 'cookbook:upload-recipe' %}">Upload Recipe</a></h2>
+		<div id="home_upload">
+			<a href="{% url 'cookbook:upload-recipe' %}">Add your own recipe</a>
+		</div>
 	{% endif %}
+	
+	<!-- <h2><a class="home_upload" href="{% url 'cookbook:upload-recipe' %}"><small>Upload Recipe</small></a></h2> -->
 	
 	Vegetarian <img class="dietary_image_key" src="{% static 'cookbook/images/vegetarian.png' %}" height="30" width="30"> 
 	| Vegan <img class="dietary_image_key" src="{% static 'cookbook/images/vegan.png' %}" height="30" width="30">
@@ -42,14 +46,6 @@
 	</p>	
 	<div class="recipe_list">
 	<h2><a class="no_u" href="{% url 'cookbook:newest-recipes' %}">Newest Recipes</a></h2>
-	
-	{% if user.is_authenticated %}
-		<div class="recipe_detail" id="add_recipe">
-			<a href="{% url 'cookbook:upload-recipe' %}">Add your own recipe</a>
-		</div>
-	{% endif %}
-	
-	<h2><a href="{% url 'cookbook:newest-recipes' %}">Newest Recipes</a></h2>
 	
 	{% if new_recipes %}
 		{% for recipe in new_recipes %}

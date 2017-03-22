@@ -1,5 +1,13 @@
 $(document).ready(function() {
 	
+	$('#id_confirm').change( function(event) {
+		var conf = $(this).is(':checked');
+		if (conf) {
+			$('#delete_account_button').prop('disabled', false);
+		} else {
+			$('#delete_account_button').prop('disabled', true);
+		}
+	});
 	
 	$('.filter').change( function(event) {
 		var vegetarian = $('#vegetarian').is(":checked");

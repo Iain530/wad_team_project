@@ -115,11 +115,14 @@ h1, h2, h3, h4, h5 {
 }
 
 /* HOME PAGE */
-.home_upload {
+#home_upload {
 	position: absolute;
-	text-align: right;
-	top: 32px;
-	right: 28px;
+	top: 33px;
+	right: 30px;
+	background: #4a4a4a;
+	border: 1px solid #f2f2f2;
+	text-align: center;
+	padding: 5px 10px;
 }
 
 /* SIGN UP PAGE */
@@ -175,18 +178,20 @@ h1, h2, h3, h4, h5 {
 	text-align: center;
 }
 
+#settings_link {
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	background: #4a4a4a;
+	border: 1px solid #f2f2f2;
+	text-align: center;
+	padding: 5px 10px;
+}
 
 /* VIEWING RECIPE LISTS--------------------------- */
 
 .recipe_list {
 
-}
-
-#add_recipe {
-	text-align: center;
-	margin: 0 auto;
-	width: 25%;
-	padding: 5px 0;
 }
 
 .recipe_detail {
@@ -585,4 +590,11 @@ span.stars span {
 table {
 	border: 1px solid #f2f2f2;
 	margin: 0 auto;
+}
+
+/* ACCOUNT SETTINGS */
+
+#delete_account {
+	text-align: center;
+	
 }

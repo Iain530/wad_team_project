@@ -53,5 +53,9 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('text',)
+
+class DeleteUserForm(forms.Form):
+    confirm = forms.BooleanField(required=True, label='Confirm')
+
     
     
