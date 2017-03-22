@@ -183,8 +183,8 @@ class Rating(models.Model):
     value = models.PositiveSmallIntegerField()
 
     def __str__(self):
-        return self.value	
+        return str(self.value)	
     def __unicode__(self):
-        return self.value
+        return unicode(self.value)
 
     
