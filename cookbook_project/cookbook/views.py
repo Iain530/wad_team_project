@@ -205,8 +205,15 @@ def myprofile(request):
 @login_required
 def savedrecipes(request):
     context_dict = {}
-
+	
     saved_recipes = Recipe.objects.filter(saved_by=request.user)[::-1]
+	
+    recipes = Recipe.objects.filter(user=request.user)
+    recent_comments = Comment.objects.filter(recipe__in=recipes)
+    if recent_comments:
+        recent_comments = recent_comments.order_by('-upload_date')[:10]
+
+    context_dict['recent_comments'] = recent_comments
     context_dict['saved_recipes'] = saved_recipes
     
     return render(request, 'cookbook/saved_recipes.html', context_dict)
