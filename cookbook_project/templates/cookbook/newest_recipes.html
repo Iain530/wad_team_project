@@ -15,6 +15,9 @@
 		{% for recipe in recipes %}
 			{% include 'cookbook/include/recipe_detail.html' %}
 		{% endfor %}
+		<p id="no_results">
+			Oh dear, it seems there's no recipes here!
+		</p>
 	{% else %}
 		No recipes yet!
 	{% endif %}

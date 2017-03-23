@@ -6,6 +6,10 @@ a.no_u {
 	text-decoration: none;
 }
 
+a.no_u:hover {
+	text-decoration: underline;
+}
+
 body {
 	margin:0;
 	background-repeat: repeat;
@@ -266,6 +270,7 @@ h1, h2, h3, h4, h5 {
 }
 
 /* BUTTONS */
+/* These were originally generated online but edited by us */
 
 button, input[type=button], input[type=submit] {
   font-family: 'Poiret One', cursive;
@@ -277,7 +282,7 @@ button, input[type=button], input[type=submit] {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
-  border: 1px solid #333;
+  border: 1px solid #222;
   background: #4A4A4A;
   background: linear-gradient(top,  #7A7A7A,  #4A4A4A);
   background: -ms-linear-gradient(top,  #7A7A7A,  #4A4A4A);
@@ -554,6 +559,9 @@ div.stars {
   display: inline-block;
 }
 
+/* this css taken from http://www.cssscript.com/simple-5-star-rating-system-with-css-and-html-radios/
+   and edited slightly */
+
 input.star { display: none; }
  
 label.star {
@@ -586,6 +594,7 @@ label.star:before {
 
 
 /* LIST STAR RATING */
+/* taken from stack overflow: http://stackoverflow.com/questions/1987524/turn-a-number-into-star-rating-display-using-jquery-and-css */
 
 span.stars, span.stars span {
     display: inline-block;

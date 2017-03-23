@@ -1,5 +1,7 @@
 $(document).ready(function() {
 	
+	// Disable delete account button until confirm is checked
+	// (Account still cannot be deleted due to the form even if button wasn't disabled)
 	$('#id_confirm').change( function(event) {
 		var conf = $(this).is(':checked');
 		if (conf) {
@@ -9,34 +11,41 @@ $(document).ready(function() {
 		}
 	});
 	
+	// filtering
 	$('.filter').change( function(event) {
+		// get the filters wanted
 		var vegetarian = $('#vegetarian').is(":checked");
 		var vegan = $('#vegan').is(":checked");
 		var glutenfree = $('#gluten-free').is(":checked");
 		var dairyfree = $('#dairy-free').is(":checked");
-		var s_vegetarian = String(vegetarian).charAt(0).toUpperCase() + String(vegetarian).slice(1)
-		var s_vegan = String(vegan).charAt(0).toUpperCase() + String(vegan).slice(1)
-		var s_glutenfree = String(glutenfree).charAt(0).toUpperCase() + String(glutenfree).slice(1)
-		var s_dairyfree = String(dairyfree).charAt(0).toUpperCase() + String(dairyfree).slice(1)
 		
+		// show all recipes
 		$('.recipe_detail').show();
+		
+		// hide unwanted recipes
 		if (vegan) {
+			// converting true to 'True'
+			var s_vegan = String(vegan).charAt(0).toUpperCase() + String(vegan).slice(1);
 			$('.recipe_detail[data-vegan!=' + s_vegan + ']').hide();
 		
 		} else {
 			if (vegetarian){
+				var s_vegetarian = String(vegetarian).charAt(0).toUpperCase() + String(vegetarian).slice(1);
 				$('.recipe_detail[data-vegetarian!=' + s_vegetarian + ']').hide();
 			}
 			if (dairyfree) {
+				var s_dairyfree = String(dairyfree).charAt(0).toUpperCase() + String(dairyfree).slice(1);
 				$('.recipe_detail[data-dairyfree!=' + s_dairyfree + ']').hide();
 			}
 		}
 	
 		if (glutenfree) {
+			var s_glutenfree = String(glutenfree).charAt(0).toUpperCase() + String(glutenfree).slice(1);
 			$('.recipe_detail[data-glutenfree!=' + s_glutenfree + ']').hide();
 		}
 		
-		if ($('.recipe_detail:visible').length == 0) {
+		// if all recipes were hidden then show a no results message
+		if ($('.recipe_detail:visible').length === 0) {
 			$('#no_results').show();
 		} else {
 			$('#no_results').hide();
@@ -57,10 +66,10 @@ $(document).ready(function() {
 		// Get the users previous rating
 		var rating = $('.stars').attr('data-initial');
 		// Display the users previous rating
-		$("#star-" + rating).prop("checked",true)
+		$("#star-" + rating).prop("checked",true);
 	});
 	
-	
+	// These two functions taken from http://stackoverflow.com/questions/1987524/turn-a-number-into-star-rating-display-using-jquery-and-css
 	// Stars for displaying the recipe rating in the list
 	// Displays star rating on recipe detail
 	$(function() {
@@ -79,7 +88,7 @@ $(document).ready(function() {
 			// Replace the numerical value with stars
 			$(this).html($span);
 		});
-	}
+	};
 	
 });
 
