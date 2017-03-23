@@ -26,10 +26,7 @@
 			
 			{% endif %}
 			</h2>
-			
-
-			
-			<div id="save_button_holder">
+		
 			{% if user.is_authenticated %}
 			<p class="widget_title"></p>
 			<button id="save_button" data-slug="{{ recipe.slug }}" data-user="{{ recipe.user }}"
@@ -41,7 +38,6 @@
 			{% endif %}
 			</button>
 			{% endif %}
-			</div>
 			
 			{% if user.is_authenticated and user != recipe.user %}
 			<div id="star_rating_holder">

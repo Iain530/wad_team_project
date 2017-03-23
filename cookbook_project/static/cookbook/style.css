@@ -185,7 +185,7 @@ h1, h2, h3, h4, h5 {
 
 #settings_link {
 	position: absolute;
-	top: 30px;
+	top: 33px;
 	right: 30px;
 	text-align: center;
 }
@@ -203,6 +203,7 @@ h1, h2, h3, h4, h5 {
 	position: relative;
 	background: #4a4a4a;
 	border: 1px solid #aaaaaa;
+	border-radius: 2px;
 	
 }
 
@@ -275,9 +276,9 @@ button, input[type=button], input[type=submit] {
   font-size: 17px;
   text-shadow: 1px 1px 1px #4A4A4A;
   padding: 3px 15px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
   border: 1px solid #333;
   background: #4A4A4A;
   background: linear-gradient(top,  #7A7A7A,  #4A4A4A);
@@ -311,17 +312,10 @@ p.widget_title {
 	text-align: center;
 }
 
-#save_button_holder {
-	position: absolute;
-	top: 10px;
-	right: -10px;
-	margin: 0 20px;
-	text-align: center;
-	font-size:15px;
-}
-
 #save_button {
-	margin: 10px;
+	position: absolute;
+	top: 33px;
+	right: 30px;
 }
 
 
@@ -523,7 +517,7 @@ input.filter {
 
 #star_rating_holder {
 	position: absolute;
-	top: 40px;
+	top: 30px;
 	right: 150px;
 	float: right;
 }
