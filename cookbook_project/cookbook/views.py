@@ -15,8 +15,6 @@ from django.forms.models import model_to_dict
 from datetime import datetime, timedelta
 from itertools import chain
 
-from django.contrib.staticfiles.templatetags.staticfiles import static
-
 
 #-HELPER-FUNCTIONS------------------------------------------------------
 

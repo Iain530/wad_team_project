@@ -95,6 +95,7 @@ class ChangePasswordForm(forms.Form):
         password = self.cleaned_data.get('old')
         if not authenticate(username=self.user.username, password=password):
             raise forms.ValidationError("Current password invalid")
+        return password
 
     
     
