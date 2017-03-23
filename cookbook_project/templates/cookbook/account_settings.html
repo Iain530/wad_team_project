@@ -8,6 +8,8 @@
 {% block body_block %}
 	<h2>Manage Your Account</h2>
 	<ul>
+		<li><a href="{% url 'cookbook:change_password' %}">Change your password</a></li>
 		<li><a href="{% url 'cookbook:delete_account' %}">Delete your account</a></li>
+		
 	</ul>
 {% endblock %}

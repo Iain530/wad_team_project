@@ -13,12 +13,17 @@
 			<form id="user_form" method="post" action="{% url 'cookbook:signup' %}" enctype="multipart/form-data">
 				{% csrf_token %}
 				<!-- Display each form -->
-				<label class="form_label" >Username: </label><p id="username_check"></p>{{ user_form.username }}</br>
-				<label class="form_label">Email: </label>{{ user_form.email }}</br>
-				<label class="form_label">Password: </label>{{ user_form.password }}</br>
+				<p>{{ user_form.username.errors }}</p>
+				<div><label class="form_label">Username: </label><p id="username_check"></p>{{ user_form.username }}</div>
+				<p>{{ user_form.email.errors }}</p>
+				<p><label class="form_label">Email: </label>{{ user_form.email }}</p>
+				<p>{{ user_form.password.errors }}</p>
+				<p><label class="form_label">Password: </label>{{ user_form.password }}</p>
+				<p>{{ user_form.reenter_password.errors }}</p>
+				<p><label class="form_label">Re-enter password: </label>{{ user_form.reenter_password }}</p>
 				<!-- Provide a button to click to submit the form. -->
 				<div class="button_wrapper">
-					<input id="register_button" type="submit" name="submit" value="Register" disabled="true"/>
+					<input id="register_button" type="submit" name="submit" value="Register"/>
 				</div>
 			</form>
 		</div>

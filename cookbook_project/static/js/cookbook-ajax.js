@@ -11,7 +11,7 @@ $('#id_username').keyup(function(event){
 				$('#register_button').prop('disabled', false);
 			} else {
 				$('#username_check').html('&#10006;')
-				$('#username_check').css('color', 'lightred')
+				$('#username_check').css('color', 'crimson')
 				$('#register_button').prop('disabled', true);
 			}
 		});

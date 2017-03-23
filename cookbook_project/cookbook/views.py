@@ -9,7 +9,7 @@ from django.utils import timezone
 from django.db import IntegrityError
 # COOKBOOK IMPORTS
 from cookbook.models import Category, Recipe, Comment, Rating
-from cookbook.forms import UserForm, RecipeForm, CommentForm, DeleteUserForm
+from cookbook.forms import UserForm, RecipeForm, CommentForm, DeleteUserForm, ChangePasswordForm
 from django.forms.models import model_to_dict
 # DATETIME IMPORTS
 from datetime import datetime, timedelta
@@ -218,6 +218,32 @@ def delete_account(request):
     context_dict['form'] = DeleteUserForm()
     
     return render(request, 'cookbook/delete_account.html', context_dict)
+
+@login_required
+def change_password(request):
+    context_dict = {}
+
+    changed = False
+    if request.method == 'POST':
+        # check if form is valid
+        form = ChangePasswordForm(data=request.POST, user=request.user)
+
+        if form.is_valid() and authenticate(username=request.user.username, password=form.cleaned_data['old']):
+            request.user.set_password(form.cleaned_data['new'])
+            request.user.save()
+            changed = True
+
+        else:
+            print(form.errors)
+
+    else:
+        # create blank form
+        form = ChangePasswordForm(user=request.user)
+
+    context_dict['form'] = form
+    context_dict['changed'] = changed
+    
+    return render(request, 'cookbook/change_password.html', context_dict)
 
 
 @login_required
