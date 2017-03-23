@@ -18,13 +18,11 @@
 			{{ recipe.name }}<br>
 			<small> 
 			{% if user == recipe.user %}
-			<a href="{% url 'cookbook:editrecipe' recipe.user recipe.slug %}">edit</a>
-			</small>
+				(<a href="{% url 'cookbook:editrecipe' recipe.user recipe.slug %}">edit</a>)
 			{% else %}
-			by <a href="{% url 'cookbook:view_user' recipe.user.username %}">{{ recipe.user.username }}</a>
-			</small>
-			
+				by <a href="{% url 'cookbook:view_user' recipe.user.username %}">{{ recipe.user.username }}</a>
 			{% endif %}
+			</small>
 			</h2>
 		
 			{% if user.is_authenticated %}
@@ -69,10 +67,11 @@
 					
 			<div id="view_recipe_desc">
 				<i>"{{ recipe.description }}"</i></br></br>
-				serves: {{ recipe.serves }}</br>
 			</div>
 			
-			cooking time: {{ recipe.cooking_time }} minutes</br>
+			Serves: {{ recipe.serves }}</br>
+			Cooking time: {{ recipe.cooking_time }} minutes</br>
+			
 			{% if recipe.spice > 0 %}
 			<div class="recipe_spicy">
 				Spice:&nbsp;
@@ -82,7 +81,13 @@
 				{% endfor %}
 				{% endwith %}
 			</div>
+			</br>
 			{% endif %}
+			
+			
+			<div class="recipe_rating">
+				Rating: <span id="this_rating" class="stars">{{ recipe.total_rating }}</span>
+			</div>
 			
 			<div class="recipe_date">
 				uploaded: {{ recipe.upload_date }}</br>
@@ -109,19 +114,24 @@
 		
 		</div>
 		
-		<p id="ingredients">
-			<h3>Ingredients</h3>
-			{% if recipe.ingredients %}
-				{{ recipe.ingredients|linebreaks }}
-			{% else %}
-				No ingredients!
-			{% endif %}
-		</p>
+		<div id="method_ing_wrapper">
 		
-		<p id="method_section">
-		<h3>Method</h3>
-		{{ recipe.method|linebreaks }}</br>
-		</p>
+			<div id="ingredients">
+				<h3>Ingredients</h3>
+				{% if recipe.ingredients %}
+					{{ recipe.ingredients|linebreaks }}
+				{% else %}
+					No ingredients!
+				{% endif %}
+			</div>
+			
+			
+			<div id="method_section">
+			<h3>Method</h3>
+			{{ recipe.method|linebreaks }}</br>
+			</div>
+		
+		</div>
 		
 		<div id="comment_section">
 		<h3>Comments</h3>
