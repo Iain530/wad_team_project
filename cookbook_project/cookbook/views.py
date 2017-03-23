@@ -395,7 +395,7 @@ def view_category(request, category_name):
     context_dict = {}
     try:
         category = Category.objects.get(name=category_name)
-        recipes = Recipe.objects.filter(category=category)
+        recipes = Recipe.objects.filter(category=category).order_by('-views')
         context_dict['category'] = category
         context_dict['recipes'] = recipes
 
@@ -433,17 +433,17 @@ def search(request):
           return render(request, 'cookbook/search.html', context_dict)
 
     if search_text == 'all':
-        return render(request, 'cookbook/search.html', {'recipes':Recipe.objects.all()})
+        return render(request, 'cookbook/search.html', {'recipes':Recipe.objects.all().order_by('-views')})
         
 
     # search by recipe name
-    recipes_name = Recipe.objects.filter(name__contains=search_text)
+    recipes_name = Recipe.objects.filter(name__contains=search_text).order_by('-views')
     # search by username
-    recipes_user = Recipe.objects.filter(user__in=User.objects.filter(username__contains=search_text))
+    recipes_user = Recipe.objects.filter(user__in=User.objects.filter(username__contains=search_text)).order_by('-views')
     # search by description
-    recipes_description = Recipe.objects.filter(description__contains=search_text)
+    recipes_description = Recipe.objects.filter(description__contains=search_text).order_by('-views')
     
-    recipes = set(list(sorted(chain(recipes_user,recipes_name,recipes_description), key=lambda instance: instance.views)))
+    recipes = set(list(sorted(chain(recipes_name,recipes_user,recipes_description), key=lambda instance: instance.views)))
     context_dict['recipes'] = recipes
     return render(request, 'cookbook/search.html', context_dict)
 
