@@ -130,10 +130,8 @@ class Recipe(models.Model):
                     self.weighted_rating = 0
                 
             self.save()
-            return rating.value
         else:
             print('Invalid rating: {0}'.format(rate))
-            return None
 
     def user_save(self, user):
         self.saved_by.add(user)

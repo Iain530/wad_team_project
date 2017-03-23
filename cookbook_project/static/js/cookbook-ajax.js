@@ -29,11 +29,9 @@ $(document).ready(function() {
 		recipe_id = $(this).attr("data-recipe_id");
 		value = parseInt($(this).attr("data-value"));
 		$.get('/cookbook/rate_recipe/', {recipe_id: recipe_id, value: value}, function(data){
-			var rating = parseInt(data);
-			if (rating != value) {
-				$("#star-" + data).prop("checked",true)
-				alert('Error posting rating');
-			}
+			var rating = parseFloat(data);
+			$('#this_rating').html(rating);
+			$('#this_rating').stars();
 		});
 	});
 

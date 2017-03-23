@@ -42,7 +42,8 @@ def rate_recipe(request):
         value = request.GET['value']
 
         if recipe and value:
-            rating = recipe.rate(request.user, int(value))
+            recipe.rate(request.user, int(value))
+            rating = recipe.total_rating
 
     return HttpResponse(rating)
 
