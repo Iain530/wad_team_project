@@ -51,8 +51,12 @@
 				
 				<div class="recipe_name">
 					<a href="{% url 'cookbook:view_recipe' recipe.user.username recipe.slug %}">
+					{% if recipe.picture %}
 					<img class="list_image" src="{{ MEDIA_URL }}{{ recipe.picture }}" height="125" width="125">
-					<big>{{ recipe.name }}</big></a>
+					{% else %}
+					<img class="list_image" src="{% static 'cookbook/images/default.png' %}" height="125" width="125">
+					{% endif %}
+				<big>{{ recipe.name }}</big></a>
 				</div>
 				
 				<div class="recipe_date">
