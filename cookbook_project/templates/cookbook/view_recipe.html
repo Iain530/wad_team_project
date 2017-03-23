@@ -63,9 +63,13 @@
 			</div>
 			{% endif %}
 		</div>
-
+		
 		<div id="description_section">
-			<img src="{{ MEDIA_URL }}{{ recipe.picture }}" id="view_recipe_image" height="200" width="200">
+			{% if recipe.picture %}
+				<img id="view_recipe_image" src="{{ MEDIA_URL }}{{ recipe.picture }}" height="200" width="200">
+			{% else %}
+				<img id="view_recipe_image" src="{% static 'cookbook/images/default.png' %}" height="200" width="200">
+			{% endif %}
 					
 			<div id="view_recipe_desc">
 				<i>"{{ recipe.description }}"</i></br></br>
@@ -148,6 +152,7 @@
 		<div id="comment_form">
 			<form id="commentForm" method="post" action="{% url 'cookbook:view_recipe' recipe.user recipe.slug %}" enctype="multipart/form-data">
 				{% csrf_token %}
+				{{ commentForm.errors }}
 				{{ commentForm.text }}
 				<input id="post_comment_button" type="submit" value="Post">
 			</form>

@@ -153,7 +153,7 @@ class Recipe(models.Model):
             self.is_vegetarian = True
             self.is_dairy_free = True
         super(Recipe, self).save(*args, **kwargs)
-
+        
         # resize recipe picture
         if self.picture:
             resizePicture(self.picture, 200)

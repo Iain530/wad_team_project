@@ -9,7 +9,7 @@ from django.utils import timezone
 from django.db import IntegrityError
 # COOKBOOK IMPORTS
 from cookbook.models import Category, Recipe, Comment, Rating
-from cookbook.forms import UserForm, RecipeForm, CommentForm, DeleteUserForm
+from cookbook.forms import UserForm, RecipeForm, CommentForm, DeleteUserForm, ChangePasswordForm
 from django.forms.models import model_to_dict
 # DATETIME IMPORTS
 from datetime import datetime, timedelta
@@ -219,6 +219,32 @@ def delete_account(request):
     
     return render(request, 'cookbook/delete_account.html', context_dict)
 
+@login_required
+def change_password(request):
+    context_dict = {}
+
+    changed = False
+    if request.method == 'POST':
+        # check if form is valid
+        form = ChangePasswordForm(data=request.POST, user=request.user)
+
+        if form.is_valid() and authenticate(username=request.user.username, password=form.cleaned_data['old']):
+            request.user.set_password(form.cleaned_data['new'])
+            request.user.save()
+            changed = True
+
+        else:
+            print(form.errors)
+
+    else:
+        # create blank form
+        form = ChangePasswordForm(user=request.user)
+
+    context_dict['form'] = form
+    context_dict['changed'] = changed
+    
+    return render(request, 'cookbook/change_password.html', context_dict)
+
 
 @login_required
 def savedrecipes(request):
@@ -323,7 +349,7 @@ def view_user(request, user):
 # Actual recipe view
 def view_recipe(request, user, recipe_slug):
     context_dict = {}
-
+    commentForm = CommentForm()
     if request.method == 'POST':
         commentForm = CommentForm(request.POST)
         if commentForm.is_valid():
@@ -335,51 +361,49 @@ def view_recipe(request, user, recipe_slug):
             recipe.no_of_comments += 1
             recipe.save()
 
+            # Use Http Get to show the recipe
             return HttpResponseRedirect(reverse('cookbook:view_recipe', args=[user, recipe_slug]))
     
-    else:
-        #HTTP GET so show the recipe
-        
-        try:
-            # get the recipe
-            user = User.objects.get(username=user)
-            recipe = Recipe.objects.get(user=user, slug=recipe_slug)
-            if request.user != user:
-                recipe.views += 1
-                recipe.save()
+    try:
+        # get the recipe
+        user = User.objects.get(username=user)
+        recipe = Recipe.objects.get(user=user, slug=recipe_slug)
+        if request.user != user:
+            recipe.views += 1
+            recipe.save()
 
-            # get the recipes comments
-            comments = Comment.objects.filter(recipe=recipe).order_by('-upload_date')
+        # get the recipes comments
+        comments = Comment.objects.filter(recipe=recipe).order_by('-upload_date')
 
-            if request.user.is_authenticated():
-                saved = recipe in Recipe.objects.filter(saved_by=request.user)
-                if request.user != recipe.user:
-                    my_rating = Rating.objects.filter(user=request.user, recipe=recipe)
-                    if len(my_rating) > 0:
-                        rating = my_rating[0].value
-                    else:
-                        rating = None
+        if request.user.is_authenticated():
+            saved = recipe in Recipe.objects.filter(saved_by=request.user)
+            if request.user != recipe.user:
+                my_rating = Rating.objects.filter(user=request.user, recipe=recipe)
+                if len(my_rating) > 0:
+                    rating = my_rating[0].value
                 else:
                     rating = None
             else:
-                saved = None
                 rating = None
-            
-            context_dict['recipe'] = recipe
-            context_dict['comments'] = comments
-            context_dict['saved'] = saved
-            context_dict['commentForm'] = CommentForm()
-            context_dict['rating'] = rating
+        else:
+            saved = None
+            rating = None
+        
+        context_dict['recipe'] = recipe
+        context_dict['comments'] = comments
+        context_dict['saved'] = saved
+        context_dict['commentForm'] = CommentForm()
+        context_dict['rating'] = rating
 
-        except (User.DoesNotExist, Recipe.DoesNotExist):
-            context_dict['recipe'] = None
-            context_dict['comments'] = None
-            context_dict['saved'] = None
-            context_dict['commentForm'] = None
-            context_dict['rating'] = None
+    except (User.DoesNotExist, Recipe.DoesNotExist):
+        context_dict['recipe'] = None
+        context_dict['comments'] = None
+        context_dict['saved'] = None
+        context_dict['commentForm'] = None
+        context_dict['rating'] = None
 
-             
-        return render(request, 'cookbook/view_recipe.html', context_dict)
+         
+    return render(request, 'cookbook/view_recipe.html', context_dict)
 
 
 
@@ -397,7 +421,7 @@ def view_category(request, category_name):
     context_dict = {}
     try:
         category = Category.objects.get(name=category_name)
-        recipes = Recipe.objects.filter(category=category)
+        recipes = Recipe.objects.filter(category=category).order_by('-views')
         context_dict['category'] = category
         context_dict['recipes'] = recipes
 
@@ -409,7 +433,7 @@ def view_category(request, category_name):
 
 def bestrated(request):
     context_dict = {}
-    weekly = Recipe.objects.filter(weighted_rating__gt=0).filter(upload_date__gte=datetime.now()-timedelta(days=7)).order_by('-weighted_rating')[:5]
+    weekly = Recipe.objects.filter(weighted_rating__gt=0).filter(upload_date__gte=timezone.now()-timedelta(days=7)).order_by('-weighted_rating')[:5]
     alltime = Recipe.objects.filter(weighted_rating__gt=0).order_by('-weighted_rating')
     context_dict['weekly'] = weekly
     context_dict['alltime'] = alltime
@@ -435,17 +459,17 @@ def search(request):
           return render(request, 'cookbook/search.html', context_dict)
 
     if search_text == 'all':
-        return render(request, 'cookbook/search.html', {'recipes':Recipe.objects.all()})
+        return render(request, 'cookbook/search.html', {'recipes':Recipe.objects.all().order_by('-views')})
         
 
     # search by recipe name
-    recipes_name = Recipe.objects.filter(name__contains=search_text)
+    recipes_name = Recipe.objects.filter(name__contains=search_text).order_by('-views')
     # search by username
-    recipes_user = Recipe.objects.filter(user__in=User.objects.filter(username__contains=search_text))
+    recipes_user = Recipe.objects.filter(user__in=User.objects.filter(username__contains=search_text)).order_by('-views')
     # search by description
-    recipes_description = Recipe.objects.filter(description__contains=search_text)
+    recipes_description = Recipe.objects.filter(description__contains=search_text).order_by('-views')
     
-    recipes = set(list(sorted(chain(recipes_user,recipes_name,recipes_description), key=lambda instance: instance.views)))
+    recipes = set(list(sorted(chain(recipes_name,recipes_user,recipes_description), key=lambda instance: instance.views)))
     context_dict['recipes'] = recipes
     return render(request, 'cookbook/search.html', context_dict)
 

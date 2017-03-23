@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^myprofile/$', views.myprofile, name='myprofile'),
     url(r'^myprofile/account-settings/$', views.account_settings, name='account_settings'),
     url(r'^myprofile/account-settings/delete-account/$', views.delete_account, name='delete_account'),
+    url(r'^myprofile/account-settings/change-password/$', views.change_password, name='change_password'),
     url(r'^myprofile/saved-recipes/$', views.savedrecipes, name='saved-recipes'),
     url(r'^myprofile/upload-recipe/$', views.uploadrecipe, name='upload-recipe'),
     url(r'^user/(?P<user>[\w\-]+)/$', views.view_user, name='view_user'),

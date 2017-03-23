@@ -119,10 +119,7 @@ h1, h2, h3, h4, h5 {
 	position: absolute;
 	top: 33px;
 	right: 30px;
-	background: #4a4a4a;
-	border: 1px solid #f2f2f2;
 	text-align: center;
-	padding: 5px 10px;
 }
 
 /* SIGN UP PAGE */
@@ -137,19 +134,21 @@ h1, h2, h3, h4, h5 {
 }
 
 .form_label {
-	line-height: 25px;
-    
+	width:45%;
+	text-align: right;	
 }
 
-#user_form > input:not([type=submit]) {
+#user_form input:not([type=submit]) {
 	float: right;
 } 
 
+
 #username_check {
 	margin: 0;
-	padding:0;
+	padding: 0;
 	display: inline-block;
 	width:15px;
+	height: 19px;
 }
 
 .button_wrapper {
@@ -169,8 +168,13 @@ h1, h2, h3, h4, h5 {
 }
 
 
-#login_form > input:not([type=submit]) {
+#login_form input:not([type=submit]) {
 	float: right;
+}
+
+#no_account {
+	text-align: center;
+	margin-bottom: 0;
 }
 
 /* VIEW MY PROFILE-------------------------------- */
@@ -182,10 +186,7 @@ h1, h2, h3, h4, h5 {
 	position: absolute;
 	top: 30px;
 	right: 30px;
-	background: #4a4a4a;
-	border: 1px solid #f2f2f2;
 	text-align: center;
-	padding: 5px 10px;
 }
 
 /* VIEWING RECIPE LISTS--------------------------- */
@@ -431,16 +432,12 @@ input#id_text {
 	border:1px solid #f2f2f2;
 }
 
-#recipe_form input:not([type=submit,file]):not([name=id_picture]),
+#recipe_form input:not([type=submit,file]):not([id=id_picture]),
 #recipe_form select,
 #recipe_form textarea {
 	text-align: left;
 }
 
-#recipe_form br {
-	position: relative;
-	left: 20%;
-}
 
 #recipe_form label:not([for=picture-clear_id]) {
 	margin-right:5%;
@@ -448,6 +445,10 @@ input#id_text {
 	float: left;
 	clear: left;
     text-align: right;
+}
+
+#recipe_form label[for=id_picture] {
+	border: 1px solid #4a4a4a;
 }
 
 #recipe_form p {
@@ -596,5 +597,17 @@ table {
 
 #delete_account {
 	text-align: center;
-	
 }
+
+#change_password {
+	width: 40%;
+	margin: 0 auto;
+	overflow: auto;
+	background: #4a4a4a;
+	padding: 10px 10px;
+	border:1px solid #f2f2f2;
+}
+
+#change_password input:not([type=submit]) {
+	float: right;
+} 

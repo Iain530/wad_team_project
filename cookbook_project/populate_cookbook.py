@@ -76,7 +76,7 @@ def populate():
          'is_dairy_free': True},
         # ROAST BEEF
         {'user': 'HealthyDad',
-         'category': 'Snacks',
+         'category': 'Mains',
          'name': 'Roast Beef',
          'picture': os.path.join('recipe_images', 'HealthyDad', 'roast-beef.jpg'),
          'description': "A simple way to roast topside of beef to ensure it's super succulent, every time.",

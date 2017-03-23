@@ -16,11 +16,12 @@
 				{% endfor %}
 				</ul>
 			{% endif %}
-			<label class="form_label" >Username: </label><input type="text" name="username" value="" /></br>
-			<label class="form_label" >Password: </label><input type="password" name="password" value="" />
+			<p><label class="form_label" >Username: </label><input type="text" name="username" value="" /></p>
+			<p><label class="form_label" >Password: </label><input type="password" name="password" value="" /></p>
 			<div class="button_wrapper">
 				<input type="submit" value="Sign in" />
 			</div>
 		</form>
+		<p id="no_account">Don't have an account? Sign up <a href="{% url 'cookbook:signup' %}">here!</a>
 	</div>
 {% endblock %}
