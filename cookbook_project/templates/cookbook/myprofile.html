@@ -8,7 +8,9 @@
 	<h2>My Profile - {{ user.username }}</h2>
 	
 	<div id="settings_link">
-		<a href="{% url 'cookbook:account_settings' %}">Manage your account</a>
+		<form method="GET" action="{% url 'cookbook:account_settings' %}">
+			<input type="submit" value="Manage your account">
+		</form>
 	</div>
 	
 	<div class="recipe_options">
