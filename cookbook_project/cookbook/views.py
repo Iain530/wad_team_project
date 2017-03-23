@@ -323,7 +323,7 @@ def view_user(request, user):
 # Actual recipe view
 def view_recipe(request, user, recipe_slug):
     context_dict = {}
-
+    commentForm = CommentForm()
     if request.method == 'POST':
         commentForm = CommentForm(request.POST)
         if commentForm.is_valid():
@@ -335,51 +335,49 @@ def view_recipe(request, user, recipe_slug):
             recipe.no_of_comments += 1
             recipe.save()
 
+            # Use Http Get to show the recipe
             return HttpResponseRedirect(reverse('cookbook:view_recipe', args=[user, recipe_slug]))
     
-    else:
-        #HTTP GET so show the recipe
-        
-        try:
-            # get the recipe
-            user = User.objects.get(username=user)
-            recipe = Recipe.objects.get(user=user, slug=recipe_slug)
-            if request.user != user:
-                recipe.views += 1
-                recipe.save()
+    try:
+        # get the recipe
+        user = User.objects.get(username=user)
+        recipe = Recipe.objects.get(user=user, slug=recipe_slug)
+        if request.user != user:
+            recipe.views += 1
+            recipe.save()
 
-            # get the recipes comments
-            comments = Comment.objects.filter(recipe=recipe).order_by('-upload_date')
+        # get the recipes comments
+        comments = Comment.objects.filter(recipe=recipe).order_by('-upload_date')
 
-            if request.user.is_authenticated():
-                saved = recipe in Recipe.objects.filter(saved_by=request.user)
-                if request.user != recipe.user:
-                    my_rating = Rating.objects.filter(user=request.user, recipe=recipe)
-                    if len(my_rating) > 0:
-                        rating = my_rating[0].value
-                    else:
-                        rating = None
+        if request.user.is_authenticated():
+            saved = recipe in Recipe.objects.filter(saved_by=request.user)
+            if request.user != recipe.user:
+                my_rating = Rating.objects.filter(user=request.user, recipe=recipe)
+                if len(my_rating) > 0:
+                    rating = my_rating[0].value
                 else:
                     rating = None
             else:
-                saved = None
                 rating = None
-            
-            context_dict['recipe'] = recipe
-            context_dict['comments'] = comments
-            context_dict['saved'] = saved
-            context_dict['commentForm'] = CommentForm()
-            context_dict['rating'] = rating
+        else:
+            saved = None
+            rating = None
+        
+        context_dict['recipe'] = recipe
+        context_dict['comments'] = comments
+        context_dict['saved'] = saved
+        context_dict['commentForm'] = CommentForm()
+        context_dict['rating'] = rating
 
-        except (User.DoesNotExist, Recipe.DoesNotExist):
-            context_dict['recipe'] = None
-            context_dict['comments'] = None
-            context_dict['saved'] = None
-            context_dict['commentForm'] = None
-            context_dict['rating'] = None
+    except (User.DoesNotExist, Recipe.DoesNotExist):
+        context_dict['recipe'] = None
+        context_dict['comments'] = None
+        context_dict['saved'] = None
+        context_dict['commentForm'] = None
+        context_dict['rating'] = None
 
-             
-        return render(request, 'cookbook/view_recipe.html', context_dict)
+         
+    return render(request, 'cookbook/view_recipe.html', context_dict)
 
 
 
@@ -409,7 +407,7 @@ def view_category(request, category_name):
 
 def bestrated(request):
     context_dict = {}
-    weekly = Recipe.objects.filter(weighted_rating__gt=0).filter(upload_date__gte=datetime.now()-timedelta(days=7)).order_by('-weighted_rating')[:5]
+    weekly = Recipe.objects.filter(weighted_rating__gt=0).filter(upload_date__gte=timezone.now()-timedelta(days=7)).order_by('-weighted_rating')[:5]
     alltime = Recipe.objects.filter(weighted_rating__gt=0).order_by('-weighted_rating')
     context_dict['weekly'] = weekly
     context_dict['alltime'] = alltime

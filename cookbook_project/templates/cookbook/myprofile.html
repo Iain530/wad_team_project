@@ -66,6 +66,8 @@
 				
 				<div class="recipe_info">
 					
+					views: {{ recipe.views }} - comments: {{ recipe.no_of_comments }}<br>
+					
 					{{ recipe.category }} 
 					| Serves: {{ recipe.serves }} 
 					| Cooking time: {{ recipe.cooking_time }} minutes 
@@ -84,9 +86,6 @@
 					{% endwith %}
 					</div>
 					{% endif %}
-					
-					| views: {{ recipe.views }}
-					| comments: {{ recipe.no_of_comments }}
 	
 				</div>
 				
