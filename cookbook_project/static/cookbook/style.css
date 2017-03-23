@@ -22,7 +22,7 @@ ul.topnav {
   background-color: #333;
   z-index:999;
   border-style: none none solid none;
-  border-color: #555;
+  border-color: #aaaaaa;
   border-width: 1px;
  
 }
@@ -67,6 +67,7 @@ h1, h2, h3, h4, h5 {
     left: 15%;
 	overflow: auto;
 	font-family: 'Josefin Sans', sans-serif;
+	border:1px solid #aaaaaa;
 }
 
 #search {
@@ -130,7 +131,7 @@ h1, h2, h3, h4, h5 {
 	overflow: auto;
 	background: #4a4a4a;
 	padding: 10px 10px;
-	border:1px solid #f2f2f2;
+	border:1px solid #aaaaaa;
 }
 
 .form_label {
@@ -164,7 +165,7 @@ h1, h2, h3, h4, h5 {
 	overflow: auto;
 	background: #4a4a4a;
 	padding: 10px 10px;
-	border:1px solid #f2f2f2;
+	border:1px solid #aaaaaa;
 }
 
 
@@ -201,7 +202,7 @@ h1, h2, h3, h4, h5 {
 	overflow: auto;
 	position: relative;
 	background: #4a4a4a;
-	border: 1px solid #f2f2f2;
+	border: 1px solid #aaaaaa;
 	
 }
 
@@ -213,7 +214,7 @@ h1, h2, h3, h4, h5 {
 .list_image {
 	float: left;
 	margin: 0px 15px 0px 0px;
-	border: 1px solid;
+	border: 1px solid #aaaaaa;
 }
 
 
@@ -277,7 +278,7 @@ button, input[type=button], input[type=submit] {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
-  border: 1px solid #F2F2F2;
+  border: 1px solid #333;
   background: #4A4A4A;
   background: linear-gradient(top,  #7A7A7A,  #4A4A4A);
   background: -ms-linear-gradient(top,  #7A7A7A,  #4A4A4A);
@@ -336,7 +337,7 @@ p.widget_title {
 #view_recipe_image {
 	float: left;
 	margin: 5px 25px 10px 0;
-	border: 1px solid #f2f2f2;
+	border: 1px solid #aaaaaa;
 }
 
 #view_recipe_desc {
@@ -353,8 +354,9 @@ p.widget_title {
 	position: relative;
 	padding: 10px 10px;
 	background: #4a4a4a;
-	border: 1px solid #f2f2f2;
-	margin: 2px auto;
+	border: 1px solid #aaaaaa;
+	border-radius:5px;
+	margin: 10px auto;
 	width: 80%;
 }
 
@@ -429,7 +431,7 @@ input#id_text {
 	overflow: auto;
 	background: #4a4a4a;
 	padding: 10px 10px;
-	border:1px solid #f2f2f2;
+	border:1px solid #aaaaaa;
 }
 
 #recipe_form input:not([type=submit,file]):not([id=id_picture]),
@@ -509,12 +511,12 @@ input.filter {
 	background-color: #4a4a4a;
 	border-style: solid;
 	border-width: 1px;
-	border-color: #f2f2f2;
+	border-color: #aaaaaa;
 }
 
 .category_list_image {
 	margin: 0 auto;
-	border: 1px solid #f2f2f2;
+	border: 1px solid #aaaaaa;
 }
 
 /* STAR RATINGS */
@@ -589,7 +591,7 @@ span.stars span {
 }
 
 table {
-	border: 1px solid #f2f2f2;
+	border: 1px solid #aaaaaa;
 	margin: 0 auto;
 }
 
@@ -605,7 +607,7 @@ table {
 	overflow: auto;
 	background: #4a4a4a;
 	padding: 10px 10px;
-	border:1px solid #f2f2f2;
+	border:1px solid #aaaaaa;
 }
 
 #change_password input:not([type=submit]) {
