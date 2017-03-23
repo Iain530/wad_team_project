@@ -10,7 +10,9 @@
 	
 	{% if user.is_authenticated %}
 		<div id="home_upload">
-			<a href="{% url 'cookbook:upload-recipe' %}">Add your own recipe</a>
+		<form method="GET" action="{% url 'cookbook:upload-recipe' %}">
+			<input type="submit" value="Add your own recipe">
+		</form>
 		</div>
 	{% endif %}
 	
