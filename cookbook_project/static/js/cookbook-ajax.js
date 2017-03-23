@@ -6,16 +6,20 @@ $(document).ready(function() {
 		if (username.length > 0) {
 			$.get('/cookbook/username_check/', {username: username}, function(data){
 				if (data === 'True') {
+					// if username is available show a green tick
+					// and enable sign up button
 					$('#username_check').html('&#10004;');
 					$('#username_check').css('color', 'lightgreen')
 					$('#register_button').prop('disabled', false);
 				} else {
+					// else a red cross and disable sign up button
 					$('#username_check').html('&#10006;')
 					$('#username_check').css('color', 'crimson')
 					$('#register_button').prop('disabled', true);
 				}
 			});
 		} else {
+			// when empty then no tick/cross and disbale button
 			$('#username_check').html('')
 			$('#username_check').css('color', '#f2f2f2')
 			$('#register_button').prop('disabled', true);

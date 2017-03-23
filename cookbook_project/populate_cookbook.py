@@ -79,7 +79,7 @@ def populate():
          'category': 'Mains',
          'name': 'Roast Beef',
          'picture': os.path.join('recipe_images', 'HealthyDad', 'roast-beef.jpg'),
-         'description': "A simple way to roast topside of beef to ensure it's super succulent, every time.",
+         'description': "A simple way to roast beef to ensure it's super succulent, every time.",
          'ingredients': """14oz beef,
                         mixed vegetables,
                         100g gravy granules""",
