@@ -63,12 +63,13 @@ h1, h2, h3, h4, h5 {
     width: 70%;
     background-color: #333;
 	padding: 10px 25px 25px 25px;
+	margin-right: auto;
+	margin-left: auto;
 	margin-bottom: 50px;
     position: relative;
 	font-size: 18px;
 	color: #f2f2f2;
     top: 170px;
-    left: 15%;
 	overflow: auto;
 	font-family: 'Josefin Sans', sans-serif;
 	border:1px solid #aaaaaa;
@@ -85,8 +86,10 @@ h1, h2, h3, h4, h5 {
 	vertical-align: middle;
 }
 
-@media screen and (max-width:1000px) {
-	.box{width: 700px}
+@media screen and (max-width:1085px) {
+	.box {
+		width: 750px;
+	}
 }
 
 @media screen and (max-width:1100px) {
@@ -489,17 +492,19 @@ input#id_text {
 }
 
 /* SEARCH PAGE */
-
+/* holder */
 #title_bar {
 	position: relative;
 }
 
+/* headers for pages with filters */
 #filter_header {
 	display:inline-block;
 	
 	
 }
 
+/* filter inputs */
 #filter_results {
 	display:inline-block;
 	position: absolute;
@@ -507,19 +512,23 @@ input#id_text {
 	right: 0;
 }
 
-input.filter {
-	
-}
-
+/* filtering */
 #no_results {
 	display: none;
 	text-align: center;
 }
 
+/* searching */
+#no_search_results {
+	text-align: center;
+}
+
+
+
 
 /* VIEWING CATEGORY LISTS--------------------------- */
 
-.category_list {
+.category_list, #empty_cat {
 	text-align: center;
 }
 

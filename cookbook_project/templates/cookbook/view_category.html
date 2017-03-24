@@ -20,12 +20,15 @@
 				Oh dear, it seems there's no recipes here!
 			</p>
 		{% else %}
-			<strong>There are currently no {{ category.name }} on Cookbook!</strong><br>
-			{% if user.is_authenticated%}
-				Click <a href="{% url 'cookbook:upload-recipe' %}">here</a> to add your own.
-			{% else %}
-				Login <a href="{% url 'cookbook:user_login' %}">here</a> to add some of your own!
-			{% endif %}
+			<p id="empty_cat">
+				<strong>There are currently no {{ category.name }} on Cookbook!</strong>
+				</br>
+				{% if user.is_authenticated%}
+					Click <a href="{% url 'cookbook:upload-recipe' %}">here</a> to add your own.
+				{% else %}
+					Login <a href="{% url 'cookbook:user_login' %}">here</a> to add some of your own!
+				{% endif %}
+			</p>
 		{% endif %}
 	{% else %}
 		This category doesn't exist!

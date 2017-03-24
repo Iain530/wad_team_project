@@ -12,6 +12,14 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('username', 'email', 'password',)
 
+    def clean_password(self):
+        password = self.cleaned_data.get('password')
+
+        if not password:
+            raise forms.ValidationError("You must enter a password")
+        if len(password) < 6:
+            raise forms.ValidationError("Password must be at least 6 characters long")
+    
     def clean_reenter_password(self):
         password1 = self.cleaned_data.get('password')
         password2 = self.cleaned_data.get('reenter_password')
@@ -21,6 +29,20 @@ class UserForm(forms.ModelForm):
         if password1 != password2:
             raise forms.ValidationError("Your passwords do not match")
         return password2
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+
+        if not username:
+            raise forms.ValidationError("You must enter a username")
+        if len(username) < 4:
+            raise forms.ValidationError("Username must be at least 4 character")
+        if len(User.objects.filter(username__iexact=username)) > 0:
+            raise forms.ValidationError("That username is not available")
+
+        return username
+
+        
 
         
 class RecipeForm(forms.ModelForm): 

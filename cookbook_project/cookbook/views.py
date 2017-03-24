@@ -25,7 +25,7 @@ def username_check(request):
         username = request.GET['username']
 
         if username:
-            users = User.objects.filter(username=username)
+            users = User.objects.filter(username__iexact=username)
             available = len(users) == 0
 
     return HttpResponse(available)

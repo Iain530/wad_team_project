@@ -593,10 +593,6 @@ def populate():
 
         recipe.rate(user, rating['value'])
 
-    # print users and their recipes
-    for u in User.objects.all():
-        for r in Recipe.objects.filter(user=u):
-            print("- {0} - {1} - {2} ({3}) - {4} comments".format(str(u), str(r), r.total_rating, r.no_of_ratings, len(Comment.objects.filter(recipe=r))))
 
 def add_user(username, email, password):
     if not User.objects.filter(username=username):
@@ -644,6 +640,10 @@ def add_comment(username, recipe_name, recipe_author, text):
 if __name__ == '__main__':
     print("Starting CookBook population script...")
     populate()
+    # print users and their recipes
+    for u in User.objects.all():
+        for r in Recipe.objects.filter(user=u):
+            print("- {0} - {1} - {2} ({3}) - {4} comments".format(str(u), str(r), str(r.total_rating)[:3], r.no_of_ratings, len(Comment.objects.filter(recipe=r))))
 
     
 

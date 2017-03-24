@@ -3,7 +3,7 @@ $(document).ready(function() {
 	// Check if username is available
 	$('#id_username').keyup(function(event){
 		var username = $(this).val();
-		if (username.length > 0) {
+		if (username.length > 3) {
 			$.get('/cookbook/username_check/', {username: username}, function(data){
 				if (data === 'True') {
 					// if username is available show a green tick
