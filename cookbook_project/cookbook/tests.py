@@ -1,5 +1,5 @@
 from django.test import TestCase
-<<<<<<< HEAD
+
 from django.core.urlresolvers import reverse
 from django.contrib.staticfiles import finders
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
@@ -9,156 +9,118 @@ from cookbook.models import Category, Recipe, Comment, Rating
 from cookbook.forms import UserForm, RecipeForm, CommentForm, DeleteUserForm
 from django.forms.models import model_to_dict
 from django.contrib.staticfiles import finders
+from django.template import loader
+from django.conf import settings
+from django.utils import timezone
+#import test_utils
+import populate_cookbook
 
-class ViewTests(TestCase):
+
+
+#test cases for the homepage
+class HomePageTests(TestCase):
+	def test_home_using_template(self):
+		response = self.client.get(reverse('cookbook:home'))
+		self.assertTemplateUsed(response, 'cookbook/home.html')
+		
+	def test_home_has_title(self):
+		# Check it has welcome message
+		response = self.client.get(reverse('cookbook:home'))
+		self.assertIn('Welcome to Cookbook'.lower(), response.content.lower())
+		
+	def test_does_home_contain_img(self):
+		# Check if the home page contains an img
+		response = self.client.get(reverse('cookbook:home'))
+		self.assertIn('img', response.content)
+	
+	#TESTS WHEN NO RECIPES!!!
+	def test_home_displays_no_newrecipes_message(self):
+		# Access index with empty database
+		response = self.client.get(reverse('cookbook:home'))
+		# Check if no categories message is displayed
+		self.assertIn("The newest recipes will appear here!", response.content)
+	
+	def test_home_displays_no_bestrated_recipes_message(self):
+		# Access index with empty database
+		response = self.client.get(reverse('cookbook:home'))
+		# Check if no categories message is displayed
+		self.assertIn("The best rated recipes will appear here!", response.content)
+	 
+
+#class MyProfileTest(TestCase):
+
+
+#test cases for category page
+class CategoryPageTests(TestCase):
+
     def test_index_context(self):
         # Access index with empty database
         response = self.client.get(reverse('cookbook:home'))
 
-        # Context dictionary is then empty
-        self.assertItemsEqual(response.context['categories'], [])
-        self.assertItemsEqual(response.context['recipes'], [])
-
-        categories = test_utils.create_categories()
-        test_utils.create_pages(categories)
+        
+        populate_cookbook.populate()
 
         #Access index with database filled
         response = self.client.get(reverse('cookbook:home'))
 
-        #Retrieve categories and recipes from database
-        pages = Page.objects.order_by('-upload_date')
+        #Retrieve recipes from database by date
+        recipes = Recipe.objects.order_by('-upload_date')[:2]
+        #check newest recipes appear on the homepage
+        for recipe in recipes:
+	 			content = response.content.decode('utf-8')
+	 			self.assertIn(recipe.name.lower(), content.lower())
+	 	
+	 	 #Retrieve recipes from database by rating
+        recipes = Recipe.objects.filter(weighted_rating__gt=0).order_by('-weighted_rating')[:3]
+        #check highest rating recipes appear on the homepage
+        for recipe in recipes:
+	 			content = response.content.decode('utf-8')
+	 			self.assertIn(recipe.name.lower(), content.lower())
+       
 
-        # Check context dictionary filled
-        self.assertItemsEqual(response.context['categories'], categories)
-        self.assertItemsEqual(response.context['pages'], pages)
-        
+
+#test case for base html
+class BaseHtmlTests(TestCase):
+
+	 def test_base_template_exists(self):
+	 	# Check base.html exists inside template folder
+	 	path_to_base = settings.TEMPLATE_DIR + '/cookbook/base.html'
+	 	print path_to_base
+	 	self.assertTrue(os.path.isfile(path_to_base))
+	 	
+class TestCategories(TestCase):
+	 #Test population script
+	 def test_population_script_changes(self):
 
 
-def test_starters_displays_no_recipes_message(self):
-	# Access index with empty database
-	response = self.client.get(reverse('cookbook:starters'))
-	# Check if no categories message is displayed
-	self.assertIn("There are no recipes present.", response.content)
+	 	#Populate database
+	 	populate_cookbook.populate()
+	 	# Check if the categories exist
+		cat = Category.objects.get(name='Starters')
+		cat = Category.objects.get(name='Desserts')
+		cat = Category.objects.get(name='Lunches')
+		cat = Category.objects.get(name='Snacks')		
+		cat = Category.objects.get(name='Drinks')
+		cat = Category.objects.get(name='Mains')
 	
-def test_mains_displays_no_recipes_message(self):
-	# Access index with empty database
-	response = self.client.get(reverse('cookbook:mains'))
-	# Check if no categories message is displayed
-	self.assertIn("There are no recipes present.", response.content)
 
-def test_lunches_displays_no_recipes_message(self):    
-	# Access index with empty database
-	response = self.client.get(reverse('cookbook:lunches'))
-	# Check if no categories message is displayed
-	self.assertIn("There are no recipes present.", response.content)
-	
-def test_desserts_displays_no_recipes_message(self):
-	# Access index with empty database
-	response = self.client.get(reverse('cookbook: desserts'))
-	# Check if no categories message is displayed
-	self.assertIn("There are no recipes present.", response.content)
-
-def test_snacks_displays_no_recipes_message(self):
-	# Access index with empty database
-	response = self.client.get(reverse('cookbook: snacks'))
-	# Check if no categories message is displayed
-	self.assertIn("There are no recipes present.", response.content)
-
-def test_drinks_displays_no_recipes_message(self):
-	# Access index with empty database
-	response = self.client.get(reverse('cookbook: drinks'))
-	# Check if no categories message is displayed
-	self.assertIn("There are no recipes present.", response.content)
-	
-# For each category check the context dictionary passed via render() function
-def test_category_context(self):
-	for category in categories:
-		response = self.client.get(reverse('show_category', args=[category.slug]))
-		pages = Page.objects.filter(category=category)
-		self.assertItemsEqual(response.context['recipes'], recipes)
-		self.assertEquals(response.context['category'], category)
-
-
-
-class HomePageTests(TestCase):
-    def test_home_using_template(self):
-        response = self.client.get(reverse('cookbook:home'))
-        self.assertTemplateUsed(response, 'cookbook/home.html')
-
-    def test_home_has_title(self):
-        # Check it has welcome message
-        response = self.client.get(reverse('cookbook:home'))
-        self.assertIn('Welcome to Cookbook'.lower(), response.content.lower())
-    
-    def test_does_home_contain_img(self):
-        # Check if the home page contains an img
-        response = self.client.get(reverse('cookbook:home'))
-        self.assertIn('img', response.content)
-
-class CategoryPageTests(TestCase):
-	
-	def test_categories_using_template(self):
-		# Check the template used to render categories page
-		response = self.client.get(reverse('cookbook:categories'))
-		self.assertTemplateUsed(response, 'cookbook/categories.html')
-	
-	def test_index_has_title(self):
-		# Check it has title
-		response = self.client.get(reverse('cookbook:categories'))
-		self.assertIn('Categories'.lower(), response.content.lower())
-	
-	def test_does_categories_contain_img(self):
-		# Check if the categories page contains an img
-		response = self.client.get(reverse('cookbook:categories'))
-		self.assertIn('img', response.content)
-
-def test_category_page_displays_pages(self):
-	# For each category, access its page and check for the pages associated with it
-	for category in categories:
-		# Access category page
-		response = self.client.get(reverse('show_category', args=[category.slug]))
-		# Retrieve pages for that category
-		pages = Page.objects.filter(category=category)
-		# Check pages are displayed and they have a link
-		for page in pages:
-			self.assertIn(page.title, response.content)
-			self.assertIn(page.url, response.content)
-		
-
-class ModelTests(TestCase):
-
-    def setUp(self):
-        try:
-            from populate_cookbook import populate
-            populate()
-        except ImportError:
-            print('The module populate_cookbook does not exist')
-        except NameError:
-            print('The function populate() does not exist or is not correct')
-        except:
-            print('Something went wrong in the populate() function :-(')
-
-def get_category(self, name):
-	from rango.models import Category
-	try:
-		cat = Category.objects.get(name=name)
-	except Category.DoesNotExist:
-		cat = None
-	return cat
-
-# check admin interface - is it configured and set up
-def test_admin_interface_page_view(self):
-    from admin import PageAdmin
-    self.assertIn('category', PageAdmin.list_display)
-    self.assertIn('url', PageAdmin.list_display)
-
-def test_does_slug_field_work(self):
-    from rango.models import Recipe
-    recipe = Recipe(name='how do i create a slug in django')
-    recipe.save()
-    self.assertEqual(recipe.slug,'how-do-i-create-a-slug-in-django')
-
-class ViewTests(TestCase):
+	 # For each category, access its page and check for the recipes associated with it
+	 	categories = create_categories()
+	 	for category in categories:
+	 		cat = Category.objects.get(name=category)
+	 		# Access category page
+	 		response = self.client.get(reverse('cookbook:view_category', args=[cat]))
+	 		#check category using template
+	 		self.assertTemplateUsed(response, 'cookbook/view_category.html')
+	 		# Retrieve recipes for that category
+	 		recipes = Recipe.objects.filter(category=cat)
+	 		content = response.content.decode('utf-8')
+	 		# Check recipes are displayed 
+	 		for recipe in recipes:
+	 			content = response.content.decode('utf-8')
+	 			self.assertIn(recipe.name.lower(), content.lower())
+	 		
+class TestForms(TestCase):
 
     def setUp(self):
         try:
@@ -171,53 +133,40 @@ class ViewTests(TestCase):
             print('The class RecipeForm does not exist or is not correct')
         except:
             print('Something else went wrong :-(')
+  
+    
+    def test_add_recipe_form_is_displayed_correctly(self):
+        try:
+                response = self.client.get(reverse('home'))
+                response = self.client.get(reverse('uploadrecipe'))
+        except:
+            try:
+                response = self.client.get(reverse('cookbook:home'))
+                response = self.client.get(reverse('cookbook:uploadrecipe'))
+            except:
+                return False
+        # Check form in response context is instance of CategoryForm
+        self.assertTrue(isinstance(response.context['form'], PageForm))
+        self.assertIn('Name:'.lower(), response.content.lower())
 
-    pass    
+        # Check form is displayed correctly
 
-def test_create_pages(self):
-	cat = Category(name="Starters")
-	cat.save()
-	
-	recipe1 = Recipe()
-	recipe1.category = cat
-	recipe1.name = "Steak pie"
-	recipe1.description = "A lovely family friendly steak pie"
-	recipe1.picture = os.path.join('recipe_images', 'HummusLover123', 'tofu-curry.jpg')
-	recipe1.ingredients = "A pie"
-	recipe1.serves = 4
-	recipe1.spice = 1
-	recipe1.cooking_time = 60
-	recipe1.is_vegetarian = False
-	recipe1.is_vegan = False
-	recipe1.is_gluten_free = False
-	recipe1.is_dairy_free = False
-	recipe1.save()
-	
-	starters_recipes = cat.page_set.all()
-	self.assertEquals(starters_recipe.count(), 1)
-	
-	first_recipe = starters_recipes[0]
-	self.assertEquals(first_page, recipe1)
-	self.assertEquals(first_page.name, "Steak pie")
-	self.assertEquals(first_page.serves, 3)
-
-=======
-from django.contrib.auth.models import User
-# COOKBOOK IMPORTS
-from cookbook.models import Category, Recipe, Comment, Rating
-from cookbook.forms import UserForm, RecipeForm, CommentForm
-
-# Create your tests here.
+        # Labels
+        self.assertIn('Name:'.lower(), response.content.lower())
+        self.assertIn('Picture:'.lower(), response.content.lower())
+        self.assertIn('Category:'.lower(), response.content.lower())
+        self.assertIn('Ingredients:'.lower(), response.content.lower())
+        self.assertIn('Description:'.lower(), response.content.lower())
+        self.assertIn('Spice:'.lower(), response.content.lower())
+        self.assertIn('Serves:'.lower(), response.content.lower())
+        self.assertIn('Cooking time (minutes):'.lower(), response.content.lower())
+        self.assertIn('Vegan:'.lower(), response.content.lower())
+        self.assertIn('Vegetarian:'.lower(), response.content.lower())
+        self.assertIn('Method:'.lower(), response.content.lower())
+        self.assertIn('Gluten Free:'.lower(), response.content.lower())
+        self.assertIn('Dairy Free:'.lower(), response.content.lower())
 
 
-
-
-
-
-
-
-
-#Definitions to make life easier
 
 def add_user(username, email, password):
     if not User.objects.filter(username=username):
@@ -226,19 +175,13 @@ def add_user(username, email, password):
         u.save()
         return u
 
-def add_category(name, picture):
-    c = Category.objects.get_or_create(name=name, picture=picture)[0]
-    c.save()
-    return c
-
 def add_recipe(username, category, name, picture, description, ingredients,
                method, serves, spice, cooking_time,
                is_vegetarian, is_vegan, is_gluten_free, is_dairy_free):
     
-    user = User.objects.get(username=username)
     cat = Category.objects.get(name=category)
         
-    r = Recipe.objects.get_or_create(user=user, category=cat, name=name,
+    r = Recipe.objects.get_or_create(category=cat, name=name,
                                      picture=picture, description=description,
                                      ingredients=ingredients,
                                      method=method, serves=serves,
@@ -251,13 +194,19 @@ def add_recipe(username, category, name, picture, description, ingredients,
     return r
 
 
-def add_comment(username, recipe_name, recipe_author, text):
-    user = User.objects.get(username=username)
-    
-    recipe_user = User.objects.get(username=recipe_author)
-    recipe = Recipe.objects.get(name=recipe_name, user=recipe_user)
 
-    c = Comment.objects.get_or_create(user=user, recipe=recipe, text=text)[0]
-    c.save()
-    return c
->>>>>>> 78834907f5c5e90161f8dcbc47e4d254f01e5b8b
+def get_category(self, name):
+
+	from rango.models import Category
+	try:
+		cat = Category.objects.get(name=name)
+	except Category.DoesNotExist:
+		cat = None
+	return cat
+
+def create_categories():
+    # List of categories
+    categories = ['Starters','Desserts','Lunches', 'Snacks','Drinks','Mains']
+
+
+    return categories
