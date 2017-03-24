@@ -1,9 +1,7 @@
 SUGGESTIONS----------------------------------
 prep time,
 conversion calculator,
-upload recipe option on home page,
 align drop down nav bar to right,
-view total rating when viewing recipe,
 make 'saved recipe' page more similar to 'my recipes' page,
 
 NEED TO FIX----------------------------------
