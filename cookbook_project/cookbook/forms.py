@@ -19,6 +19,7 @@ class UserForm(forms.ModelForm):
             raise forms.ValidationError("You must enter a password")
         if len(password) < 6:
             raise forms.ValidationError("Password must be at least 6 characters long")
+        return password
     
     def clean_reenter_password(self):
         password1 = self.cleaned_data.get('password')
